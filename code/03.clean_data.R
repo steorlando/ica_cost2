@@ -44,6 +44,32 @@ db <- db_select %>%
          )
          )
 
+#Creo variabile job_type usando la seconda cifra dei lavoratori impiegati
+
+db <- db %>%
+  mutate(job_type = case_when(
+    str_sub(as.character(sdo1_profes), 2, 2) == "1" ~ "Entrepreneur-Self-employed",
+    str_sub(as.character(sdo1_profes), 2, 2) == "2" ~ "Other self-employed",
+    str_sub(as.character(sdo1_profes), 2, 2) == "3" ~ "Director",
+    str_sub(as.character(sdo1_profes), 2, 2) == "4" ~ "Office worker",
+    str_sub(as.character(sdo1_profes), 2, 2) == "5" ~ "Worker",
+    str_sub(as.character(sdo1_profes), 2, 2) == "6" ~ "Other dependent",
+    TRUE ~ "Not employed"
+  ))
+    
+#Creo variabile job_sector usando la terza cifra dei lavoratori impiegati
+db <- db %>%
+  mutate(job_sector = case_when(
+    str_sub(as.character(sdo1_profes), 3, 3) == "1" ~ "Agriculture, hunting and fishing",
+    str_sub(as.character(sdo1_profes), 3, 3) == "2" ~ "Factory",
+    str_sub(as.character(sdo1_profes), 3, 3) == "3" ~ "Commerce, public services",
+    str_sub(as.character(sdo1_profes), 3, 3) == "4" ~ "Public administration",
+    str_sub(as.character(sdo1_profes), 3, 3) == "5" ~ "Other private services",
+    TRUE ~ "Not employed"
+  ))
+
+
+
 # Tolgo le variabili che abbiamo ricodificato con altro nome
 db <- db %>% 
   select(-c(sdo1_tit_stu
@@ -109,8 +135,37 @@ reparti <- import("data/reparti.xlsx") %>%
   clean_names()
 
 
-
 db <- left_join(db, reparti, by = "reparto_cod") %>% select(-sdo1_uor)
+
+
+#Diagnosi primaria
+db <- db %>%
+  mutate(dia_pri = 
+    substr(sdo1_dia_pri, 1, 3)
+  )
+
+db <- db %>%
+  mutate( 
+    dia_pri = case_when(
+      dia_pri < 139 ~ "Infectious and parasitic diseases",
+      dia_pri < 239 ~ "Neoplasms",
+      dia_pri < 279 ~ "Endocrine, nutritional and metabolic diseases, and immunity disorders",
+      dia_pri < 289 ~ "Diseases of the blood",
+      dia_pri < 319 ~ "Mental disorders",
+      dia_pri < 389 ~ "Diseases of the nervous system",
+      dia_pri < 459 ~ "Diseases of the circulatory system",
+      dia_pri < 519 ~ "Diseases of the respiratory system",
+      dia_pri < 579 ~ "Diseases of the digestive system",
+      dia_pri < 629 ~ "Diseases of the genitourinary system",
+      dia_pri < 679 ~ "Complications of pregnancy and childbirth",
+      dia_pri < 709 ~ "Diseases of the skin",
+      dia_pri < 739 ~ "Diseases of the musculoskeletal system",
+      dia_pri < 759 ~ "Congenital anomalies",
+      dia_pri < 779 ~ "Conditions originating in the perinatal period",
+      dia_pri < 799 ~ "Symptoms, signs, and ill-defined conditions",
+      dia_pri < 999 ~ "Injury and poisoning",
+      startsWith(dia_pri, "V") ~ "Supplemental classification"
+    ))
 
 # Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
