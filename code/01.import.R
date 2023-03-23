@@ -1,8 +1,11 @@
 # Import databases ####
-db_orig <- import("data/master.csv") #Import main database
+db_orig <- import("data/db_old.csv") #Import main database
+
+# Il vecchio DB è salvato è, per confonderci le idee, si chiama master.csv. Ha qualche variabile in più alla fine
+# Poi vediamo se sono variabili che ci servono oppure no
 
 db_select <- db_orig %>%  # Elimino alcune variabili che non mi servono
-  select(c(1:72, 454:497)) %>% 
+  select(c(1:72, 456:492)) %>% 
   select(-c("INFCODinSOSPETTEICA","perRERICOVERO", "SDO1_Polo")) %>% # in particolare le prime tre perchè sono vuote
   clean_names()
   
@@ -34,12 +37,6 @@ db_select <- db_select %>%  # queste le tolgo perchè non ho idea di cosa si tra
             #"sdo1_tip_dim", #tipo di dimissione, l'ho inserita anche in db_select
             "sdo1_irc_tra",
             "sdo1_ris_aut",
-            #"sdo1_dia_pri", #diagnosi primaria, l'ho inserita anche in db_select          
-            "sdo1_dia_se1",
-            "sdo1_dia_se2",
-            "sdo1_dia_se3",
-            "sdo1_dia_se4",
-            "sdo1_dia_se5",           
             "sdo1_int_pri",
             "sdo1_dat_in_p",
             "sdo1_int_se1",

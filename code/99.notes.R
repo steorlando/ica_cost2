@@ -65,3 +65,10 @@ frq(db_orig$RERICOVERO)
 
 db_old <- import("data/db_old.csv") #Import main database
 
+names(db)
+frq(db$sdo1_degenza)
+unique(db$sdo1_dia_pri)
+
+hist(db$sdo1_costo_ln)
+
+db$sdo1_costo_ln <- log(db$sdo1_costo)

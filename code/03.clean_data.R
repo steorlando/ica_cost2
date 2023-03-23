@@ -43,6 +43,12 @@ db <- db_select %>%
            sdo1_profes == "6" ~ "Retired/Disable",
          )
          )
+
+# Tolgo le variabili che abbiamo ricodificato con altro nome
+db <- db %>% 
+  select(-c(sdo1_tit_stu
+            ))
+
 # Organizzo al meglio le variabili categoriche non ordinate
 db <- db %>% 
   mutate(sdo1_sesso = factor(sdo1_sesso),
@@ -54,14 +60,14 @@ db <- db %>%
          profession_simple = factor(profession_simple, levels = c("Employed/Student/Housewife", "Retired/Disable", "Unemployed"))
          )
 
+frq(db$sdo1_modali)
 #db_orig$sdo1_modali è la modalità di ammissione 
 db <- db %>%
   mutate( 
     sdo1_modali = case_when(
-      sdo1_modali == 1 ~ "Planned",
-      sdo1_modali == 2 ~ "Emergency",
-      sdo1_modali == 3 ~ "Home care",
-      sdo1_modali == 4 ~ "Day surgery with overnight stay"
+      sdo1_modali == 1 ~ "Scheduled",
+      sdo1_modali == 2 ~ "Urgent",
+      sdo1_modali == 4 ~ "Scheduled with preospedalization"
     )
     )
 #db_orig$sdo1_tipdim è il tipo di dimissione 
@@ -104,10 +110,7 @@ reparti <- import("data/reparti.xlsx") %>%
 
 
 
-db <- left_join(db, reparti, by = "reparto_cod")
-
-frq(db$reparto)
-
+db <- left_join(db, reparti, by = "reparto_cod") %>% select(-sdo1_uor)
 
 # Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
