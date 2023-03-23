@@ -139,13 +139,13 @@ db <- left_join(db, reparti, by = "reparto_cod") %>% select(-sdo1_uor)
 
 
 #Diagnosi primaria
-db <- db %>%
-  mutate(dia_pri = 
+db <- db %>%           #ho creato la variabile dia_pri riducendo alle prime tre cifre
+  mutate(dia_pri =      #sdo1_diapri
     substr(sdo1_dia_pri, 1, 3)
   )
-
+#ricodifico dia_pri come da lista wikipedia 
 db <- db %>%
-  mutate( 
+  mutate(          
     dia_pri = case_when(
       dia_pri < 139 ~ "Infectious and parasitic diseases",
       dia_pri < 239 ~ "Neoplasms",
