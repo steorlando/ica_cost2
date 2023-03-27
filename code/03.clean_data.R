@@ -139,33 +139,93 @@ db <- left_join(db, reparti, by = "reparto_cod") %>% select(-sdo1_uor)
 
 
 #Diagnosi primaria
-db <- db %>%           #ho creato la variabile dia_pri riducendo alle prime tre cifre
-  mutate(dia_pri =      #sdo1_diapri
+db <- db %>%           #ho creato la variabile diapri_cod riducendo alle prime tre cifre
+  mutate(diapri_cod =      #sdo1_diapri
     substr(sdo1_dia_pri, 1, 3)
   )
-#ricodifico dia_pri come da lista wikipedia 
-db <- db %>%
+
+table(db$diapri_cod)     #Elenco aggregato diapri_cod   
+
+db <- db %>%     #creo variabile dia_pri come da lista wikipedia 
   mutate(          
     dia_pri = case_when(
-      dia_pri < 139 ~ "Infectious and parasitic diseases",
-      dia_pri < 239 ~ "Neoplasms",
-      dia_pri < 279 ~ "Endocrine, nutritional and metabolic diseases, and immunity disorders",
-      dia_pri < 289 ~ "Diseases of the blood",
-      dia_pri < 319 ~ "Mental disorders",
-      dia_pri < 389 ~ "Diseases of the nervous system",
-      dia_pri < 459 ~ "Diseases of the circulatory system",
-      dia_pri < 519 ~ "Diseases of the respiratory system",
-      dia_pri < 579 ~ "Diseases of the digestive system",
-      dia_pri < 629 ~ "Diseases of the genitourinary system",
-      dia_pri < 679 ~ "Complications of pregnancy and childbirth",
-      dia_pri < 709 ~ "Diseases of the skin",
-      dia_pri < 739 ~ "Diseases of the musculoskeletal system",
-      dia_pri < 759 ~ "Congenital anomalies",
-      dia_pri < 779 ~ "Conditions originating in the perinatal period",
-      dia_pri < 799 ~ "Symptoms, signs, and ill-defined conditions",
-      dia_pri < 999 ~ "Injury and poisoning",
-      startsWith(dia_pri, "V") ~ "Supplemental classification"
+      diapri_cod < 139 ~ "Infectious and parasitic diseases",
+      diapri_cod < 239 ~ "Neoplasms",
+      diapri_cod < 279 ~ "Endocrine, nutritional and metabolic diseases, and immunity disorders",
+      diapri_cod < 289 ~ "Diseases of the blood",
+      diapri_cod < 319 ~ "Mental disorders",
+      diapri_cod < 389 ~ "Diseases of the nervous system",
+      diapri_cod < 459 ~ "Diseases of the circulatory system",
+      diapri_cod < 519 ~ "Diseases of the respiratory system",
+      diapri_cod < 579 ~ "Diseases of the digestive system",
+      diapri_cod < 629 ~ "Diseases of the genitourinary system",
+      diapri_cod < 679 ~ "Complications of pregnancy and childbirth",
+      diapri_cod < 709 ~ "Diseases of the skin",
+      diapri_cod < 739 ~ "Diseases of the musculoskeletal system",
+      diapri_cod < 759 ~ "Congenital anomalies",
+      diapri_cod < 779 ~ "Conditions originating in the perinatal period",
+      diapri_cod < 799 ~ "Symptoms, signs, and ill-defined conditions",
+      diapri_cod < 999 ~ "Injury and poisoning",
+      startsWith(diapri_cod, "V") ~ "Supplemental classification"
     ))
+
+db <- db %>%        #Rimuovo sdo1_diapri 
+  select(-c(sdo1_dia_pri
+  ))
+
+#Continuo la ricodifica della diagnosi con le successive 
+db <- db %>%
+  mutate(diase1 = substr(sdo1_dia_se1, 1, 3)) %>%
+  mutate(diase2 = substr(sdo1_dia_se2, 1, 3)) %>%
+  mutate(diase3 = substr(sdo1_dia_se3, 1, 3)) %>%
+  mutate(diase4 = substr(sdo1_dia_se4, 1, 3)) %>%
+  mutate(diase5 = substr(sdo1_dia_se5, 1, 3)) 
+
+ricodifica <- function(x) {
+  case_when(
+    x < 139 ~ "Infectious and parasitic diseases",
+    x < 239 ~ "Neoplasms",
+    x < 279 ~ "Endocrine, nutritional and metabolic diseases, and immunity disorders",
+    x < 289 ~ "Diseases of the blood",
+    x < 319 ~ "Mental disorders",
+    x < 389 ~ "Diseases of the nervous system",
+    x < 459 ~ "Diseases of the circulatory system",
+    x < 519 ~ "Diseases of the respiratory system",
+    x < 579 ~ "Diseases of the digestive system",
+    x < 629 ~ "Diseases of the genitourinary system",
+    x < 679 ~ "Complications of pregnancy and childbirth",
+    x < 709 ~ "Diseases of the skin",
+    x < 739 ~ "Diseases of the musculoskeletal system",
+    x < 759 ~ "Congenital anomalies",
+    x < 779 ~ "Conditions originating in the perinatal period",
+    x < 799 ~ "Symptoms, signs, and ill-defined conditions",
+    x < 999 ~ "Injury and poisoning",
+    startsWith(x, "V") ~ "Supplemental classification",
+    TRUE ~ as.character(x),
+    is.na(x)|x == " " ~ " "
+  )
+}
+
+
+#Ricodifico sdo1_terapia
+db <- db %>%
+  mutate(
+    terapia = case_when(
+      sdo1_terapia == "C" ~ "Surgical",
+      sdo1_terapia == "M" ~ "Medical"
+    )
+  )
+
+db <- db %>%  #Elimino la variabile già ricodificata
+  select(-c(sdo1_terapia))
+
+#Creo le variabilini almeno_una_infezione e numero_di_infezioni
+db$almeno_una_infezione <- ifelse(db$numero_di_infezioni >= 1, T, F)
+
+db$numero_di_infezioni <- rowSums(db[ ,c("acinetobacter", "escherichia_coli",
+                                         "klebsiella_pnm", "pseudomonas", 
+                                         "clostridium", "candida", "enterococcus", 
+                                         "staphylococcus")] == 0)
 
 # Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
