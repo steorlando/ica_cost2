@@ -175,14 +175,15 @@ db <- db %>%        #Rimuovo sdo1_diapri
 
 #Continuo la ricodifica della diagnosi con le successive 
 db <- db %>%
-  mutate(diase1 = substr(sdo1_dia_se1, 1, 3)) %>%
-  mutate(diase2 = substr(sdo1_dia_se2, 1, 3)) %>%
-  mutate(diase3 = substr(sdo1_dia_se3, 1, 3)) %>%
-  mutate(diase4 = substr(sdo1_dia_se4, 1, 3)) %>%
-  mutate(diase5 = substr(sdo1_dia_se5, 1, 3)) 
+  mutate(diase1_cod = substr(sdo1_dia_se1, 1, 3)) %>%
+  mutate(diase2_cod = substr(sdo1_dia_se2, 1, 3)) %>%
+  mutate(diase3_cod = substr(sdo1_dia_se3, 1, 3)) %>%
+  mutate(diase4_cod = substr(sdo1_dia_se4, 1, 3)) %>%
+  mutate(diase5_cod = substr(sdo1_dia_se5, 1, 3)) 
 
 ricodifica <- function(x) {
   case_when(
+    x == "" ~ "",
     x < 139 ~ "Infectious and parasitic diseases",
     x < 239 ~ "Neoplasms",
     x < 279 ~ "Endocrine, nutritional and metabolic diseases, and immunity disorders",
@@ -200,11 +201,19 @@ ricodifica <- function(x) {
     x < 779 ~ "Conditions originating in the perinatal period",
     x < 799 ~ "Symptoms, signs, and ill-defined conditions",
     x < 999 ~ "Injury and poisoning",
-    startsWith(x, "V") ~ "Supplemental classification",
-    TRUE ~ as.character(x),
-    is.na(x)|x == " " ~ " "
+    startsWith(x, "V") ~ "Supplemental classification"
   )
 }
+
+db$diase1 <- ricodifica(db$diase1_cod)
+db$diase2 <- ricodifica(db$diase2_cod)
+db$diase3 <- ricodifica(db$diase3_cod)
+db$diase4 <- ricodifica(db$diase4_cod)
+db$diase5 <- ricodifica(db$diase5_cod)
+
+db <- db %>%  #Elimino variabili già ricodificate
+  select(-c(sdo1_dia_se1, sdo1_dia_se2, sdo1_dia_se3,
+            sdo1_dia_se4, sdo1_dia_se5))
 
 
 #Ricodifico sdo1_terapia
@@ -219,13 +228,14 @@ db <- db %>%
 db <- db %>%  #Elimino la variabile già ricodificata
   select(-c(sdo1_terapia))
 
-#Creo le variabilini almeno_una_infezione e numero_di_infezioni
-db$almeno_una_infezione <- ifelse(db$numero_di_infezioni >= 1, T, F)
+#Creo le variabilini numero_di_infezioni e almeno_una_infezione
 
 db$numero_di_infezioni <- rowSums(db[ ,c("acinetobacter", "escherichia_coli",
                                          "klebsiella_pnm", "pseudomonas", 
                                          "clostridium", "candida", "enterococcus", 
                                          "staphylococcus")] == 0)
+
+db$almeno_una_infezione <- ifelse(db$numero_di_infezioni >= 1, T, F) 
 
 # Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
