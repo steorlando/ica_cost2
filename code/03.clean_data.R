@@ -1,4 +1,4 @@
-# devo ricodificare le categoriche e le continue per quello che sono
+# devo ricodificare le categoriche e le continue per quello che sono ####
 
 db <- db_select %>%
   mutate(sdo1_costo = as_numeric(sdo1_costo)) %>%     # e metto il costo numerico
@@ -44,7 +44,7 @@ db <- db_select %>%
          )
          )
 
-#Creo variabile job_type usando la seconda cifra dei lavoratori impiegati
+## Creo variabile job_type usando la seconda cifra dei lavoratori impiegati ####
 
 db <- db %>%
   mutate(job_type = case_when(
@@ -57,7 +57,7 @@ db <- db %>%
     TRUE ~ "Not employed"
   ))
     
-#Creo variabile job_sector usando la terza cifra dei lavoratori impiegati
+## Creo variabile job_sector usando la terza cifra dei lavoratori impiegati####
 db <- db %>%
   mutate(job_sector = case_when(
     str_sub(as.character(sdo1_profes), 3, 3) == "1" ~ "Agriculture, hunting and fishing",
@@ -70,12 +70,12 @@ db <- db %>%
 
 
 
-# Tolgo le variabili che abbiamo ricodificato con altro nome
+# Tolgo le variabili che abbiamo ricodificato con altro nome ####
 db <- db %>% 
   select(-c(sdo1_tit_stu
             ))
 
-# Organizzo al meglio le variabili categoriche non ordinate
+# Organizzo al meglio le variabili categoriche non ordinate ####
 db <- db %>% 
   mutate(sdo1_sesso = factor(sdo1_sesso),
          sdo1_cittad = as_factor(sdo1_cittad),
@@ -86,8 +86,7 @@ db <- db %>%
          profession_simple = factor(profession_simple, levels = c("Employed/Student/Housewife", "Retired/Disable", "Unemployed"))
          )
 
-frq(db$sdo1_modali)
-#db_orig$sdo1_modali è la modalità di ammissione 
+# modalità di ammissione ####
 db <- db %>%
   mutate( 
     sdo1_modali = case_when(
@@ -96,7 +95,7 @@ db <- db %>%
       sdo1_modali == 4 ~ "Scheduled with preospedalization"
     )
     )
-#db_orig$sdo1_tipdim è il tipo di dimissione 
+# tipo di dimissione ####
 db <- db %>%
   mutate(
     sdo1_tip_dim = case_when(
@@ -113,7 +112,7 @@ db <- db %>%
   )
 
 
-#sdo1_causa_ext è la causa esterna 
+# causa esterna ####
 db <- db %>%
   mutate(
     sdo1_causa_ext = case_when(
@@ -122,7 +121,7 @@ db <- db %>%
     )
   )
 
-#sdo1_uor reparto di ammissione
+# reparto di ammissione ####
 
 #transformo in carattere perchè startsWith vuole formato carattere
 db$sdo1_uor <- as.character(db$sdo1_uor) 
@@ -138,7 +137,7 @@ reparti <- import("data/reparti.xlsx") %>%
 db <- left_join(db, reparti, by = "reparto_cod") %>% select(-sdo1_uor)
 
 
-#Diagnosi primaria
+# Diagnosi primaria ####
 db <- db %>%           #ho creato la variabile diapri_cod riducendo alle prime tre cifre
   mutate(diapri_cod =      #sdo1_diapri
     substr(sdo1_dia_pri, 1, 3)
@@ -216,7 +215,7 @@ db <- db %>%  #Elimino variabili già ricodificate
             sdo1_dia_se4, sdo1_dia_se5))
 
 
-#Ricodifico sdo1_terapia
+# Tipo terapia surgical o medical ####
 db <- db %>%
   mutate(
     terapia = case_when(
@@ -228,25 +227,22 @@ db <- db %>%
 db <- db %>%  #Elimino la variabile già ricodificata
   select(-c(sdo1_terapia))
 
-#Creo le variabilini numero_di_infezioni e almeno_una_infezione
+# Creo le variabilini numero_di_infezioni e almeno_una_infezione #####
 
-db$numero_di_infezioni <- rowSums(db[ ,c("acinetobacter", "escherichia_coli",
+db$num_infezioni <- rowSums(db[ ,c("acinetobacter", "escherichia_coli",
                                          "klebsiella_pnm", "pseudomonas", 
                                          "clostridium", "candida", "enterococcus", 
-                                         "staphylococcus")] == 0)
+                                         "staphylococcus")] == 0) # nel db 0 vuol dire che ha l'infezione
 
-db$almeno_una_infezione <- ifelse(db$numero_di_infezioni >= 1, T, F) 
+db$infetto <- ifelse(db$num_infezioni >= 1, T, F) 
 
 # Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
 
+# creo una variabile di costo trasformata con il log per le analisi ####
 
+# rinomino il costo per renderla più chiara
 
-# Imposto etichette (lo stavo facendo una ad una ma mi sono interrotto, meglio farlo alla fine)
-#db <- db %>% 
- # var_labels(sdo1_costo = "Reimbursed cost", 
-  #          sdo1_sesso = "Sex",
-   #         sdo1_cittad = "Nationality",
-    #        sdo1_sta_civ = "Civil status", #controllare che si dica così'
-     #       family = "Familiar status", #anche qui non so se è l'etichetta giusta
-      #      )
+db <- db %>% 
+  rename(cost = sdo1_costo) %>% 
+  mutate(cost_ln = log(cost))

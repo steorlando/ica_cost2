@@ -13,6 +13,9 @@ db <- db %>%
              sdo1_causa_ext     = "External Reason",             # Verificare
              sdo1_degenza       = "Days of stay",
              sdo1_attesa        = "Days in waiting list",
-             sdo1_terapia       = "Medical-Surgical",
-             sdo1_costo         = "Real reimbursement"
+             terapia            = "Medical-Surgical",
+             cost               = "Real reimbursement",
+             cost_ln            = "Log Real Reimbursement",
+             num_infezioni      = "Infections number",
+             infetto            = "Infection detected"
   )

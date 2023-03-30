@@ -72,3 +72,7 @@ unique(db$sdo1_dia_pri)
 hist(db$sdo1_costo_ln)
 
 db$sdo1_costo_ln <- log(db$sdo1_costo)
+
+names(db)
+
+frq(db_orig$SANGUE)
