@@ -37,17 +37,17 @@ db_select <- db_select %>%  # queste le tolgo perchè non ho idea di cosa si tra
             #"sdo1_tip_dim", #tipo di dimissione, l'ho inserita anche in db_select
             "sdo1_irc_tra",
             "sdo1_ris_aut",
-            "sdo1_int_pri",
-            "sdo1_dat_in_p",
-            "sdo1_int_se1",
+            #"sdo1_int_pri",  #intervento primario
+            "sdo1_dat_in_p", 
+            #"sdo1_int_se1", #intervento secondario 1
             "sdo1_d_in_se1",
-            "sdo1_int_se2",           
+            #"sdo1_int_se2", #intervento secondario 2           
             "sdo1_d_in_se2",
-            "sdo1_int_se3",
+            #"sdo1_int_se3", #intervento secondario 3
             "sdo1_d_in_se3",
-            "sdo1_int_se4",
+            #"sdo1_int_se4", #intervento secondario 4
             "sdo1_d_in_se4",          
-            "sdo1_int_se5",
+            #"sdo1_int_se5", #intervento secondario 5
             "sdo1_d_in_se5",
             "sdo1_acce_dh",
             "sdo1_d_pren",

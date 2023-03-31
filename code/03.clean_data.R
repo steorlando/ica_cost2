@@ -236,6 +236,27 @@ db$num_infezioni <- rowSums(db[ ,c("acinetobacter", "escherichia_coli",
 
 db$infetto <- ifelse(db$num_infezioni >= 1, T, F) 
 
+#Creo variabile proc_inv che mi dice T se il pz ha subito almeno una proc invasiva di quelle definite elenco
+int_inv <- as.integer(c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622,  
+                        8628, 8962, 8964, 9604, 9605, 9670, 9671, 9672))  #codici elenco
+
+db$proc_inv <- ifelse(db$sdo1_int_pri %in% int_inv | db$sdo1_int_se1 %in% int_inv | db$sdo1_int_se2 %in% int_inv |
+                        db$sdo1_int_se3 %in% int_inv | db$sdo1_int_se4 %in% int_inv | db$sdo1_int_se5 %in% int_inv, "TRUE", "FALSE")
+
+#Creo variabile cod_proc che mi dice per i pz che hanno avuto TRUE il codice di 
+#quale procedura hanno avuto
+db <- db %>%  
+  mutate(cod_proc = case_when(
+    sdo1_int_pri %in% int_inv & TRUE ~ sdo1_int_pri,
+    sdo1_int_se1 %in% int_inv & TRUE ~ sdo1_int_se1,
+    sdo1_int_se2 %in% int_inv & TRUE ~ sdo1_int_se2,
+    sdo1_int_se3 %in% int_inv & TRUE ~ sdo1_int_se3,
+    sdo1_int_se4 %in% int_inv & TRUE ~ sdo1_int_se4,
+    sdo1_int_se5 %in% int_inv & TRUE ~ sdo1_int_se5,
+    TRUE ~ NA_integer_
+  ))
+
+
 # Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
 
