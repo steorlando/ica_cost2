@@ -256,6 +256,24 @@ db <- db %>%
     TRUE ~ NA_integer_
   ))
 
+#Aggiungo la variabile drg_soglia associata ai drg
+db$drgnum <- as.character(db$drgnum)
+
+db <- db %>%
+ mutate(drgnum = ifelse(nchar(drgnum) == 1, paste0("00", drgnum),
+                        ifelse(nchar(drgnum) == 2, paste0("0", drgnum), as.character(drgnum))))
+
+DRG <- import("data/DRG.xlsx") %>%
+  clean_names()
+
+db <- left_join(db, DRG, by = 'drgnum')
+
+frq(db$drg_soglia)
+
+#Creo variabile binaria sup_soglia che mi indica se i giorni di degenza hanno superato la soglia
+db$drg_soglia <- as.integer(db$drg_soglia)
+
+db$sup_soglia <- ifelse(db$sdo1_degenza > db$drg_soglia, TRUE, FALSE)
 
 # Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
