@@ -275,6 +275,8 @@ db$drg_soglia <- as.integer(db$drg_soglia)
 
 db$sup_soglia <- ifelse(db$sdo1_degenza > db$drg_soglia, TRUE, FALSE)
 
+db$diff_soglia <- db$degenza - db$drg_soglia
+
 # Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
 
