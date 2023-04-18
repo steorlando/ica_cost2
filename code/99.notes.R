@@ -76,3 +76,5 @@ db$sdo1_costo_ln <- log(db$sdo1_costo)
 names(db)
 
 frq(db_orig$SANGUE)
+
+frq(db_prop$cost_ln)

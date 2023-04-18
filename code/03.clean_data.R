@@ -72,7 +72,7 @@ db <- db %>%
 
 # Tolgo le variabili che abbiamo ricodificato con altro nome ####
 db <- db %>% 
-  select(-c(sdo1_tit_stu
+  dplyr::select(-c(sdo1_tit_stu
             ))
 
 # Organizzo al meglio le variabili categoriche non ordinate ####
@@ -134,7 +134,7 @@ reparti <- import("data/reparti.xlsx") %>%
   clean_names()
 
 
-db <- left_join(db, reparti, by = "reparto_cod") %>% select(-sdo1_uor)
+db <- left_join(db, reparti, by = "reparto_cod") %>% dplyr::select(-sdo1_uor)
 
 
 # Diagnosi primaria ####
@@ -143,7 +143,6 @@ db <- db %>%           #ho creato la variabile diapri_cod riducendo alle prime t
     substr(sdo1_dia_pri, 1, 3)
   )
 
-table(db$diapri_cod)     #Elenco aggregato diapri_cod   
 
 db <- db %>%     #creo variabile dia_pri come da lista wikipedia 
   mutate(          
@@ -169,7 +168,7 @@ db <- db %>%     #creo variabile dia_pri come da lista wikipedia
     ))
 
 db <- db %>%        #Rimuovo sdo1_diapri 
-  select(-c(sdo1_dia_pri
+  dplyr::select(-c(sdo1_dia_pri
   ))
 
 #Continuo la ricodifica della diagnosi con le successive 
@@ -211,7 +210,7 @@ db$diase4 <- ricodifica(db$diase4_cod)
 db$diase5 <- ricodifica(db$diase5_cod)
 
 db <- db %>%  #Elimino variabili già ricodificate
-  select(-c(sdo1_dia_se1, sdo1_dia_se2, sdo1_dia_se3,
+  dplyr::select(-c(sdo1_dia_se1, sdo1_dia_se2, sdo1_dia_se3,
             sdo1_dia_se4, sdo1_dia_se5))
 
 
@@ -225,7 +224,7 @@ db <- db %>%
   )
 
 db <- db %>%  #Elimino la variabile già ricodificata
-  select(-c(sdo1_terapia))
+  dplyr::select(-c(sdo1_terapia))
 
 # Creo le variabilini numero_di_infezioni e almeno_una_infezione #####
 
@@ -268,7 +267,7 @@ DRG <- import("data/DRG.xlsx") %>%
 
 db <- left_join(db, DRG, by = 'drgnum')
 
-frq(db$drg_soglia)
+
 
 #Creo variabile binaria sup_soglia che mi indica se i giorni di degenza hanno superato la soglia
 db$drg_soglia <- as.integer(db$drg_soglia)
@@ -277,8 +276,10 @@ db$sup_soglia <- ifelse(db$sdo1_degenza > db$drg_soglia, TRUE, FALSE)
 
 db$diff_soglia <- db$degenza - db$drg_soglia
 
-# Sto sistemando le variabili seguendo la tabella excel. Sono arrivato a "Invio" e devo continuare dalla linea 28
 
+# aggiusto il decesso
+db <- db %>% 
+  mutate(decessodico = ifelse(decessodico == 0, TRUE, FALSE))
 
 # creo una variabile di costo trasformata con il log per le analisi ####
 
@@ -287,3 +288,7 @@ db$diff_soglia <- db$degenza - db$drg_soglia
 db <- db %>% 
   rename(cost = sdo1_costo) %>% 
   mutate(cost_ln = log(cost))
+
+# modifiche al db da verificare ####
+
+# tolgo i reparti con meno di 5 infezioni 

@@ -1,0 +1,142 @@
+---
+title: "Prime analisi"
+author: "Stefano Orlando e Mariagrazia Cicala"
+date: "2023-04-18"
+output: 
+  html_document:
+    toc: false
+    toc_depth: 3
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+load("my_work_space.RData")
+library(tidyverse)
+library(magrittr)
+library(officer)
+library(flextable)
+library(ggplot2)
+library(scales)
+library(janitor)
+library(here)
+library(lubridate)
+library(gtsummary)
+library(lsr)
+
+set_flextable_defaults(font.size = 10,
+                       table.layout = "autofit",
+                       theme_fun = "theme_booktabs",
+                       padding = 0)
+
+std_border <- fp_border(color = "grey", style = "solid", width = 1 )
+```
+
+# Prime analisi
+
+Abbiamo provato a vedere le variabili che potrebbero essere correlate all'infezione
+
+```{r summary_infezioni}
+# Creo db allo scopo
+db_prop <- db %>% 
+  dplyr::select(infetto,
+         sdo1_sesso,
+         sdo1_eta, 
+         sdo1_modali,
+         sdo1_degenza,
+         terapia, 
+         decessodico,
+         education,
+         profession_simple,
+         reparto,
+         dia_pri,
+         proc_inv,
+         cost_ln)
+
+summary <- db_prop %>% 
+  tbl_summary(by = infetto) %>% 
+  add_p %>% 
+  add_overall()
+
+summary
+
+```
+
+Ci siamo accorti che alcuni reparti e alcune diagnosi hanno pochi casi e pochissimi o zero infetti. Ipotizziamo che si tratti di situazioni poco rilevanti in uno studio sulle ICA quindi li togliamo. I reparti con meno di 5 casi sono
+
+```{r reparti_null}
+reparti_null <- db_prop %>%
+  group_by(reparto) %>% 
+  summarise(infected = sum(infetto)) %>% 
+  filter(infected < 5)
+
+t2 <- flextable(reparti_null)
+
+t2 %>%  autofit()
+
+    
+
+```
+
+Invece le diagnosi con meno di 5 pazienti in tutto sono
+
+```{r diagnosi_null}
+diag_null <- db_prop %>%
+  group_by(dia_pri) %>% 
+  summarise(patients = n()) %>% 
+  filter(patients < 5)
+
+t3 <- flextable(diag_null) %>% 
+  autofit()
+t3
+```
+
+Quindi ripetiamo la tabella di sintesi esplorativa togliendo quei reparti e quelle diagnosi
+
+```{r summary2}
+
+reparti_null <- db_prop %>%
+  group_by(reparto) %>% 
+  summarise(infected = sum(infetto)) %>% 
+  filter(infected < 5) %>% 
+  mutate(filt = 1) %>% 
+  select(reparto, filt)
+
+diag_null <- db_prop %>%
+  group_by(dia_pri) %>% 
+  summarise(patients = n()) %>% 
+  filter(patients < 5) %>% 
+  mutate(filt1 = 1) %>% 
+  select(dia_pri, filt1)
+
+db_prop <- left_join(db_prop, reparti_null) %>% mutate(filt = ifelse(is.na(filt),0,filt))
+db_prop <- left_join(db_prop, diag_null) %>% mutate(filt1 = ifelse(is.na(filt1),0,filt1))
+
+db_prop <- db_prop %>% 
+  filter(!filt == 1) %>% 
+  filter(!filt1 == 1) %>% 
+  select(-c(filt, filt1))
+
+summary <- db_prop %>% 
+  tbl_summary(by = infetto) %>% 
+  add_p %>% 
+  add_overall()
+
+summary
+```
+
+## Propensity
+
+**Primo passo:** facciamo una regrssione logistica con tutte le variabili identificate rispetto all'infezione
+
+```{r logistica}
+# Step 1: PS estimation with logistic regression -----------------------
+model <- glm(
+  infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_prop,
+  family = binomial("logit")
+)
+
+model %>% tbl_regression(exponentiate = T)
+
+```

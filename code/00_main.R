@@ -17,12 +17,20 @@ pacman::p_load(pacman,
                gtsummary,
                DataExplorer,
                janitor, 
-               here
-)
+               here,
+               Matching,
+               cobalt,
+               dplyr,
+               tidyverse
+               )
 
 rm(list = ls())
+
 
 source(here::here("code","01.import.R")) 
 source(here::here("code","03.clean_data.R"))
 source(here::here("code","04.labelling.R"))
+
+# Save image ####
+save.image (file = "code/my_work_space.RData")
 

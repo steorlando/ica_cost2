@@ -17,5 +17,8 @@ db <- db %>%
              cost               = "Real reimbursement",
              cost_ln            = "Log Real Reimbursement",
              num_infezioni      = "Infections number",
-             infetto            = "Infection detected"
+             infetto            = "Infection detected",
+             dia_pri            = "Primary diagnosis",
+             proc_inv           = "Invasive procedure",
+             decessodico        = "Died"
   )
