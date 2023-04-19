@@ -78,3 +78,36 @@ names(db)
 frq(db_orig$SANGUE)
 
 frq(db_prop$cost_ln)
+
+names(db)
+
+db_prova <- db %>% 
+  dplyr::select(c("acinetobacter", "escherichia_coli", "klebsiella_pnm", "pseudomonas", 
+                  "clostridium", "candida", "enterococcus", "staphylococcus", "sangue", "respiratorio", "urinario", "ferita", "rettale" ))
+
+db_prova1 <- db_prova %>% mutate_all(function(x) x == 0)
+
+names(db_prova1)
+
+# Creare due tabelle separate per i due gruppi di colonne
+df_microorganismi <- db_prova1 %>%
+  pivot_longer(cols = c("acinetobacter", "escherichia_coli", "klebsiella_pnm", "pseudomonas", "clostridium", "candida", "enterococcus", "staphylococcus"),
+               names_to = "microorganismo",
+               values_drop_na = TRUE)
+
+df_origine <- db_prova1 %>%
+  pivot_longer(cols = c("sangue", "respiratorio", "urinario", "ferita", "rettale"),
+               names_to = "origine",
+               values_to = "presente",
+               values_drop_na = TRUE) %>%
+  filter(presente == TRUE)
+
+# Unire le due tabelle usando l'indice del dataframe originale
+result <- left_join(df_microorganismi, df_origine, by = c("rowid" = "rowid"))
+
+# Rimuovere la colonna "presente" e l'indice del dataframe originale (rowid)
+result <- result %>% select(-c(presente.x, presente.y, rowid))
+
+# Visualizzare il risultato
+print(result)
+
