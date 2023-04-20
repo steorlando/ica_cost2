@@ -125,6 +125,7 @@ summary <- db_prop %>%
 summary
 ```
 
+
 ## Propensity
 
 **Primo passo:** facciamo una regrssione logistica con tutte le variabili identificate rispetto all'infezione
@@ -140,3 +141,47 @@ model <- glm(
 model %>% tbl_regression(exponentiate = T)
 
 ```
+
+**Secondo passo:** faccio match usando i PS
+```{r matching using PS}
+# Get PS values
+ps_values <- model$fitted.values
+
+# Step 2: matching using PS --------------------------------------------
+# Define outcome and treatment vector
+outcome <- db_prop$cost
+treatment <- db_prop$infetto
+
+# Matching
+match_object <- Match(
+  Y = outcome,            # vector with the outcome
+  Tr = treatment,         # vector with treatment
+  X = ps_values,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 2,                  # 1:2 matching,
+  ties = FALSE,           # If there are multiple matches, takes only 1
+  replace = FALSE         # Control subjects used only once
+)
+
+```
+
+**Terzo passo:** valuto il bilanciamento delle covariate dopo il match
+```{r balance assessment}
+# Step 3: balance assessment -------------------------------------------
+balance_table <- bal.tab(
+  match_object,
+  infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_prop,
+  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
+  un = T, stats = c('means.diffs', 'variance.ratios')
+)
+
+bal.plot(
+  match_object,
+  formula = infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_prop,
+  var.name = "sdo1_eta", which = "both"
+)
+
+```
+

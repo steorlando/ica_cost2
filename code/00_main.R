@@ -21,7 +21,8 @@ pacman::p_load(pacman,
                Matching,
                cobalt,
                dplyr,
-               tidyverse
+               tidyverse,
+               mice
                )
 
 rm(list = ls())
