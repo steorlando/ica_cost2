@@ -13,7 +13,6 @@ db_prop <- db %>%
          reparto,
          dia_pri,
          proc_inv,
-         cost_ln,
          cost,
          sangue,   #inserisco in db_prop variabili relative alla sede dell'infezione 
          urinario,
@@ -58,14 +57,46 @@ summary2 <- db_prop %>%
   add_p %>% 
   add_overall()
 
-summary2
+
 
 # sto togliendo i costi = zero, ma poi devo imputarli per bene ####
-dp_prop <- db_prop %>% 
-  filter(!cost_ln == 0)
+db_prop <- db_prop[db_prop$cost != 0, ]
 
-dp_prop <- db_prop %>% 
-  filter(!cost == 0)
+db_prop <- db_prop %>% 
+  mutate(cost_ln = log(cost))
+
+
+db_prop <- db_prop %>% 
+  var_labels(sdo1_sesso         = "Sex",
+             sdo1_eta           = "Age",
+             sdo1_cittad        = "National-Non-national",
+             sdo1_sta_civ       = "Civil status",
+             family             = "Living alone",
+             education          = "Education level",
+             profession         = "Occupational status",
+             profession_simple  = "Employed-Unemployed-Retired",
+             reparto            = "Department",
+             sdo1_modali        = "Admission modality",
+             sdo1_tip_dim       = "Type of discharge",
+             sdo1_causa_ext     = "External Reason",             # Verificare
+             sdo1_degenza       = "Days of stay",
+             sdo1_attesa        = "Days in waiting list",
+             terapia            = "Medical-Surgical",
+             cost               = "Real reimbursement",
+             cost_ln            = "Log Real Reimbursement",
+             num_infezioni      = "Infections number",
+             infetto            = "Infection detected",
+             dia_pri            = "Primary diagnosis",
+             proc_inv           = "Invasive procedure",
+             decessodico        = "Died"
+  )
+
+summary3 <- db_prop %>% 
+  tbl_summary(by = infetto) %>% 
+  add_p %>% 
+  add_overall()
+
+summary3
 
 # Step 1: PS estimation with logistic regression -----------------------
 model <- glm(
@@ -75,6 +106,8 @@ model <- glm(
 )
 
 model %>% tbl_regression(exponentiate = T)
+
+
 
 # Get PS values
 ps_values <- model$fitted.values
@@ -92,9 +125,9 @@ match_object <- Match(
   Tr = treatment,         # vector with treatment
   X = ps_values,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
-  M = 2,                  # 1:2 matching,
-  ties = FALSE,           # If there are multiple matches, takes only 1
-  replace = FALSE         # Control subjects used only once
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
 )
 
 
@@ -113,12 +146,13 @@ bal.plot(
   match_object,
   formula = infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
   data = db_prop,
-  var.name = "sdo1_eta", which = "both"
+  var.name = "sdo1_degenza", which = "both"
 )
 
 
 # Step 4: outcome analysis
 summary(match_object)
+exp(match_object$est)
 
 # Compute confidence intervals -----------------------------------------
 # Without caliper

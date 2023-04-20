@@ -22,7 +22,9 @@ pacman::p_load(pacman,
                cobalt,
                dplyr,
                tidyverse,
-               mice
+               mice,
+               skimr,
+               quantreg
                )
 
 rm(list = ls())

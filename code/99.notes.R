@@ -111,3 +111,85 @@ result <- result %>% select(-c(presente.x, presente.y, rowid))
 # Visualizzare il risultato
 print(result)
 
+skim(db_prop)
+
+
+matched_data <- db_prop[unlist(match_object[c("index.treated", "index.control")]), ]
+
+# Step 4: Perform quantile regression on matched data --------------------------
+# Esegui la regressione quantilica al 50° quantile (mediana)
+qr_model <- rq(cost ~ infetto + sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+               data = matched_data, tau = 0.5)
+
+# Visualizza i risultati del modello
+summary(qr_model)
+
+hist(db_prop$cost)
+
+# Installa e carica il pacchetto ggplot2 se non è già installato
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+
+library(ggplot2)
+
+# Supponiamo che il tuo dataframe si chiami 'db_prop'
+# Assicurati che 'infetto' sia un fattore
+db_prop$infetto <- as.factor(db_prop$infetto)
+
+# Crea il density plot utilizzando ggplot
+ggplot(db_prop, aes(x = cost, fill = infetto)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Distribuzione del costo per gruppi Infetto e Non Infetto",
+       x = "Costo",
+       y = "Densità",
+       fill = "Infetto") +
+  theme_minimal()
+
+matched_data$infetto <- as.factor(matched_data$infetto)
+
+# Crea il density plot utilizzando ggplot
+ggplot(matched_data, aes(x = cost, fill = infetto)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Distribuzione del costo per gruppi Infetto e Non Infetto",
+       x = "Costo",
+       y = "Densità",
+       fill = "Infetto") +
+  theme_minimal()
+
+
+# Calcola le medie per ciascun gruppo
+media_infetto <- mean(db_prop$cost[db_prop$infetto == TRUE])
+media_non_infetto <- mean(db_prop$cost[db_prop$infetto == FALSE])
+
+# Crea il density plot utilizzando ggplot e aggiungi le linee delle medie
+ggplot(db_prop, aes(x = cost, fill = infetto)) +
+  geom_density(alpha = 0.5) +
+  geom_vline(aes(xintercept = media_infetto, color = "Infetto"), linetype = "dashed", size = 1) +
+  geom_vline(aes(xintercept = media_non_infetto, color = "Non Infetto"), linetype = "dashed", size = 1) +
+  scale_color_manual(values = c("Infetto" = "red", "Non Infetto" = "blue"), labels = c("Media Infetto", "Media Non Infetto")) +
+  labs(title = "Distribuzione del costo per gruppi Infetto e Non Infetto",
+       x = "Costo",
+       y = "Densità",
+       fill = "Infetto",
+       color = "Medie") +
+  theme_minimal()
+
+# Calcola le medie per ciascun gruppo
+media_infetto <- median(matched_data$cost[matched_data$infetto == TRUE])
+media_non_infetto <- median(matched_data$cost[matched_data$infetto == FALSE])
+
+# Crea il density plot utilizzando ggplot e aggiungi le linee delle medie
+ggplot(matched_data, aes(x = cost, fill = infetto)) +
+  geom_density(alpha = 0.5) +
+  geom_vline(aes(xintercept = media_infetto, color = "Infetto"), linetype = "dashed", size = 1) +
+  geom_vline(aes(xintercept = media_non_infetto, color = "Non Infetto"), linetype = "dashed", size = 1) +
+  scale_color_manual(values = c("Infetto" = "red", "Non Infetto" = "blue"), labels = c("Media Infetto", "Media Non Infetto")) +
+  labs(title = "Distribuzione del costo per gruppi Infetto e Non Infetto",
+       x = "Costo",
+       y = "Densità",
+       fill = "Infetto",
+       color = "Medie") +
+  theme_minimal()
+
+
