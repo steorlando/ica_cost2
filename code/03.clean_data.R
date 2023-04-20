@@ -289,6 +289,8 @@ db <- db %>%
   rename(cost = sdo1_costo) %>% 
   mutate(cost_ln = log(cost))
 
+
+
 # modifiche al db da verificare ####
 
 # tolgo i reparti con meno di 5 infezioni 

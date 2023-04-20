@@ -1,76 +1,47 @@
-# Evaluation of covariates distributions by treatment groups
+#prova senza costo = 0
 
-db_prop <- db %>% 
-  dplyr::select(infetto,
-         sdo1_sesso,
-         sdo1_eta, 
-         sdo1_modali,
-         sdo1_degenza,
-         terapia, 
-         decessodico,
-         education,
-         profession_simple,
-         reparto,
-         dia_pri,
-         proc_inv,
-         cost_ln,
-         cost,
-         sangue,   #inserisco in db_prop variabili relative alla sede dell'infezione 
-         urinario,
-         rettale,
-         respiratorio,
-         ferita,
-         acinetobacter,  #inserisco in db_prop variabili relative ai batteri
-         klebsiella_pnm,
-         clostridium,
-         enterococcus,
-         escherichia_coli,
-         pseudomonas,
-         candida,
-         staphylococcus,
-         num_infezioni  #inserisco in db_prop num_infezioni poi vediamo come usarle
-         )
+db_prova <- db
 
-reparti_null <- db_prop %>%
+db_prova<- db_prova[db_prova$cost != 0, ]
+
+db_prova <- db_prova %>% 
+  mutate(cost_ln = log(cost))
+
+
+reparti_null <- db_prova %>%
   group_by(reparto) %>% 
   summarise(infected = sum(infetto)) %>% 
   filter(infected < 5) %>% 
   mutate(filt = 1) %>% 
   dplyr::select(reparto, filt)
 
-diag_null <- db_prop %>%
+diag_null <- db_prova %>%
   group_by(dia_pri) %>% 
   summarise(patients = n()) %>% 
   filter(patients < 5) %>% 
   mutate(filt1 = 1) %>% 
   dplyr::select(dia_pri, filt1)
 
-db_prop <- left_join(db_prop, reparti_null) %>% mutate(filt = ifelse(is.na(filt),0,filt))
-db_prop <- left_join(db_prop, diag_null) %>% mutate(filt1 = ifelse(is.na(filt1),0,filt1))
+db_prova <- left_join(db_prova, reparti_null) %>% mutate(filt = ifelse(is.na(filt),0,filt))
+db_prova <- left_join(db_prova, diag_null) %>% mutate(filt1 = ifelse(is.na(filt1),0,filt1))
 
-db_prop <- db_prop %>% 
+db_prova <- db_prova %>% 
   filter(!filt == 1) %>% 
   filter(!filt1 == 1) %>% 
   dplyr::select(-c(filt, filt1))
 
-summary2 <- db_prop %>% 
+summary2 <- db_prova %>% 
   tbl_summary(by = infetto) %>% 
   add_p %>% 
   add_overall()
 
 summary2
 
-# sto togliendo i costi = zero, ma poi devo imputarli per bene ####
-dp_prop <- db_prop %>% 
-  filter(!cost_ln == 0)
-
-dp_prop <- db_prop %>% 
-  filter(!cost == 0)
 
 # Step 1: PS estimation with logistic regression -----------------------
 model <- glm(
   infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_prop,
+  data = db_prova,
   family = binomial("logit")
 )
 
@@ -81,8 +52,9 @@ ps_values <- model$fitted.values
 
 # Step 2: matching using PS --------------------------------------------
 # Define outcome and treatment vector
-outcome <- db_prop$cost
-treatment <- db_prop$infetto
+outcome <- db_prova$cost
+treatment <- db_prova$infetto
+outcome_ln <- db_prova$cost_ln
 
 # from Matching package requires the treatment vector to be a logical
 
@@ -102,7 +74,7 @@ match_object <- Match(
 balance_table <- bal.tab(
   match_object,
   infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_prop,
+  data = db_prova,
   continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
@@ -112,7 +84,7 @@ print(balance_table)
 bal.plot(
   match_object,
   formula = infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_prop,
+  data = db_prova,
   var.name = "sdo1_eta", which = "both"
 )
 
