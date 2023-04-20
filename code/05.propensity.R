@@ -14,7 +14,21 @@ db_prop <- db %>%
          dia_pri,
          proc_inv,
          cost_ln,
-         cost
+         cost,
+         sangue,   #inserisco in db_prop variabili relative alla sede dell'infezione 
+         urinario,
+         rettale,
+         respiratorio,
+         ferita,
+         acinetobacter,  #inserisco in db_prop variabili relative ai batteri
+         klebsiella_pnm,
+         clostridium,
+         enterococcus,
+         escherichia_coli,
+         pseudomonas,
+         candida,
+         staphylococcus,
+         num_infezioni  #inserisco in db_prop num_infezioni poi vediamo come usarle
          )
 
 reparti_null <- db_prop %>%
@@ -99,10 +113,10 @@ bal.plot(
   data = db_prop,
   var.name = "sdo1_eta", which = "both"
 )
-# Step 4: outcome analysis ---------------------------------------------
-# 4A) Unadjusted analysis ----------------------------------------------
-summary(match_object)
 
+
+# Step 4: outcome analysis
+summary(match_object)
 
 # Compute confidence intervals -----------------------------------------
 # Without caliper
@@ -112,99 +126,37 @@ upper_1 <- match_object$est + 2 * match_object$se.standard
 
 c(lower_1, rd_1, upper_1)
 
-# With caliper
-rd_2 <- match_object_2$est
-lower_2 <- match_object_2$est - 2 * match_object$se.standard
-upper_2 <- match_object_2$est + 2 * match_object$se.standard
-
-c(lower_2, rd_2, upper_2)
 
 # Get matched datasets
-clotbusting_matched_1 <- bind_rows(
-  clotbusting_db[match_object$index.treated, ],
-  clotbusting_db[match_object$index.control, ]
+db_match <- bind_rows(
+  db_prop[match_object$index.treated, ],
+  db_prop[match_object$index.control, ]
 )
 
-clotbusting_matched_2 <- bind_rows(
-  clotbusting_db[match_object_2$index.treated, ],
-  clotbusting_db[match_object_2$index.control, ]
-)
-
-# Logistic regression to quantify drug's effect with OR
+# Logistic regression to quantify OR
 # Without caliper
-unadj_model_1 <- glm(
-  death_30_days ~ trt, data = clotbusting_matched_1,
-  family = binomial("logit")
+db_match_model<- glm(
+  cost ~ infetto + sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv,
+  data = db_match,
+  family = gaussian("identity")
 )
 
-or_unadj_1 <- exp(coef(unadj_model_1)[2])
-lower_or_unadj_1 <- exp(confint(unadj_model_1)[2, 1])
-upper_or_unadj_1 <- exp(confint(unadj_model_1)[2, 2])
+or <- exp(coef(db_match_model)[2])
+lower_or <- exp(confint(db_match_model)[2, 1])
+upper_or <- exp(confint(db_match_model)[2, 2])
 
-c(lower_or_unadj_1, or_unadj_1, upper_or_unadj_1)
+c(lower_or, or, upper_or)
 
-# With caliper
-unadj_model_2 <- glm(
-  death_30_days ~ trt, data = clotbusting_matched_2,
-  family = binomial("logit")
-)
-
-or_unadj_2 <- exp(coef(unadj_model_2)[2])
-lower_or_unadj_2 <- exp(confint(unadj_model_2)[2, 1])
-upper_or_unadj_2 <- exp(confint(unadj_model_2)[2, 2])
-
-c(lower_or_unadj_2, or_unadj_2, upper_or_unadj_2)
-
-# 4B) Adjusted analysis ------------------------------------------------
-# Adjusting for confounders may still reduce bias due to residual
-# imbalance in the matched set
-
-# Without caliper
-adj_model_1 <- glm(
-  death_30_days ~ trt + risk + age + severity,
-  data = clotbusting_matched_1, family = binomial("logit")
-)
-
-summary(adj_model_1)
-
-# Exponentiating the coefficients of treatment returns the conditional
-# effect of the new drug in terms of OR
-or_cond_1 <- exp(coef(adj_model_1)[2])
-lower_or_cond_1 <- exp(confint(adj_model_1)[2, 1])
-upper_or_cond_1 <- exp(confint(adj_model_1)[2, 2])
-
-c(lower_or_cond_1, or_cond_1, upper_or_cond_1)
 
 # But the marginal OR is needed to evaluate the ATT
-marg_means_1 <- emmeans(adj_model_1, specs = "trt")
+marg_means_1 <- emmeans(db_match_model, specs = "trt")
 
 marg_means_1@linfct
 
 att_1 <- pairs(marg_means_1, reverse = TRUE, type = "response")
 confint(att_1)
 
-# With caliper
-adj_model_2 <- glm(
-  death_30_days ~ trt + risk + age + severity,
-  data = clotbusting_matched_2, family = binomial("logit")
-)
 
-summary(adj_model_2)
 
-# Exponentiating the coefficients of treatment returns the conditional
-# effect of the new drug in terms of OR
-or_cond_2 <- exp(coef(adj_model_2)[2])
-lower_or_cond_2 <- exp(confint(adj_model_2)[2, 1])
-upper_or_cond_2 <- exp(confint(adj_model_2)[2, 2])
-
-c(lower_or_cond_2, or_cond_2, upper_or_cond_2)
-
-# But the marginal OR is needed to evaluate the ATT
-marg_means_2 <- emmeans(adj_model_2, specs = "trt")
-
-marg_means_2@linfct
-
-att_2 <- pairs(marg_means_2, reverse = TRUE, type = "response")
-confint(att_2)
 
 

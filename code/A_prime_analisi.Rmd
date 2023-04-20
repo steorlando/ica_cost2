@@ -185,3 +185,39 @@ bal.plot(
 
 ```
 
+***quarto passo:*** Outcome analysis
+```{r outcome analysis}
+# Step 4: outcome analysis
+summary(match_object)
+
+# Compute confidence intervals -----------------------------------------
+# Without caliper
+rd_1 <- match_object$est
+lower_1 <- match_object$est - 2 * match_object$se.standard
+upper_1 <- match_object$est + 2 * match_object$se.standard
+
+c(lower_1, rd_1, upper_1)
+
+
+# Get matched datasets
+db_match <- bind_rows(
+  db_prop[match_object$index.treated, ],
+  db_prop[match_object$index.control, ]
+)
+
+# Logistic regression to quantify OR
+# Without caliper
+db_match_model<- glm(
+  cost ~ infetto + sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv,
+  data = db_match,
+  family = gaussian("identity")
+)
+
+or <- exp(coef(db_match_model)[2])
+lower_or <- exp(confint(db_match_model)[2, 1])
+upper_or <- exp(confint(db_match_model)[2, 2])
+
+c(lower_or, or, upper_or)
+
+```
+
