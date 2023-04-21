@@ -502,4 +502,74 @@ bal.plot(
 summary(match_obj_staphylo)
 
 
+###Mi creo le variabili num_siti (con il totale di siti in cui è risultata l'infezione)
+db_prop$num_siti <- rowSums(db_prop[ ,c("sangue", "urinario",
+                                   "rettale", "respiratorio", 
+                                   "ferita")] == 0) # nel db 0 vuol dire che ha l'infezione
+#e la variabile siti (che mi dice se almeno in un sito è risultata l'infezione)
+db_prop$siti <- ifelse(db_prop$num_siti >= 1, T, F) 
+
+
+### PS analysis sangue vs non infetti
+#mi creo db_sangue per eseguire modifiche e analisi senza toccare db_prop
+db_sangue <- db_prop
+db_sangue$sangue <- ifelse(db_sangue$sangue == 0, 1, 0) #inverto i valori di 0 e 1
+
+#Mi creo variabile non infetti vs infetti solo sangue
+db_sangue$sangue_vs_noninfetto <- ifelse(db_sangue$siti == 0 & db_sangue$sangue == 0, 0,
+                                ifelse(db_sangue$siti == 1 & db_sangue$sangue == 1, 1,
+                                                    ifelse(db_sangue$siti == 1 & db_sangue$sangue == 0, "", "")))
+
+
+db_sangue <- db_sangue[db_sangue$sangue_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
+
+
+#Faccio matching con PS
+db_sangue$sangue_vs_noninfetto <- ifelse(db_sangue$sangue_vs_noninfetto == 1, T, F) #trasformo in logico
+
+model_sangue <- glm(
+  sangue_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_sangue,
+  family = binomial("logit")
+)
+
+#matching using PS 
+# Get PS values
+ps_values_sangue <- model_sangue$fitted.values
+
+# Define outcome and treatment vector
+outcome_sangue <- db_sangue$cost_ln
+treatment_sangue <- db_sangue$sangue_vs_noninfetto
+
+# Matching
+match_obj_sangue <- Match(
+  Y = outcome_sangue,            # vector with the outcome
+  Tr = treatment_sangue,         # vector with treatment
+  X = ps_values_sangue,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+# Balance assessment -------------------------------------------
+balance_sangue <- bal.tab(
+  match_obj_sangue,
+  sangue_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_sangue,
+  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
+  un = T, stats = c('means.diffs', 'variance.ratios')
+)
+
+print(balance_sangue)
+
+bal.plot(
+  match_obj_sangue,
+  formula = sangue_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_sangue,
+  var.name = "sdo1_degenza", which = "both"
+)
+
+# Outcome analysis
+summary(match_obj_sangue)
 
