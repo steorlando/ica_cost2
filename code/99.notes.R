@@ -193,3 +193,22 @@ ggplot(matched_data, aes(x = cost, fill = infetto)) +
   theme_minimal()
 
 
+##Verifico se gli infetti corrispondono ai siti di infezione
+db_prop$num_siti <- rowSums(db_prop[ ,c("sangue", "urinario",   #mi dice se l'infezione è stata trovata in più siti
+                                   "rettale", "respiratorio", 
+                                   "ferita")] == 0) # nel db 0 vuol dire che ha l'infezione
+
+db_prop$siti <- ifelse(db_prop$num_siti >= 1, T, F)  #mi dice se almeno in un sito c'è l'infezione
+
+if(all(db_prop$infetto == db_prop$siti & db_prop$infetto == 1)) {
+    print("si")
+  } else {
+    print("no")
+  }
+
+#cerco valori non corrispondenti
+corr <- data.frame(db_prop$infetto, db_prop$siti)
+
+no_corr <- corr[corr$db_prop.infetto != corr$db_prop.siti, ]
+
+no_corr

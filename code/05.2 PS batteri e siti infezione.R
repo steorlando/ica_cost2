@@ -1,4 +1,4 @@
-### PS analysis acinetobacter vs non infetti
+### PS analysis acinetobacter vs non infetti   ####
 #mi creo db_acineto per eseguire modifiche e analisi senza toccare db_prop
 db_acineto <- db_prop
 db_acineto$acinetobacter <- ifelse(db_acineto$acinetobacter == 0, 1, 0) #inverto i valori di 0 e 1
@@ -40,7 +40,7 @@ match_obj_acineto <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment 
 balance_acineto <- bal.tab(
   match_obj_acineto,
   acineto_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -62,7 +62,7 @@ bal.plot(
 summary(match_obj_acineto)
 
 
-### PS analysis Klebsiella vs non infetti
+### PS analysis Klebsiella vs non infetti  ####
 #mi creo db_klebsiella per eseguire modifiche e analisi senza toccare db_prop
 db_klebsiella <- db_prop
 db_klebsiella$klebsiella_pnm <- ifelse(db_klebsiella$klebsiella_pnm == 0, 1, 0) #inverto i valori di 0 e 1
@@ -103,7 +103,7 @@ match_obj_klebsiella <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment 
 balance_klebsiella <- bal.tab(
   match_obj_klebsiella,
   klebsiella_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -125,7 +125,7 @@ bal.plot(
 summary(match_obj_klebsiella)
 
 
-### PS analysis clostridium vs non infetti
+### PS analysis clostridium vs non infetti   ####
 #mi creo db_clostridium per eseguire modifiche e analisi senza toccare db_prop
 db_clostridium <- db_prop
 db_clostridium$clostridium <- ifelse(db_clostridium$clostridium == 0, 1, 0) #inverto i valori di 0 e 1
@@ -166,7 +166,7 @@ match_obj_clostridium <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment 
 balance_clostridium <- bal.tab(
   match_obj_clostridium,
   clostridium_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -188,7 +188,7 @@ bal.plot(
 summary(match_obj_clostridium)
 
 
-### PS analysis enterococcus vs non infetti
+### PS analysis enterococcus vs non infetti   ####
 #mi creo db_entero per eseguire modifiche e analisi senza toccare db_prop
 db_entero <- db_prop
 db_entero$enterococcus <- ifelse(db_entero$enterococcus == 0, 1, 0) #inverto i valori di 0 e 1
@@ -229,7 +229,7 @@ match_obj_entero <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment 
 balance_entero <- bal.tab(
   match_obj_entero,
   entero_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -251,7 +251,7 @@ bal.plot(
 summary(match_obj_entero)
 
 
-### PS analysis escherichia_coli vs non infetti
+### PS analysis escherichia_coli vs non infetti   ####
 #mi creo db_escherichia per eseguire modifiche e analisi senza toccare db_prop
 db_escherichia <- db_prop
 db_escherichia$escherichia_coli <- ifelse(db_escherichia$escherichia_coli == 0, 1, 0) #inverto i valori di 0 e 1
@@ -292,7 +292,7 @@ match_obj_escherichia <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment 
 balance_escherichia <- bal.tab(
   match_obj_escherichia,
   escherichia_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -313,7 +313,8 @@ bal.plot(
 # Outcome analysis
 summary(match_obj_escherichia)
 
-### PS analysis pseudomonas vs non infetti
+
+### PS analysis pseudomonas vs non infetti   ####
 #mi creo db_pseudo per eseguire modifiche e analisi senza toccare db_prop
 db_pseudo <- db_prop
 db_pseudo$pseudomonas <- ifelse(db_pseudo$pseudomonas == 0, 1, 0) #inverto i valori di 0 e 1
@@ -354,7 +355,7 @@ match_obj_pseudo <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment
 balance_pseudo <- bal.tab(
   match_obj_pseudo,
   pseudo_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -376,7 +377,7 @@ bal.plot(
 summary(match_obj_pseudo)
 
 
-### PS analysis candida vs non infetti
+### PS analysis candida vs non infetti   ####
 #mi creo db_candida per eseguire modifiche e analisi senza toccare db_prop
 db_candida <- db_prop
 db_candida$candida <- ifelse(db_candida$candida == 0, 1, 0) #inverto i valori di 0 e 1
@@ -417,7 +418,7 @@ match_obj_candida <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment 
 balance_candida <- bal.tab(
   match_obj_candida,
   candida_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -439,7 +440,7 @@ bal.plot(
 summary(match_obj_candida)
 
 
-### PS analysis staphylococcus vs non infetti
+### PS analysis staphylococcus vs non infetti   ####
 #mi creo db_staphylo per eseguire modifiche e analisi senza toccare db_prop
 db_staphylo <- db_prop
 db_staphylo$staphylococcus <- ifelse(db_staphylo$staphylococcus == 0, 1, 0) #inverto i valori di 0 e 1
@@ -480,7 +481,7 @@ match_obj_staphylo <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment 
 balance_staphylo <- bal.tab(
   match_obj_staphylo,
  staphylo_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -501,24 +502,18 @@ bal.plot(
 # Outcome analysis
 summary(match_obj_staphylo)
 
-
-###Mi creo le variabili num_siti (con il totale di siti in cui è risultata l'infezione)
-db_prop$num_siti <- rowSums(db_prop[ ,c("sangue", "urinario",
-                                   "rettale", "respiratorio", 
-                                   "ferita")] == 0) # nel db 0 vuol dire che ha l'infezione
-#e la variabile siti (che mi dice se almeno in un sito è risultata l'infezione)
-db_prop$siti <- ifelse(db_prop$num_siti >= 1, T, F) 
+----------------------------------
 
 
-### PS analysis sangue vs non infetti
+### PS analysis sangue vs non infetti   ####
 #mi creo db_sangue per eseguire modifiche e analisi senza toccare db_prop
 db_sangue <- db_prop
 db_sangue$sangue <- ifelse(db_sangue$sangue == 0, 1, 0) #inverto i valori di 0 e 1
 
 #Mi creo variabile non infetti vs infetti solo sangue
-db_sangue$sangue_vs_noninfetto <- ifelse(db_sangue$siti == 0 & db_sangue$sangue == 0, 0,
-                                ifelse(db_sangue$siti == 1 & db_sangue$sangue == 1, 1,
-                                                    ifelse(db_sangue$siti == 1 & db_sangue$sangue == 0, "", "")))
+db_sangue$sangue_vs_noninfetto <- ifelse(db_sangue$infetto == 0 & db_sangue$sangue == 0, 0,
+                                ifelse(db_sangue$infetto == 1 & db_sangue$sangue == 1, 1,
+                                                    ifelse(db_sangue$infetto == 1 & db_sangue$sangue == 0, "", "")))
 
 
 db_sangue <- db_sangue[db_sangue$sangue_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
@@ -552,7 +547,7 @@ match_obj_sangue <- Match(
   replace = FALSE
 )
 
-# Balance assessment -------------------------------------------
+# Balance assessment 
 balance_sangue <- bal.tab(
   match_obj_sangue,
   sangue_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
@@ -573,3 +568,259 @@ bal.plot(
 # Outcome analysis
 summary(match_obj_sangue)
 
+
+### PS analysis urinario vs non infetti   ####
+#mi creo db_urinario per eseguire modifiche e analisi senza toccare db_prop
+db_urinario <- db_prop
+db_urinario$urinario <- ifelse(db_urinario$urinario == 0, 1, 0) #inverto i valori di 0 e 1
+
+#Mi creo variabile non infetti vs infetti solo urinario
+db_urinario$urinario_vs_noninfetto <- ifelse(db_urinario$infetto == 0 & db_urinario$urinario == 0, 0,
+                                         ifelse(db_urinario$infetto == 1 & db_urinario$urinario == 1, 1,
+                                                ifelse(db_urinario$infetto == 1 & db_urinario$urinario == 0, "", "")))
+
+
+db_urinario <- db_urinario[db_urinario$urinario_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
+
+
+#Faccio matching con PS
+db_urinario$urinario_vs_noninfetto <- ifelse(db_urinario$urinario_vs_noninfetto == 1, T, F) #trasformo in logico
+
+model_urinario <- glm(
+  urinario_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_urinario,
+  family = binomial("logit")
+)
+
+#matching using PS 
+# Get PS values
+ps_values_ur <- model_urinario$fitted.values
+
+# Define outcome and treatment vector
+outcome_ur <- db_urinario$cost_ln
+treatment_ur <- db_urinario$urinario_vs_noninfetto
+
+# Matching
+match_obj_urinario <- Match(
+  Y = outcome_ur,            # vector with the outcome
+  Tr = treatment_ur,         # vector with treatment
+  X = ps_values_ur,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+# Balance assessment 
+balance_urinario <- bal.tab(
+  match_obj_urinario,
+  urinario_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_urinario,
+  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
+  un = T, stats = c('means.diffs', 'variance.ratios')
+)
+
+print(balance_urinario)
+
+bal.plot(
+  match_obj_urinario,
+  formula = urinario_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_urinario,
+  var.name = "sdo1_degenza", which = "both"
+)
+
+# Outcome analysis
+summary(match_obj_urinario)
+
+
+### PS analysis rettale  vs non infetti   ####
+#mi creo db_rett per eseguire modifiche e analisi senza toccare db_prop
+db_rett <- db_prop
+db_rett$rettale <- ifelse(db_rett$rettale == 0, 1, 0) #inverto i valori di 0 e 1
+
+#Mi creo variabile non infetti vs infetti solo rettale
+db_rett$rett_vs_noninfetto <- ifelse(db_rett$infetto == 0 & db_rett$rettale == 0, 0,
+                                         ifelse(db_rett$infetto == 1 & db_rett$rettale == 1, 1,
+                                                ifelse(db_rett$infetto == 1 & db_rett$rettale == 0, "", "")))
+
+
+db_rett <- db_rett[db_rett$rett_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
+
+
+#Faccio matching con PS
+db_rett$rett_vs_noninfetto <- ifelse(db_rett$rett_vs_noninfetto == 1, T, F) #trasformo in logico
+
+model_rett <- glm(
+  rett_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_rett,
+  family = binomial("logit")
+)
+
+#matching using PS 
+# Get PS values
+ps_values_rett <- model_rett$fitted.values
+
+# Define outcome and treatment vector
+outcome_rett <- db_rett$cost_ln
+treatment_rett <- db_rett$rett_vs_noninfetto
+
+# Matching
+match_obj_rett <- Match(
+  Y = outcome_rett,            # vector with the outcome
+  Tr = treatment_rett,         # vector with treatment
+  X = ps_values_rett,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+# Balance assessment 
+balance_rett <- bal.tab(
+  match_obj_rett,
+  rett_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_rett,
+  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
+  un = T, stats = c('means.diffs', 'variance.ratios')
+)
+
+print(balance_rett)
+
+bal.plot(
+  match_obj_rett,
+  formula = rett_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_rett,
+  var.name = "sdo1_degenza", which = "both"
+)
+
+# Outcome analysis
+summary(match_obj_rett)
+
+
+### PS analysis respiratorio  vs non infetti   ####
+#mi creo db_resp per eseguire modifiche e analisi senza toccare db_prop
+db_resp <- db_prop
+db_resp$respiratorio <- ifelse(db_resp$respiratorio == 0, 1, 0) #inverto i valori di 0 e 1
+
+#Mi creo variabile non infetti vs infetti solo respiratorio
+db_resp$resp_vs_noninfetto <- ifelse(db_resp$infetto == 0 & db_resp$respiratorio == 0, 0,
+                                     ifelse(db_resp$infetto == 1 & db_resp$respiratorio == 1, 1,
+                                            ifelse(db_resp$infetto == 1 & db_resp$respiratorio == 0, "", "")))
+
+
+db_resp <- db_resp[db_resp$resp_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
+
+
+#Faccio matching con PS
+db_resp$resp_vs_noninfetto <- ifelse(db_resp$resp_vs_noninfetto == 1, T, F) #trasformo in logico
+
+model_resp <- glm(
+  resp_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_resp,
+  family = binomial("logit")
+)
+
+#matching using PS 
+# Get PS values
+ps_values_resp <- model_resp$fitted.values
+
+# Define outcome and treatment vector
+outcome_resp <- db_resp$cost_ln
+treatment_resp <- db_resp$resp_vs_noninfetto
+
+# Matching
+match_obj_resp <- Match(
+  Y = outcome_resp,            # vector with the outcome
+  Tr = treatment_resp,         # vector with treatment
+  X = ps_values_resp,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+# Balance assessment 
+balance_resp <- bal.tab(
+  match_obj_resp,
+  resp_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_resp,
+  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
+  un = T, stats = c('means.diffs', 'variance.ratios')
+)
+
+print(balance_resp)
+
+bal.plot(
+  match_obj_resp,
+  formula = resp_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_resp,
+  var.name = "sdo1_degenza", which = "both"
+)
+
+# Outcome analysis
+summary(match_obj_resp)
+
+
+
+## PS analysis ferita  vs non infetti   ####
+#mi creo db_ferita per eseguire modifiche e analisi senza toccare db_prop
+db_ferita <- db_prop
+db_ferita$ferita <- ifelse(db_ferita$ferita== 0, 1, 0) #inverto i valori di 0 e 1
+
+#Mi creo variabile non infetti vs infetti solo ferita
+db_ferita$ferita_vs_noninfetto <- ifelse(db_ferita$infetto == 0 & db_ferita$ferita == 0, 0,
+                                     ifelse(db_ferita$infetto == 1 & db_ferita$ferita == 1, 1,
+                                            ifelse(db_ferita$infetto == 1 & db_ferita$ferita == 0, "", "")))
+
+
+db_ferita <- db_ferita[db_ferita$ferita_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
+
+
+#Faccio matching con PS
+db_ferita$ferita_vs_noninfetto <- ifelse(db_ferita$ferita_vs_noninfetto == 1, T, F) #trasformo in logico
+
+model_ferita <- glm(
+  ferita_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_ferita,
+  family = binomial("logit")
+)
+
+#matching using PS 
+# Get PS values
+ps_values_fe <- model_ferita$fitted.values
+
+# Define outcome and treatment vector
+outcome_fe <- db_ferita$cost_ln
+treatment_fe <- db_ferita$ferita_vs_noninfetto
+
+# Matching
+match_obj_ferita <- Match(
+  Y = outcome_fe,            # vector with the outcome
+  Tr = treatment_fe,         # vector with treatment
+  X = ps_values_fe,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+# Balance assessment 
+balance_ferita <- bal.tab(
+  match_obj_ferita,
+  ferita_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_ferita,
+  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
+  un = T, stats = c('means.diffs', 'variance.ratios')
+)
+
+print(balance_ferita)
+
+bal.plot(
+  match_obj_ferita,
+  formula = ferita_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  data = db_ferita,
+  var.name = "sdo1_degenza", which = "both"
+)
+
+# Outcome analysis
+summary(match_obj_ferita)
