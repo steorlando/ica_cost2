@@ -114,7 +114,7 @@ ps_values <- model$fitted.values
 
 # Step 2: matching using PS --------------------------------------------
 # Define outcome and treatment vector
-outcome <- db_prop$cost
+outcome <- db_prop$cost_ln
 treatment <- db_prop$infetto
 
 # from Matching package requires the treatment vector to be a logical
@@ -168,29 +168,6 @@ db_match <- bind_rows(
   db_prop[match_object$index.treated, ],
   db_prop[match_object$index.control, ]
 )
-
-# Logistic regression to quantify OR
-# Without caliper
-db_match_model<- glm(
-  cost ~ infetto + sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv,
-  data = db_match,
-  family = gaussian("identity")
-)
-
-or <- exp(coef(db_match_model)[2])
-lower_or <- exp(confint(db_match_model)[2, 1])
-upper_or <- exp(confint(db_match_model)[2, 2])
-
-c(lower_or, or, upper_or)
-
-
-# But the marginal OR is needed to evaluate the ATT
-marg_means_1 <- emmeans(db_match_model, specs = "trt")
-
-marg_means_1@linfct
-
-att_1 <- pairs(marg_means_1, reverse = TRUE, type = "response")
-confint(att_1)
 
 
 
