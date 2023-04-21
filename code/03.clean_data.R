@@ -233,7 +233,18 @@ db$num_infezioni <- rowSums(db[ ,c("acinetobacter", "escherichia_coli",
                                          "clostridium", "candida", "enterococcus", 
                                          "staphylococcus")] == 0) # nel db 0 vuol dire che ha l'infezione
 
-db$infetto <- ifelse(db$num_infezioni >= 1, T, F) 
+db$batterio_pos <- ifelse(db$num_infezioni >= 1, T, F) 
+
+db$num_infez_sito <- rowSums(db[ ,c("sangue", "urinario",
+                                    "rettale", "respiratorio", 
+                                    "ferita")] == 0) # nel db 0 vuol dire che ha l'infezione
+
+db$sito_pos <- ifelse(db$num_infez_sito >= 1, T, F) 
+
+db <- db %>%
+  mutate(infetto = ifelse(batterio_pos == T, T, 
+                               ifelse(sito_pos == T, T, F)))
+
 
 #Creo variabile proc_inv che mi dice T se il pz ha subito almeno una proc invasiva di quelle definite elenco
 int_inv <- as.integer(c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622,  

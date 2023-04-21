@@ -200,7 +200,7 @@ db_prop$num_siti <- rowSums(db_prop[ ,c("sangue", "urinario",   #mi dice se l'in
 
 db_prop$siti <- ifelse(db_prop$num_siti >= 1, T, F)  #mi dice se almeno in un sito c'è l'infezione
 
-if(all(db_prop$infetto == db_prop$siti & db_prop$infetto == 1)) {
+if(all(db_prop$infetto == db_prop$siti & db_prop$infetto == T)) {
     print("si")
   } else {
     print("no")
@@ -212,3 +212,20 @@ corr <- data.frame(db_prop$infetto, db_prop$siti)
 no_corr <- corr[corr$db_prop.infetto != corr$db_prop.siti, ]
 
 no_corr
+
+frq(db_prop$siti)
+
+db$num_infez_sito <- rowSums(db[ ,c("sangue", "urinario",
+                                   "rettale", "respiratorio", 
+                                   "ferita")] == 0) # nel db 0 vuol dire che ha l'infezione
+
+db$sito <- ifelse(db$num_infez_sito >= 1, T, F) 
+
+frq(db$sito)
+frq(db$infetto)
+
+table(db$sito, db$infetto)
+db <- db %>%
+  mutate(infetto_true = ifelse(infetto == T, T, 
+                               ifelse(sito == T, T, F)))
+frq(db$infetto_true)

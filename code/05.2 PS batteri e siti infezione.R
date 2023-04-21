@@ -21,6 +21,7 @@ model_acineto <- glm(
 )
 
 
+
 #matching using PS 
 # Get PS values
 ps_values_ac <- model_acineto$fitted.values
@@ -505,6 +506,7 @@ summary(match_obj_staphylo)
 ----------------------------------
 
 
+  
 ### PS analysis sangue vs non infetti   ####
 #mi creo db_sangue per eseguire modifiche e analisi senza toccare db_prop
 db_sangue <- db_prop

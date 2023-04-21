@@ -114,7 +114,7 @@ ps_values <- model$fitted.values
 
 # Step 2: matching using PS --------------------------------------------
 # Define outcome and treatment vector
-outcome <- db_prop$cost_ln
+outcome <- db_prop$cost
 treatment <- db_prop$infetto
 
 # from Matching package requires the treatment vector to be a logical
