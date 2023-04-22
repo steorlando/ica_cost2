@@ -165,8 +165,7 @@ summary(match_object)
 summary(match_object_ln)
 
 #Aggiusto cost_ln
-cost_exp <- exp(match_object_ln$est)
-cost_ln_agg <- (cost_exp - 1) * 100
+cost_ln_agg <- ((exp(match_object_ln$est)) - 1) * 100
 
 # Compute confidence intervals -----------------------------------------
 lower <- match_object$est - 2 * match_object$se.standard

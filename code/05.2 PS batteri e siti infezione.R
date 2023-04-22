@@ -85,9 +85,8 @@ upper_ac <- match_obj_acineto$est + 2 * match_obj_acineto$se.standard
 lower_ac_ln <- match_obj_acineto_ln$est - 2 * match_obj_acineto_ln$se.standard
 upper_ac_ln <- match_obj_acineto_ln$est + 2 * match_obj_acineto_ln$se.standard
 
-CI_ac <- c(lower_ac, upper_ac)
-CI_ac_ln <- c(lower_ac_ln, upper_ac_ln)
-
+low_ac_ln <- ((exp(lower_ac_ln)) - 1) * 100
+high_ac_ln <- ((exp(upper_ac_ln)) - 1) * 100
 
 
 ### PS analysis Klebsiella vs non infetti  ####
@@ -175,8 +174,8 @@ upper_kl <- match_obj_klebsiella$est + 2 * match_obj_klebsiella$se.standard
 lower_kl_ln <- match_obj_klebsiella_ln$est - 2 * match_obj_klebsiella_ln$se.standard
 upper_kl_ln <- match_obj_klebsiella_ln$est + 2 * match_obj_klebsiella_ln$se.standard
 
-CI_kl <- c(lower_kl, upper_kl)
-CI_kl_ln <- c(lower_kl_ln, upper_kl_ln)
+low_kl_ln <- ((exp(lower_kl_ln)) - 1) * 100
+high_kl_ln <- ((exp(upper_kl_ln)) - 1) * 100
 
 ### PS analysis clostridium vs non infetti   ####
 #mi creo db_clostridium per eseguire modifiche e analisi senza toccare db_prop
@@ -263,8 +262,8 @@ upper_cl <- match_obj_clostridium$est + 2 * match_obj_clostridium$se.standard
 lower_cl_ln <- match_obj_clostridium_ln$est - 2 * match_obj_clostridium_ln$se.standard
 upper_cl_ln <- match_obj_clostridium_ln$est + 2 * match_obj_clostridium_ln$se.standard
 
-CI_cl <- c(lower_cl, upper_cl)
-CI_cl_ln <- c(lower_cl_ln, upper_cl_ln)
+low_cl_ln <- ((exp(lower_cl_ln)) - 1) * 100
+high_cl_ln <- ((exp(upper_cl_ln)) - 1) * 100
 
 ### PS analysis enterococcus vs non infetti   ####
 #mi creo db_entero per eseguire modifiche e analisi senza toccare db_prop
@@ -351,8 +350,8 @@ upper_ent <- match_obj_entero$est + 2 * match_obj_entero$se.standard
 lower_ent_ln <- match_obj_entero_ln$est - 2 * match_obj_entero_ln$se.standard
 upper_ent_ln <- match_obj_entero_ln$est + 2 * match_obj_entero_ln$se.standard
 
-CI_ent <- c(lower_ent, upper_ent)
-CI_ent_ln <- c(lower_ent_ln, upper_ent_ln)
+low_ent_ln <- ((exp(lower_ent_ln)) - 1) * 100
+high_ent_ln <- ((exp(upper_ent_ln)) - 1) * 100
 
 
 ### PS analysis escherichia_coli vs non infetti   ####
@@ -441,8 +440,8 @@ upper_es <- match_obj_escherichia$est + 2 * match_obj_escherichia$se.standard
 lower_es_ln <- match_obj_escherichia_ln$est - 2 * match_obj_escherichia_ln$se.standard
 upper_es_ln <- match_obj_escherichia_ln$est + 2 * match_obj_escherichia_ln$se.standard
 
-CI_es <- c(lower_es, upper_es)
-CI_es_ln <- c(lower_es_ln, upper_es_ln)
+low_es_ln <- ((exp(lower_es_ln)) - 1) * 100
+high_es_ln <- ((exp(upper_es_ln)) - 1) * 100
 
 
 ### PS analysis pseudomonas vs non infetti   ####
@@ -530,8 +529,8 @@ upper_pseudo <- match_obj_pseudo$est + 2 * match_obj_pseudo$se.standard
 lower_pseudo_ln <- match_obj_pseudo_ln$est - 2 * match_obj_pseudo_ln$se.standard
 upper_pseudo_ln <- match_obj_pseudo_ln$est + 2 * match_obj_pseudo_ln$se.standard
 
-CI_pseudo <- c(lower_pseudo, upper_pseudo)
-CI_pseudo_ln <- c(lower_pseudo_ln, upper_pseudo_ln)
+low_pseudo_ln <- ((exp(lower_pseudo_ln)) - 1) * 100
+high_pseudo_ln <- ((exp(upper_pseudo_ln)) - 1) * 100
 
 ### PS analysis candida vs non infetti   ####
 #mi creo db_candida per eseguire modifiche e analisi senza toccare db_prop
@@ -618,9 +617,8 @@ upper_ca <- match_obj_candida$est + 2 * match_obj_candida$se.standard
 lower_ca_ln <- match_obj_candida_ln$est - 2 * match_obj_candida_ln$se.standard
 upper_ca_ln <- match_obj_candida_ln$est + 2 * match_obj_candida_ln$se.standard
 
-CI_ca <- c(lower_ca, upper_ca)
-CI_ca_ln <- c(lower_ca_ln, upper_ca_ln)
-
+low_ca_ln <- ((exp(lower_ca_ln)) - 1) * 100
+high_ca_ln <- ((exp(upper_ca_ln)) - 1) * 100
 
 ### PS analysis staphylococcus vs non infetti   ####
 #mi creo db_staphylo per eseguire modifiche e analisi senza toccare db_prop
@@ -707,9 +705,8 @@ upper_st <- match_obj_staphylo$est + 2 * match_obj_staphylo$se.standard
 lower_st_ln <- match_obj_staphylo_ln$est - 2 * match_obj_staphylo_ln$se.standard
 upper_st_ln <- match_obj_staphylo_ln$est + 2 * match_obj_staphylo_ln$se.standard
 
-CI_st <- c(lower_st, upper_st)
-CI_st_ln <- c(lower_st_ln, upper_st_ln)
-
+low_st_ln <- ((exp(lower_st_ln)) - 1) * 100
+high_st_ln <- ((exp(upper_st_ln)) - 1) * 100
   
 ### PS analysis sangue vs non infetti   ####
 #mi creo db_sangue per eseguire modifiche e analisi senza toccare db_prop
@@ -797,8 +794,8 @@ upper_sangue <- match_obj_sangue$est + 2 * match_obj_sangue$se.standard
 lower_sangue_ln <- match_obj_sangue_ln$est - 2 * match_obj_sangue_ln$se.standard
 upper_sangue_ln <- match_obj_sangue_ln$est + 2 * match_obj_sangue_ln$se.standard
 
-CI_sangue <- c(lower_sangue, upper_sangue)
-CI_sangue_ln <- c(lower_sangue_ln, upper_sangue_ln)
+low_sangue_ln <- ((exp(lower_sangue_ln)) - 1) * 100
+high_sangue_ln <- ((exp(lower_sangue_ln)) - 1) * 100
 
 ### PS analysis urinario vs non infetti   ####
 #mi creo db_urinario per eseguire modifiche e analisi senza toccare db_prop
@@ -886,9 +883,8 @@ upper_ur <- match_obj_urinario$est + 2 * match_obj_urinario$se.standard
 lower_ur_ln <- match_obj_urinario_ln$est - 2 * match_obj_urinario_ln$se.standard
 upper_ur_ln <- match_obj_urinario_ln$est + 2 * match_obj_urinario_ln$se.standard
 
-CI_ur <- c(lower_ur, upper_ur)
-CI_ur_ln <- c(lower_ur_ln, upper_ur_ln)
-
+low_ur_ln <- ((exp(lower_ur_ln)) - 1) * 100
+high_ur_ln <- ((exp(upper_ur_ln)) - 1) * 100
 
 ### PS analysis rettale  vs non infetti   ####
 #mi creo db_rett per eseguire modifiche e analisi senza toccare db_prop
@@ -976,9 +972,8 @@ upper_rett <- match_obj_rett$est + 2 * match_obj_rett$se.standard
 lower_rett_ln <- match_obj_rett_ln$est - 2 * match_obj_rett_ln$se.standard
 upper_rett_ln <- match_obj_rett_ln$est + 2 * match_obj_rett_ln$se.standard
 
-CI_rett <- c(lower_rett, upper_rett)
-CI_rett_ln <- c(lower_rett_ln, upper_rett_ln)
-
+low_rett_ln <- ((exp(lower_rett_ln)) - 1) * 100
+high_rett_ln <- ((exp(upper_rett_ln)) - 1) * 100
 
 ### PS analysis respiratorio  vs non infetti   ####
 #mi creo db_resp per eseguire modifiche e analisi senza toccare db_prop
@@ -1069,9 +1064,8 @@ upper_resp_ln <- match_obj_resp_ln$est + 2 * match_obj_resp_ln$se.standard
 low_resp_exp <- exp(lower_resp_ln)
 low_resp_exp_agg <- (low_resp_exp - 1) * 100
 
-CI_resp <- c(lower_resp, upper_resp)
-CI_resp_ln <- c(lower_resp_ln, upper_resp_ln)
-
+low_resp_ln <- ((exp(lower_resp_ln)) - 1) * 100
+high_resp_ln <- ((exp(upper_resp_ln)) - 1) * 100
 
 ## PS analysis ferita  vs non infetti   ####
 #mi creo db_ferita per eseguire modifiche e analisi senza toccare db_prop
@@ -1160,10 +1154,8 @@ upper_fe <- match_obj_ferita$est + 2 * match_obj_ferita$se.standard
 lower_fe_ln <- match_obj_ferita_ln$est - 2 * match_obj_ferita_ln$se.standard
 upper_fe_ln <- match_obj_ferita_ln$est + 2 * match_obj_ferita_ln$se.standard
 
-CI_fe <- c(lower_fe, upper_fe)
-CI_fe_ln <- c(lower_fe_ln, upper_fe_ln)
-
-
+low_fe_ln <- ((exp(lower_fe_ln)) - 1) * 100
+high_fe_ln <- ((exp(upper_fe_ln)) - 1) * 100
 
 #Creo dataframe 
 
@@ -1181,8 +1173,11 @@ df_ica <- data.frame(
               upper_sangue, upper_ur, upper_rett, upper_resp, upper_fe),
  "Eff_ln" = c(cost_ln_agg, cost_ac_ln_agg, cost_kl_ln_agg, cost_cl_ln_agg, cost_ent_ln_agg,
               cost_es_ln_agg, cost_pseudo_ln_agg, cost_ca_ln_agg, cost_st_ln_agg,
-              cost_sangue_ln_agg, cost_ur_ln_agg, cost_rett_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg)
- 
+              cost_sangue_ln_agg, cost_ur_ln_agg, cost_rett_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg),
+ "ln_low" = c(low_ln, low_ac_ln, low_kl_ln, low_cl_ln, low_ent_ln, low_es_ln, low_pseudo_ln, low_ca_ln, low_st_ln,
+              low_sangue_ln, low_ur_ln, low_rett_ln, low_resp_ln, low_fe_ln),
+ "ln_high" = c(high_ln, high_ac_ln, high_kl_ln, high_cl_ln, high_ent_ln, high_es_ln, high_pseudo_ln, 
+               high_ca_ln, high_st_ln, high_sangue_ln, high_ur_ln, high_rett_ln, high_resp_ln, high_fe_ln)
 )
 
-View(df_ica)
+openxlsx::write.xlsx(df_ica, "df_ica.xlsx", rowNames = F)
