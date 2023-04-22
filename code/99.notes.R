@@ -229,3 +229,7 @@ db <- db %>%
   mutate(infetto_true = ifelse(infetto == T, T, 
                                ifelse(sito == T, T, F)))
 frq(db$infetto_true)
+
+
+min(db$data_ricovero)
+max(db$data_ricovero)

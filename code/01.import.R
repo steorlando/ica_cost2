@@ -18,7 +18,7 @@ db_select <- db_select %>%  # queste le tolgo perchè non ho idea di cosa si tra
             "sdo1_cod_irc",
             "sdo1_pro_ric",
             #"sdo1_uor", # Mi chiedo se sia una variabile importante perchè magari le maggiori infezioni sono nelle UOR dove i DRG sono più alti, quindi se la UOR influenza i costi, e quelle più "care" sono anche a rischio infezione è un confounder
-            "sdo1_dat_ric", # è la data del ricovero, potrebbe essere utile se ci sono differenze nei DRG a seconda del periodo dell'anno o dei giorni della settimana
+            #"sdo1_dat_ric", # è la data del ricovero, potrebbe essere utile se ci sono differenze nei DRG a seconda del periodo dell'anno o dei giorni della settimana
             "sdo1_invio",
             "sdo1_irc_pro",
             "sdo1_regime",

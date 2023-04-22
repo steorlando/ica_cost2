@@ -41,8 +41,10 @@ db <- db_select %>%
            sdo1_profes == "4" ~ "Employed/Student/Housewife",
            sdo1_profes == "5" ~ "Employed/Student/Housewife",
            sdo1_profes == "6" ~ "Retired/Disable",
-         )
-         )
+         ),
+         data_ricovero = as_date(sdo1_dat_ric)
+         ) %>% 
+  select(-sdo1_dat_ric)
 
 ## Creo variabile job_type usando la seconda cifra dei lavoratori impiegati ####
 
