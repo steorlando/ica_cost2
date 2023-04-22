@@ -21,7 +21,6 @@ model_acineto <- glm(
 )
 
 
-
 #matching using PS 
 # Get PS values
 ps_values_ac <- model_acineto$fitted.values
@@ -1077,7 +1076,6 @@ db_ferita$ferita_vs_noninfetto <- ifelse(db_ferita$infetto == 0 & db_ferita$feri
                                      ifelse(db_ferita$infetto == 1 & db_ferita$ferita == 1, 1,
                                             ifelse(db_ferita$infetto == 1 & db_ferita$ferita == 0, "", "")))
 
-
 db_ferita <- db_ferita[db_ferita$ferita_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
 
 
@@ -1156,6 +1154,7 @@ upper_fe_ln <- match_obj_ferita_ln$est + 2 * match_obj_ferita_ln$se.standard
 
 low_fe_ln <- ((exp(lower_fe_ln)) - 1) * 100
 high_fe_ln <- ((exp(upper_fe_ln)) - 1) * 100
+
 
 #Creo dataframe 
 
