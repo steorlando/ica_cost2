@@ -44,7 +44,7 @@ db <- db_select %>%
          ),
          data_ricovero = as_date(sdo1_dat_ric)
          ) %>% 
-  select(-sdo1_dat_ric)
+  dplyr::select(-sdo1_dat_ric)
 
 ## Creo variabile job_type usando la seconda cifra dei lavoratori impiegati ####
 
