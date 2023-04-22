@@ -27,12 +27,23 @@ model_acineto <- glm(
 ps_values_ac <- model_acineto$fitted.values
 
 # Define outcome and treatment vector
-outcome_ac <- db_acineto$cost_ln
+outcome_ac <- db_acineto$cost
+outcome_ac_ln <- db_acineto$cost_ln
 treatment_ac <- db_acineto$acineto_vs_noninfetto
 
 # Matching
 match_obj_acineto <- Match(
   Y = outcome_ac,            # vector with the outcome
+  Tr = treatment_ac,         # vector with treatment
+  X = ps_values_ac,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_acineto_ln <- Match(
+  Y = outcome_ac_ln,            # vector with the outcome
   Tr = treatment_ac,         # vector with treatment
   X = ps_values_ac,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -61,6 +72,22 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_acineto)
+summary(match_obj_acineto_ln)
+
+#Aggiusto cost_ln
+cost_ac_exp <- exp(match_obj_acineto_ln$est)
+cost_ac_ln_agg <- (cost_ac_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_ac <- match_obj_acineto$est - 2 * match_obj_acineto$se.standard
+upper_ac <- match_obj_acineto$est + 2 * match_obj_acineto$se.standard
+
+lower_ac_ln <- match_obj_acineto_ln$est - 2 * match_obj_acineto_ln$se.standard
+upper_ac_ln <- match_obj_acineto_ln$est + 2 * match_obj_acineto_ln$se.standard
+
+CI_ac <- c(lower_ac, upper_ac)
+CI_ac_ln <- c(lower_ac_ln, upper_ac_ln)
+
 
 
 ### PS analysis Klebsiella vs non infetti  ####
@@ -90,12 +117,23 @@ model_klebsiella <- glm(
 ps_values_kl <- model_klebsiella$fitted.values
 
 # Define outcome and treatment vector
-outcome_kl <- db_klebsiella$cost_ln
+outcome_kl <- db_klebsiella$cost
+outcome_kl_ln <- db_klebsiella$cost_ln
 treatment_kl <- db_klebsiella$klebsiella_vs_noninfetto
 
 # Matching
 match_obj_klebsiella <- Match(
   Y = outcome_kl,            # vector with the outcome
+  Tr = treatment_kl,         # vector with treatment
+  X = ps_values_kl,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_klebsiella_ln <- Match(
+  Y = outcome_kl_ln,            # vector with the outcome
   Tr = treatment_kl,         # vector with treatment
   X = ps_values_kl,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -124,7 +162,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_klebsiella)
+summary(match_obj_klebsiella_ln)
 
+#Aggiusto cost_ln
+cost_kl_exp <- exp(match_obj_klebsiella_ln$est)
+cost_kl_ln_agg <- (cost_kl_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_kl <- match_obj_klebsiella$est - 2 * match_obj_klebsiella$se.standard
+upper_kl <- match_obj_klebsiella$est + 2 * match_obj_klebsiella$se.standard
+
+lower_kl_ln <- match_obj_klebsiella_ln$est - 2 * match_obj_klebsiella_ln$se.standard
+upper_kl_ln <- match_obj_klebsiella_ln$est + 2 * match_obj_klebsiella_ln$se.standard
+
+CI_kl <- c(lower_kl, upper_kl)
+CI_kl_ln <- c(lower_kl_ln, upper_kl_ln)
 
 ### PS analysis clostridium vs non infetti   ####
 #mi creo db_clostridium per eseguire modifiche e analisi senza toccare db_prop
@@ -153,12 +205,23 @@ model_clostridium <- glm(
 ps_values_cl <- model_clostridium$fitted.values
 
 # Define outcome and treatment vector
-outcome_cl <- db_clostridium$cost_ln
+outcome_cl <- db_clostridium$cost
+outcome_cl_ln <- db_clostridium$cost_ln
 treatment_cl <- db_clostridium$clostridium_vs_noninfetto
 
 # Matching
 match_obj_clostridium <- Match(
   Y = outcome_cl,            # vector with the outcome
+  Tr = treatment_cl,         # vector with treatment
+  X = ps_values_cl,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_clostridium_ln <- Match(
+  Y = outcome_cl_ln,            # vector with the outcome
   Tr = treatment_cl,         # vector with treatment
   X = ps_values_cl,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -187,7 +250,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_clostridium)
+summary(match_obj_clostridium_ln)
 
+#Aggiusto cost_ln
+cost_cl_exp <- exp(match_obj_clostridium_ln$est)
+cost_cl_ln_agg <- (cost_cl_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_cl <- match_obj_clostridium$est - 2 * match_obj_clostridium$se.standard
+upper_cl <- match_obj_clostridium$est + 2 * match_obj_clostridium$se.standard
+
+lower_cl_ln <- match_obj_clostridium_ln$est - 2 * match_obj_clostridium_ln$se.standard
+upper_cl_ln <- match_obj_clostridium_ln$est + 2 * match_obj_clostridium_ln$se.standard
+
+CI_cl <- c(lower_cl, upper_cl)
+CI_cl_ln <- c(lower_cl_ln, upper_cl_ln)
 
 ### PS analysis enterococcus vs non infetti   ####
 #mi creo db_entero per eseguire modifiche e analisi senza toccare db_prop
@@ -216,12 +293,23 @@ model_entero <- glm(
 ps_values_ent <- model_entero$fitted.values
 
 # Define outcome and treatment vector
-outcome_ent <- db_entero$cost_ln
+outcome_ent <- db_entero$cost
+outcome_ent_ln <- db_entero$cost_ln
 treatment_ent <- db_entero$entero_vs_noninfetto
 
 # Matching
 match_obj_entero <- Match(
   Y = outcome_ent,            # vector with the outcome
+  Tr = treatment_ent,         # vector with treatment
+  X = ps_values_ent,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_entero_ln <- Match(
+  Y = outcome_ent_ln,            # vector with the outcome
   Tr = treatment_ent,         # vector with treatment
   X = ps_values_ent,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -250,6 +338,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_entero)
+summary(match_obj_entero_ln)
+
+#Aggiusto cost_ln
+cost_ent_exp <- exp(match_obj_entero_ln$est)
+cost_ent_ln_agg <- (cost_ent_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_ent <- match_obj_entero$est - 2 * match_obj_entero$se.standard
+upper_ent <- match_obj_entero$est + 2 * match_obj_entero$se.standard
+
+lower_ent_ln <- match_obj_entero_ln$est - 2 * match_obj_entero_ln$se.standard
+upper_ent_ln <- match_obj_entero_ln$est + 2 * match_obj_entero_ln$se.standard
+
+CI_ent <- c(lower_ent, upper_ent)
+CI_ent_ln <- c(lower_ent_ln, upper_ent_ln)
 
 
 ### PS analysis escherichia_coli vs non infetti   ####
@@ -279,7 +382,8 @@ model_escherichia <- glm(
 ps_values_es <- model_escherichia$fitted.values
 
 # Define outcome and treatment vector
-outcome_es <- db_escherichia$cost_ln
+outcome_es <- db_escherichia$cost
+outcome_es_ln <- db_escherichia$cost_ln
 treatment_es <- db_escherichia$escherichia_vs_noninfetto
 
 # Matching
@@ -292,6 +396,17 @@ match_obj_escherichia <- Match(
   ties = FALSE,
   replace = FALSE
 )
+
+match_obj_escherichia_ln <- Match(
+  Y = outcome_es_ln,            # vector with the outcome
+  Tr = treatment_es,         # vector with treatment
+  X = ps_values_es,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
 
 # Balance assessment 
 balance_escherichia <- bal.tab(
@@ -313,6 +428,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_escherichia)
+summary(match_obj_escherichia_ln)
+
+#Aggiusto cost_ln
+cost_es_exp <- exp(match_obj_escherichia_ln$est)
+cost_es_ln_agg <- (cost_es_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_es <- match_obj_escherichia$est - 2 * match_obj_escherichia$se.standard
+upper_es <- match_obj_escherichia$est + 2 * match_obj_escherichia$se.standard
+
+lower_es_ln <- match_obj_escherichia_ln$est - 2 * match_obj_escherichia_ln$se.standard
+upper_es_ln <- match_obj_escherichia_ln$est + 2 * match_obj_escherichia_ln$se.standard
+
+CI_es <- c(lower_es, upper_es)
+CI_es_ln <- c(lower_es_ln, upper_es_ln)
 
 
 ### PS analysis pseudomonas vs non infetti   ####
@@ -342,12 +472,23 @@ model_pseudo <- glm(
 ps_values_ps <- model_pseudo$fitted.values
 
 # Define outcome and treatment vector
-outcome_ps <- db_pseudo$cost_ln
+outcome_ps <- db_pseudo$cost
+outcome_ps_ln <- db_pseudo$cost_ln
 treatment_ps <- db_pseudo$pseudo_vs_noninfetto
 
 # Matching
 match_obj_pseudo <- Match(
   Y = outcome_ps,            # vector with the outcome
+  Tr = treatment_ps,         # vector with treatment
+  X = ps_values_ps,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_pseudo_ln <- Match(
+  Y = outcome_ps_ln,            # vector with the outcome
   Tr = treatment_ps,         # vector with treatment
   X = ps_values_ps,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -376,7 +517,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_pseudo)
+summary(match_obj_pseudo_ln)
 
+#Aggiusto cost_ln
+cost_pseudo_exp <- exp(match_obj_pseudo_ln$est)
+cost_pseudo_ln_agg <- (cost_pseudo_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_pseudo <- match_obj_pseudo$est - 2 * match_obj_pseudo$se.standard
+upper_pseudo <- match_obj_pseudo$est + 2 * match_obj_pseudo$se.standard
+
+lower_pseudo_ln <- match_obj_pseudo_ln$est - 2 * match_obj_pseudo_ln$se.standard
+upper_pseudo_ln <- match_obj_pseudo_ln$est + 2 * match_obj_pseudo_ln$se.standard
+
+CI_pseudo <- c(lower_pseudo, upper_pseudo)
+CI_pseudo_ln <- c(lower_pseudo_ln, upper_pseudo_ln)
 
 ### PS analysis candida vs non infetti   ####
 #mi creo db_candida per eseguire modifiche e analisi senza toccare db_prop
@@ -405,12 +560,23 @@ model_candida <- glm(
 ps_values_ca <- model_candida$fitted.values
 
 # Define outcome and treatment vector
-outcome_ca <- db_candida$cost_ln
+outcome_ca <- db_candida$cost
+outcome_ca_ln <- db_candida$cost_ln
 treatment_ca <- db_candida$candida_vs_noninfetto
 
 # Matching
 match_obj_candida <- Match(
   Y = outcome_ca,            # vector with the outcome
+  Tr = treatment_ca,         # vector with treatment
+  X = ps_values_ca,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_candida_ln <- Match(
+  Y = outcome_ca_ln,            # vector with the outcome
   Tr = treatment_ca,         # vector with treatment
   X = ps_values_ca,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -439,6 +605,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_candida)
+summary(match_obj_candida_ln)
+
+#Aggiusto cost_ln
+cost_ca_exp <- exp(match_obj_candida_ln$est)
+cost_ca_ln_agg <- (cost_ca_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_ca <- match_obj_candida$est - 2 * match_obj_candida$se.standard
+upper_ca <- match_obj_candida$est + 2 * match_obj_candida$se.standard
+
+lower_ca_ln <- match_obj_candida_ln$est - 2 * match_obj_candida_ln$se.standard
+upper_ca_ln <- match_obj_candida_ln$est + 2 * match_obj_candida_ln$se.standard
+
+CI_ca <- c(lower_ca, upper_ca)
+CI_ca_ln <- c(lower_ca_ln, upper_ca_ln)
 
 
 ### PS analysis staphylococcus vs non infetti   ####
@@ -468,12 +649,23 @@ model_staphylo <- glm(
 ps_values_st <- model_staphylo$fitted.values
 
 # Define outcome and treatment vector
-outcome_st <- db_staphylo$cost_ln
+outcome_st <- db_staphylo$cost
+outcome_st_ln <- db_staphylo$cost_ln
 treatment_st <- db_staphylo$staphylo_vs_noninfetto
 
 # Matching
 match_obj_staphylo <- Match(
   Y = outcome_st,            # vector with the outcome
+  Tr = treatment_st,         # vector with treatment
+  X = ps_values_st,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_staphylo_ln <- Match(
+  Y = outcome_st_ln,            # vector with the outcome
   Tr = treatment_st,         # vector with treatment
   X = ps_values_st,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -502,9 +694,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_staphylo)
+summary(match_obj_staphylo_ln)
 
-----------------------------------
+#Aggiusto cost_ln
+cost_st_exp <- exp(match_obj_staphylo_ln$est)
+cost_st_ln_agg <- (cost_st_exp - 1) * 100
 
+# Compute confidence intervals -----------------------------------------
+lower_st <- match_obj_staphylo$est - 2 * match_obj_staphylo$se.standard
+upper_st <- match_obj_staphylo$est + 2 * match_obj_staphylo$se.standard
+
+lower_st_ln <- match_obj_staphylo_ln$est - 2 * match_obj_staphylo_ln$se.standard
+upper_st_ln <- match_obj_staphylo_ln$est + 2 * match_obj_staphylo_ln$se.standard
+
+CI_st <- c(lower_st, upper_st)
+CI_st_ln <- c(lower_st_ln, upper_st_ln)
 
   
 ### PS analysis sangue vs non infetti   ####
@@ -535,12 +739,23 @@ model_sangue <- glm(
 ps_values_sangue <- model_sangue$fitted.values
 
 # Define outcome and treatment vector
-outcome_sangue <- db_sangue$cost_ln
+outcome_sangue <- db_sangue$cost
+outcome_sangue_ln <- db_sangue$cost_ln
 treatment_sangue <- db_sangue$sangue_vs_noninfetto
 
 # Matching
 match_obj_sangue <- Match(
   Y = outcome_sangue,            # vector with the outcome
+  Tr = treatment_sangue,         # vector with treatment
+  X = ps_values_sangue,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_sangue_ln <- Match(
+  Y = outcome_sangue_ln,            # vector with the outcome
   Tr = treatment_sangue,         # vector with treatment
   X = ps_values_sangue,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -569,7 +784,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_sangue)
+summary(match_obj_sangue_ln)
 
+#Aggiusto cost_ln
+cost_sangue_exp <- exp(match_obj_sangue_ln$est)
+cost_sangue_ln_agg <- (cost_sangue_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_sangue <- match_obj_sangue$est - 2 * match_obj_sangue$se.standard
+upper_sangue <- match_obj_sangue$est + 2 * match_obj_sangue$se.standard
+
+lower_sangue_ln <- match_obj_sangue_ln$est - 2 * match_obj_sangue_ln$se.standard
+upper_sangue_ln <- match_obj_sangue_ln$est + 2 * match_obj_sangue_ln$se.standard
+
+CI_sangue <- c(lower_sangue, upper_sangue)
+CI_sangue_ln <- c(lower_sangue_ln, upper_sangue_ln)
 
 ### PS analysis urinario vs non infetti   ####
 #mi creo db_urinario per eseguire modifiche e analisi senza toccare db_prop
@@ -599,12 +828,23 @@ model_urinario <- glm(
 ps_values_ur <- model_urinario$fitted.values
 
 # Define outcome and treatment vector
-outcome_ur <- db_urinario$cost_ln
+outcome_ur <- db_urinario$cost
+outcome_ur_ln <- db_urinario$cost_ln
 treatment_ur <- db_urinario$urinario_vs_noninfetto
 
 # Matching
 match_obj_urinario <- Match(
   Y = outcome_ur,            # vector with the outcome
+  Tr = treatment_ur,         # vector with treatment
+  X = ps_values_ur,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_urinario_ln <- Match(
+  Y = outcome_ur_ln,            # vector with the outcome
   Tr = treatment_ur,         # vector with treatment
   X = ps_values_ur,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -633,6 +873,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_urinario)
+summary(match_obj_urinario_ln)
+
+#Aggiusto cost_ln
+cost_ur_exp <- exp(match_obj_urinario_ln$est)
+cost_ur_ln_agg <- (cost_ur_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_ur <- match_obj_urinario$est - 2 * match_obj_urinario$se.standard
+upper_ur <- match_obj_urinario$est + 2 * match_obj_urinario$se.standard
+
+lower_ur_ln <- match_obj_urinario_ln$est - 2 * match_obj_urinario_ln$se.standard
+upper_ur_ln <- match_obj_urinario_ln$est + 2 * match_obj_urinario_ln$se.standard
+
+CI_ur <- c(lower_ur, upper_ur)
+CI_ur_ln <- c(lower_ur_ln, upper_ur_ln)
 
 
 ### PS analysis rettale  vs non infetti   ####
@@ -663,12 +918,23 @@ model_rett <- glm(
 ps_values_rett <- model_rett$fitted.values
 
 # Define outcome and treatment vector
-outcome_rett <- db_rett$cost_ln
+outcome_rett <- db_rett$cost
+outcome_rett_ln <- db_rett$cost_ln
 treatment_rett <- db_rett$rett_vs_noninfetto
 
 # Matching
 match_obj_rett <- Match(
   Y = outcome_rett,            # vector with the outcome
+  Tr = treatment_rett,         # vector with treatment
+  X = ps_values_rett,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_rett_ln <- Match(
+  Y = outcome_rett_ln,            # vector with the outcome
   Tr = treatment_rett,         # vector with treatment
   X = ps_values_rett,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -697,6 +963,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_rett)
+summary(match_obj_rett_ln)
+
+#Aggiusto cost_ln
+cost_rett_exp <- exp(match_obj_rett_ln$est)
+cost_rett_ln_agg <- (cost_rett_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_rett <- match_obj_rett$est - 2 * match_obj_rett$se.standard
+upper_rett <- match_obj_rett$est + 2 * match_obj_rett$se.standard
+
+lower_rett_ln <- match_obj_rett_ln$est - 2 * match_obj_rett_ln$se.standard
+upper_rett_ln <- match_obj_rett_ln$est + 2 * match_obj_rett_ln$se.standard
+
+CI_rett <- c(lower_rett, upper_rett)
+CI_rett_ln <- c(lower_rett_ln, upper_rett_ln)
 
 
 ### PS analysis respiratorio  vs non infetti   ####
@@ -727,12 +1008,23 @@ model_resp <- glm(
 ps_values_resp <- model_resp$fitted.values
 
 # Define outcome and treatment vector
-outcome_resp <- db_resp$cost_ln
+outcome_resp <- db_resp$cost
+outcome_resp_ln <- db_resp$cost_ln
 treatment_resp <- db_resp$resp_vs_noninfetto
 
 # Matching
 match_obj_resp <- Match(
   Y = outcome_resp,            # vector with the outcome
+  Tr = treatment_resp,         # vector with treatment
+  X = ps_values_resp,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_resp_ln <- Match(
+  Y = outcome_resp_ln,            # vector with the outcome
   Tr = treatment_resp,         # vector with treatment
   X = ps_values_resp,          # vector with individual propensity scores
   estimand = "ATT",       # average treatment effect on treated
@@ -761,7 +1053,21 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_resp)
+summary(match_obj_resp_ln)
 
+#Aggiusto cost_ln
+cost_resp_exp <- exp(match_obj_resp_ln$est)
+cost_resp_ln_agg <- (cost_resp_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_resp <- match_obj_resp$est - 2 * match_obj_resp$se.standard
+upper_resp <- match_obj_resp$est + 2 * match_obj_resp$se.standard
+
+lower_resp_ln <- match_obj_resp_ln$est - 2 * match_obj_resp_ln$se.standard
+upper_resp_ln <- match_obj_resp_ln$est + 2 * match_obj_resp_ln$se.standard
+
+CI_resp <- c(lower_resp, upper_resp)
+CI_resp_ln <- c(lower_resp_ln, upper_resp_ln)
 
 
 ## PS analysis ferita  vs non infetti   ####
@@ -792,7 +1098,8 @@ model_ferita <- glm(
 ps_values_fe <- model_ferita$fitted.values
 
 # Define outcome and treatment vector
-outcome_fe <- db_ferita$cost_ln
+outcome_fe <- db_ferita$cost
+outcome_fe_ln <- db_ferita$cost_ln
 treatment_fe <- db_ferita$ferita_vs_noninfetto
 
 # Matching
@@ -805,6 +1112,17 @@ match_obj_ferita <- Match(
   ties = FALSE,
   replace = FALSE
 )
+
+match_obj_ferita_ln <- Match(
+  Y = outcome_fe_ln,            # vector with the outcome
+  Tr = treatment_fe,         # vector with treatment
+  X = ps_values_fe,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
 
 # Balance assessment 
 balance_ferita <- bal.tab(
@@ -826,3 +1144,34 @@ bal.plot(
 
 # Outcome analysis
 summary(match_obj_ferita)
+summary(match_obj_ferita_ln)
+
+#Aggiusto cost_ln
+cost_fe_exp <- exp(match_obj_ferita_ln$est)
+cost_fe_ln_agg <- (cost_fe_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_fe <- match_obj_ferita$est - 2 * match_obj_ferita$se.standard
+upper_fe <- match_obj_ferita$est + 2 * match_obj_ferita$se.standard
+
+lower_fe_ln <- match_obj_ferita_ln$est - 2 * match_obj_ferita_ln$se.standard
+upper_fe_ln <- match_obj_ferita_ln$est + 2 * match_obj_ferita_ln$se.standard
+
+CI_fe <- c(lower_fe, upper_fe)
+CI_fe_ln <- c(lower_fe_ln, upper_fe_ln)
+
+
+
+#Creo dataframe 
+df_ica <- data.frame(
+  "Batterio/Sito" = c("Overall", "Acinobacter", "klebsiella", "Clostridium", "Enterococcus", 
+                    "Escherichiacoli", "Pseudomonas", "Candida", "Staphylococcus",
+                    "Blood", "Urinary", "Rectal", "Respiratory", "Wound"),
+  "Cost" = c(match_obj$est, match_obj_acineto$est, match_obj_klebsiella$est, match_obj_clostridium$est,
+            match_obj_entero$est, match_obj_escherichia$est, match_obj_pseudo$est, match_obj_candida$est,
+            match_obj_staphylo$est, match_obj_sangue$est, match_obj_urinario$est, match_obj_rett$est,
+            match_obj_resp$est, match_obj_ferita$est),
+  "Cost_exp" = c(cost_ln_agg, cost_ac_ln_agg, cost_kl_ln_agg, cost_cl_ln_agg, cost_ent_ln_agg,
+                 cost_es_ln_agg, cost_pseudo_ln_agg, cost_ca_ln_agg, cost_st_ln_agg,
+                 cost_sangue_ln_agg, cost_ur_ln_agg, cost_rett_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg)
+)

@@ -116,10 +116,21 @@ ps_values <- model$fitted.values
 # Define outcome and treatment vector
 outcome <- db_prop$cost
 treatment <- db_prop$infetto
+outcome_ln <- db_prop$cost_ln
 
 # from Matching package requires the treatment vector to be a logical
 
 # Matching
+match_object_ln <- Match(
+  Y = outcome_ln,            # vector with the outcome
+  Tr = treatment,         # vector with treatment
+  X = ps_values,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
 match_object <- Match(
   Y = outcome,            # vector with the outcome
   Tr = treatment,         # vector with treatment
@@ -129,7 +140,6 @@ match_object <- Match(
   ties = FALSE,
   replace = FALSE
 )
-
 
 # Step 3: balance assessment -------------------------------------------
 balance_table <- bal.tab(
@@ -152,16 +162,21 @@ bal.plot(
 
 # Step 4: outcome analysis
 summary(match_object)
-exp(match_object$est)
+summary(match_object_ln)
+
+#Aggiusto cost_ln
+cost_exp <- exp(match_object_ln$est)
+cost_ln_agg <- (cost_exp - 1) * 100
 
 # Compute confidence intervals -----------------------------------------
-# Without caliper
-rd_1 <- match_object$est
-lower_1 <- match_object$est - 2 * match_object$se.standard
-upper_1 <- match_object$est + 2 * match_object$se.standard
+lower <- match_object$est - 2 * match_object$se.standard
+upper <- match_object$est + 2 * match_object$se.standard
 
-c(lower_1, rd_1, upper_1)
+lower_ln <- match_object_ln$est - 2 * match_object_ln$se.standard
+upper_ln <- match_object_ln$est + 2 * match_object_ln$se.standard
 
+CI <- c(lower, upper)
+CI_ln <- c(lower_ln, upper_ln)
 
 # Get matched datasets
 db_match <- bind_rows(
