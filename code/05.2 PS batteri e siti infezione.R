@@ -1066,6 +1066,9 @@ upper_resp <- match_obj_resp$est + 2 * match_obj_resp$se.standard
 lower_resp_ln <- match_obj_resp_ln$est - 2 * match_obj_resp_ln$se.standard
 upper_resp_ln <- match_obj_resp_ln$est + 2 * match_obj_resp_ln$se.standard
 
+low_resp_exp <- exp(lower_resp_ln)
+low_resp_exp_agg <- (low_resp_exp - 1) * 100
+
 CI_resp <- c(lower_resp, upper_resp)
 CI_resp_ln <- c(lower_resp_ln, upper_resp_ln)
 
@@ -1163,15 +1166,23 @@ CI_fe_ln <- c(lower_fe_ln, upper_fe_ln)
 
 
 #Creo dataframe 
+
 df_ica <- data.frame(
-  "Batterio/Sito" = c("Overall", "Acinobacter", "klebsiella", "Clostridium", "Enterococcus", 
+  "Batteri/Siti" = c("Overall", "Acinobacter", "klebsiella", "Clostridium", "Enterococcus", 
                     "Escherichiacoli", "Pseudomonas", "Candida", "Staphylococcus",
                     "Blood", "Urinary", "Rectal", "Respiratory", "Wound"),
-  "Cost" = c(match_obj$est, match_obj_acineto$est, match_obj_klebsiella$est, match_obj_clostridium$est,
+  "Eff_cost" = c(match_object$est, match_obj_acineto$est, match_obj_klebsiella$est, match_obj_clostridium$est,
             match_obj_entero$est, match_obj_escherichia$est, match_obj_pseudo$est, match_obj_candida$est,
             match_obj_staphylo$est, match_obj_sangue$est, match_obj_urinario$est, match_obj_rett$est,
             match_obj_resp$est, match_obj_ferita$est),
-  "Cost_exp" = c(cost_ln_agg, cost_ac_ln_agg, cost_kl_ln_agg, cost_cl_ln_agg, cost_ent_ln_agg,
-                 cost_es_ln_agg, cost_pseudo_ln_agg, cost_ca_ln_agg, cost_st_ln_agg,
-                 cost_sangue_ln_agg, cost_ur_ln_agg, cost_rett_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg)
+ "c_low" = c(lower, lower_ac, lower_kl, lower_cl, lower_ent, lower_es, lower_pseudo, lower_ca, lower_st,
+             lower_sangue, lower_ur, lower_rett, lower_resp, lower_fe),
+ "c_high" = c(upper, upper_ac, upper_kl, upper_cl, upper_ent, upper_es, upper_pseudo, upper_ca, upper_st,
+              upper_sangue, upper_ur, upper_rett, upper_resp, upper_fe),
+ "Eff_ln" = c(cost_ln_agg, cost_ac_ln_agg, cost_kl_ln_agg, cost_cl_ln_agg, cost_ent_ln_agg,
+              cost_es_ln_agg, cost_pseudo_ln_agg, cost_ca_ln_agg, cost_st_ln_agg,
+              cost_sangue_ln_agg, cost_ur_ln_agg, cost_rett_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg)
+ 
 )
+
+View(df_ica)

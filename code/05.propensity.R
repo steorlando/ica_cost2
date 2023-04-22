@@ -175,8 +175,9 @@ upper <- match_object$est + 2 * match_object$se.standard
 lower_ln <- match_object_ln$est - 2 * match_object_ln$se.standard
 upper_ln <- match_object_ln$est + 2 * match_object_ln$se.standard
 
-CI <- c(lower, upper)
-CI_ln <- c(lower_ln, upper_ln)
+
+low_ln <- ((exp(lower_ln)) - 1) * 100
+high_ln <- ((exp(upper_ln)) - 1) * 100
 
 # Get matched datasets
 db_match <- bind_rows(
