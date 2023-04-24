@@ -60,7 +60,7 @@ balance_acineto <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_acineto)
+##print(balance_acineto)
 
 bal.plot(
   match_obj_acineto,
@@ -149,7 +149,7 @@ balance_klebsiella <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_klebsiella)
+#print(balance_klebsiella)
 
 bal.plot(
   match_obj_klebsiella,
@@ -237,7 +237,7 @@ balance_clostridium <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_clostridium)
+#print(balance_clostridium)
 
 bal.plot(
   match_obj_clostridium,
@@ -325,7 +325,7 @@ balance_entero <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_entero)
+#print(balance_entero)
 
 bal.plot(
   match_obj_entero,
@@ -415,7 +415,7 @@ balance_escherichia <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_escherichia)
+#print(balance_escherichia)
 
 bal.plot(
   match_obj_escherichia,
@@ -504,7 +504,7 @@ balance_pseudo <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_pseudo)
+#print(balance_pseudo)
 
 bal.plot(
   match_obj_pseudo,
@@ -592,7 +592,7 @@ balance_candida <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_candida)
+#print(balance_candida)
 
 bal.plot(
   match_obj_candida,
@@ -680,7 +680,7 @@ balance_staphylo <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_staphylo)
+#print(balance_staphylo)
 
 bal.plot(
   match_obj_staphylo,
@@ -769,7 +769,7 @@ balance_sangue <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_sangue)
+#print(balance_sangue)
 
 bal.plot(
   match_obj_sangue,
@@ -858,7 +858,7 @@ balance_urinario <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_urinario)
+#print(balance_urinario)
 
 bal.plot(
   match_obj_urinario,
@@ -947,7 +947,7 @@ balance_rett <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_rett)
+#print(balance_rett)
 
 bal.plot(
   match_obj_rett,
@@ -1036,7 +1036,7 @@ balance_resp <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_resp)
+#print(balance_resp)
 
 bal.plot(
   match_obj_resp,
@@ -1128,7 +1128,7 @@ balance_ferita <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_ferita)
+#print(balance_ferita)
 
 bal.plot(
   match_obj_ferita,
@@ -1179,4 +1179,4 @@ df_ica <- data.frame(
                high_ca_ln, high_st_ln, high_sangue_ln, high_ur_ln, high_rett_ln, high_resp_ln, high_fe_ln)
 )
 
-openxlsx::write.xlsx(df_ica, "df_ica.xlsx", rowNames = F)
+

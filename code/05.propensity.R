@@ -105,7 +105,7 @@ model <- glm(
   family = binomial("logit")
 )
 
-model %>% tbl_regression(exponentiate = T)
+#model %>% tbl_regression(exponentiate = T)
 
 
 
@@ -150,7 +150,7 @@ balance_table <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-print(balance_table)
+#print(balance_table)
 
 bal.plot(
   match_object,
