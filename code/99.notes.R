@@ -245,3 +245,6 @@ print(p_value)
 match_summary$est
 
 df_ica
+
+desc <- as_flex_table(summary4)
+save_as_docx(desc, path = "output/descrittive.docx")

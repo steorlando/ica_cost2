@@ -92,6 +92,8 @@ db_prop <- db_prop %>%
              decessodico        = "Died"
   )
 
+names()
+
 summary3 <- db_prop %>% 
   tbl_summary(by = infetto) %>% 
   add_p %>% 
@@ -178,7 +180,18 @@ db_match <- bind_rows(
   db_prop[match_object$index.control, ]
 )
 
+# creo un db per le descrittive in cui inverto  zero con TRUE e 1 con FALSE
 
+# Define the columns to be transformed
+columns_to_transform <- c("sangue", "urinario", "respiratorio", "ferita", "acinetobacter", "klebsiella_pnm", "clostridium", "enterococcus", "escherichia_coli", "pseudomonas", "candida", "staphylococcus")
 
+# Transform the dataframe
+db_desc <- db_prop %>%
+  mutate_at(.vars = columns_to_transform, .funs = ~ ifelse(. == 0, TRUE, FALSE))
 
+# Descrittive con database migliorato 
+summary4 <- db_desc %>% 
+  tbl_summary(by = infetto) %>% 
+  add_p %>% 
+  add_overall()
 

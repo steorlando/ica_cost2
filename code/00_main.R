@@ -35,6 +35,8 @@ source(here::here("code","01.import.R"))
 source(here::here("code","03.clean_data.R"))
 source(here::here("code","04.labelling.R"))
 source(here::here("code","05.propensity.R"))
+source(here::here("code","06.PS_batteri_siti.R"))
+
 
 
 
