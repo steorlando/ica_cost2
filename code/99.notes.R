@@ -233,3 +233,15 @@ frq(db$infetto_true)
 
 min(db$data_ricovero)
 max(db$data_ricovero)
+
+hist(db$cost_ln)
+
+# Extract p-value from match_object summary
+match_summary <- summary(match_object)
+p_value <- as.numeric(row.names(match_summary$est)[4])
+
+# Print the p-value
+print(p_value)
+match_summary$est
+
+df_ica

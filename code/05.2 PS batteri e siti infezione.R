@@ -794,7 +794,7 @@ lower_sangue_ln <- match_obj_sangue_ln$est - 2 * match_obj_sangue_ln$se.standard
 upper_sangue_ln <- match_obj_sangue_ln$est + 2 * match_obj_sangue_ln$se.standard
 
 low_sangue_ln <- ((exp(lower_sangue_ln)) - 1) * 100
-high_sangue_ln <- ((exp(lower_sangue_ln)) - 1) * 100
+high_sangue_ln <- ((exp(upper_sangue_ln)) - 1) * 100
 
 ### PS analysis urinario vs non infetti   ####
 #mi creo db_urinario per eseguire modifiche e analisi senza toccare db_prop
@@ -885,94 +885,6 @@ upper_ur_ln <- match_obj_urinario_ln$est + 2 * match_obj_urinario_ln$se.standard
 low_ur_ln <- ((exp(lower_ur_ln)) - 1) * 100
 high_ur_ln <- ((exp(upper_ur_ln)) - 1) * 100
 
-### PS analysis rettale  vs non infetti   ####
-#mi creo db_rett per eseguire modifiche e analisi senza toccare db_prop
-db_rett <- db_prop
-db_rett$rettale <- ifelse(db_rett$rettale == 0, 1, 0) #inverto i valori di 0 e 1
-
-#Mi creo variabile non infetti vs infetti solo rettale
-db_rett$rett_vs_noninfetto <- ifelse(db_rett$infetto == 0 & db_rett$rettale == 0, 0,
-                                         ifelse(db_rett$infetto == 1 & db_rett$rettale == 1, 1,
-                                                ifelse(db_rett$infetto == 1 & db_rett$rettale == 0, "", "")))
-
-
-db_rett <- db_rett[db_rett$rett_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
-
-
-#Faccio matching con PS
-db_rett$rett_vs_noninfetto <- ifelse(db_rett$rett_vs_noninfetto == 1, T, F) #trasformo in logico
-
-model_rett <- glm(
-  rett_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_rett,
-  family = binomial("logit")
-)
-
-#matching using PS 
-# Get PS values
-ps_values_rett <- model_rett$fitted.values
-
-# Define outcome and treatment vector
-outcome_rett <- db_rett$cost
-outcome_rett_ln <- db_rett$cost_ln
-treatment_rett <- db_rett$rett_vs_noninfetto
-
-# Matching
-match_obj_rett <- Match(
-  Y = outcome_rett,            # vector with the outcome
-  Tr = treatment_rett,         # vector with treatment
-  X = ps_values_rett,          # vector with individual propensity scores
-  estimand = "ATT",       # average treatment effect on treated
-  M = 1,                  # 1:2 matching,
-  ties = FALSE,
-  replace = FALSE
-)
-
-match_obj_rett_ln <- Match(
-  Y = outcome_rett_ln,            # vector with the outcome
-  Tr = treatment_rett,         # vector with treatment
-  X = ps_values_rett,          # vector with individual propensity scores
-  estimand = "ATT",       # average treatment effect on treated
-  M = 1,                  # 1:2 matching,
-  ties = FALSE,
-  replace = FALSE
-)
-
-# Balance assessment 
-balance_rett <- bal.tab(
-  match_obj_rett,
-  rett_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_rett,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_rett)
-
-bal.plot(
-  match_obj_rett,
-  formula = rett_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_rett,
-  var.name = "sdo1_degenza", which = "both"
-)
-
-# Outcome analysis
-summary(match_obj_rett)
-summary(match_obj_rett_ln)
-
-#Aggiusto cost_ln
-cost_rett_exp <- exp(match_obj_rett_ln$est)
-cost_rett_ln_agg <- (cost_rett_exp - 1) * 100
-
-# Compute confidence intervals -----------------------------------------
-lower_rett <- match_obj_rett$est - 2 * match_obj_rett$se.standard
-upper_rett <- match_obj_rett$est + 2 * match_obj_rett$se.standard
-
-lower_rett_ln <- match_obj_rett_ln$est - 2 * match_obj_rett_ln$se.standard
-upper_rett_ln <- match_obj_rett_ln$est + 2 * match_obj_rett_ln$se.standard
-
-low_rett_ln <- ((exp(lower_rett_ln)) - 1) * 100
-high_rett_ln <- ((exp(upper_rett_ln)) - 1) * 100
 
 ### PS analysis respiratorio  vs non infetti   ####
 #mi creo db_resp per eseguire modifiche e analisi senza toccare db_prop
@@ -1161,22 +1073,60 @@ high_fe_ln <- ((exp(upper_fe_ln)) - 1) * 100
 df_ica <- data.frame(
   "Batteri/Siti" = c("Overall", "Acinobacter", "klebsiella", "Clostridium", "Enterococcus", 
                     "Escherichiacoli", "Pseudomonas", "Candida", "Staphylococcus",
-                    "Blood", "Urinary", "Rectal", "Respiratory", "Wound"),
+                    "Blood", "Urinary", "Respiratory", "Wound"),
   "Eff_cost" = c(match_object$est, match_obj_acineto$est, match_obj_klebsiella$est, match_obj_clostridium$est,
             match_obj_entero$est, match_obj_escherichia$est, match_obj_pseudo$est, match_obj_candida$est,
-            match_obj_staphylo$est, match_obj_sangue$est, match_obj_urinario$est, match_obj_rett$est,
+            match_obj_staphylo$est, match_obj_sangue$est, match_obj_urinario$est, 
             match_obj_resp$est, match_obj_ferita$est),
  "c_low" = c(lower, lower_ac, lower_kl, lower_cl, lower_ent, lower_es, lower_pseudo, lower_ca, lower_st,
-             lower_sangue, lower_ur, lower_rett, lower_resp, lower_fe),
+             lower_sangue, lower_ur, lower_resp, lower_fe),
  "c_high" = c(upper, upper_ac, upper_kl, upper_cl, upper_ent, upper_es, upper_pseudo, upper_ca, upper_st,
-              upper_sangue, upper_ur, upper_rett, upper_resp, upper_fe),
+              upper_sangue, upper_ur, upper_resp, upper_fe),
  "Eff_ln" = c(cost_ln_agg, cost_ac_ln_agg, cost_kl_ln_agg, cost_cl_ln_agg, cost_ent_ln_agg,
               cost_es_ln_agg, cost_pseudo_ln_agg, cost_ca_ln_agg, cost_st_ln_agg,
-              cost_sangue_ln_agg, cost_ur_ln_agg, cost_rett_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg),
+              cost_sangue_ln_agg, cost_ur_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg),
  "ln_low" = c(low_ln, low_ac_ln, low_kl_ln, low_cl_ln, low_ent_ln, low_es_ln, low_pseudo_ln, low_ca_ln, low_st_ln,
-              low_sangue_ln, low_ur_ln, low_rett_ln, low_resp_ln, low_fe_ln),
+              low_sangue_ln, low_ur_ln, low_resp_ln, low_fe_ln),
  "ln_high" = c(high_ln, high_ac_ln, high_kl_ln, high_cl_ln, high_ent_ln, high_es_ln, high_pseudo_ln, 
-               high_ca_ln, high_st_ln, high_sangue_ln, high_ur_ln, high_rett_ln, high_resp_ln, high_fe_ln)
+               high_ca_ln, high_st_ln, high_sangue_ln, high_ur_ln, high_resp_ln, high_fe_ln)
 )
 
+zero_to_one <- function(x) {ifelse(x == 0,1,0)
+  }
 
+db_count <- db_prop %>% 
+  dplyr::select(c(infetto,
+                  acinetobacter,
+                  klebsiella_pnm,
+                  clostridium,
+                  enterococcus,
+                  escherichia_coli,
+                  pseudomonas,
+                  candida,
+                  staphylococcus,
+                  sangue,
+                  urinario,
+                  respiratorio,
+                  ferita)) %>% 
+  mutate(infetto = ifelse(infetto == TRUE, 0, 1)) %>% 
+  mutate_all(zero_to_one)
+
+db_count <- db_count %>% 
+  mutate(first = "") %>% 
+  relocate(first, .before = infetto) %>% 
+  adorn_totals(where = "row") %>% 
+  dplyr::select(-first)
+  
+# Assuming your dataframe is named 'df'
+last_row <- db_count[nrow(db_count), ]
+
+# Convert the last row to a vector
+n_paz <- as.vector(unlist(last_row))
+
+df_ica <- df_ica %>% 
+  mutate(Infetti = n_paz) %>% 
+  relocate(Infetti, .before = Eff_cost)
+
+export(df_ica, "output/risultati.xlsx")
+
+summary(match_obj_clostridium)

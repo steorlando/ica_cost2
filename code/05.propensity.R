@@ -52,19 +52,20 @@ db_prop <- db_prop %>%
   filter(!filt1 == 1) %>% 
   dplyr::select(-c(filt, filt1))
 
-summary2 <- db_prop %>% 
-  tbl_summary(by = infetto) %>% 
-  add_p %>% 
-  add_overall()
-
-
 
 # sto togliendo i costi = zero, ma poi devo imputarli per bene ####
 db_prop <- db_prop[db_prop$cost != 0, ]
 
+# togliamo le infezioni rettali perchè non siamo sicuri che siano ICA, 
+# prima dell'articolo facciamo una analisi sulla data del campione rispetto al 
+# ricovero, per vedere se lo sono e magari li reinseriamo
+db_prop <- db_prop[db_prop$rettale != 0, ]
+
+db_prop <- db_prop %>% 
+  dplyr::select(-rettale)
+
 db_prop <- db_prop %>% 
   mutate(cost_ln = log(cost))
-
 
 db_prop <- db_prop %>% 
   var_labels(sdo1_sesso         = "Sex",
@@ -96,7 +97,6 @@ summary3 <- db_prop %>%
   add_p %>% 
   add_overall()
 
-summary3
 
 # Step 1: PS estimation with logistic regression -----------------------
 model <- glm(
@@ -105,8 +105,7 @@ model <- glm(
   family = binomial("logit")
 )
 
-#model %>% tbl_regression(exponentiate = T)
-
+# model %>% tbl_regression(exponentiate = T)
 
 
 # Get PS values
@@ -150,15 +149,10 @@ balance_table <- bal.tab(
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
 
-#print(balance_table)
+# print(balance_table)
 
-bal.plot(
-  match_object,
-  formula = infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_prop,
-  var.name = "sdo1_degenza", which = "both"
-)
-
+# se lo rifacciamo per l'articolo cambiando qualcosa, qui è utile fare i bar plot con le variabili
+# aggiustate (il codice sta nei file di MG) bar.plot (match_object, etc.)
 
 # Step 4: outcome analysis
 summary(match_object)
