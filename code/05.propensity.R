@@ -92,8 +92,6 @@ db_prop <- db_prop %>%
              decessodico        = "Died"
   )
 
-names()
-
 summary3 <- db_prop %>% 
   tbl_summary(by = infetto) %>% 
   add_p %>% 

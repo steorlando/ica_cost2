@@ -248,3 +248,6 @@ df_ica
 
 desc <- as_flex_table(summary4)
 save_as_docx(desc, path = "output/descrittive.docx")
+
+db_stp <- db_orig %>% 
+  filter(STAPHYLOCOCCUS == 0)
