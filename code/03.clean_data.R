@@ -228,24 +228,42 @@ db <- db %>%
 db <- db %>%  #Elimino la variabile già ricodificata
   dplyr::select(-c(sdo1_terapia))
 
-# Creo le variabilini numero_di_infezioni e almeno_una_infezione #####
+# Creo le variabili numero_di_infezioni e almeno_una_infezione #####
 
 db$num_infezioni <- rowSums(db[ ,c("acinetobacter", "escherichia_coli",
                                          "klebsiella_pnm", "pseudomonas", 
                                          "clostridium", "candida", "enterococcus", 
                                          "staphylococcus")] == 0) # nel db 0 vuol dire che ha l'infezione
 
+
+
 db$batterio_pos <- ifelse(db$num_infezioni >= 1, T, F) 
+
+db <- db %>%
+  mutate(sangue =       ifelse(s1_risultato != "", 0, 1),
+         urinario =     ifelse(u1_risultato != "", 0, 1),
+         rettale =      ifelse(g1_risultato != "", 0, 1),
+         respiratorio = ifelse(r1_risultato != "", 0, 1),
+         ferita =       ifelse(t1_risultato != "", 0, 1),
+         altro_sito =   ifelse(n1_risultato != "", 0, 1))
 
 db$num_infez_sito <- rowSums(db[ ,c("sangue", "urinario",
                                     "rettale", "respiratorio", 
-                                    "ferita")] == 0) # nel db 0 vuol dire che ha l'infezione
+                                    "ferita", "altro_sito")] == 0) # nel db 0 vuol dire che ha l'infezione
 
 db$sito_pos <- ifelse(db$num_infez_sito >= 1, T, F) 
 
-db <- db %>%
-  mutate(infetto = ifelse(batterio_pos == T, T, 
-                               ifelse(sito_pos == T, T, F)))
+
+db <- db %>% 
+  dplyr::select(-c("s1_risultato",
+                                      "g1_risultato",
+                                      "u1_risultato",
+                                      "r1_risultato",
+                                      "t1_risultato",
+                                      "n1_risultato")) 
+
+
+db <- db %>% mutate(infetto = ifelse(sito_pos == T, T, F))  # l'infezione si basa sui siti perchè i batteri vanno corretti
 
 
 #Creo variabile proc_inv che mi dice T se il pz ha subito almeno una proc invasiva di quelle definite elenco

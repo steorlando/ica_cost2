@@ -5,7 +5,12 @@ db_orig <- import("data/db_old.csv") #Import main database
 # Poi vediamo se sono variabili che ci servono oppure no
 
 db_select <- db_orig %>%  # Elimino alcune variabili che non mi servono
-  dplyr::select(c(1:72, 456:492)) %>% 
+  dplyr::select(c(1:72, 456:492, c(S1_Risultato,
+                                   G1_Risultato,
+                                   U1_Risultato,
+                                   R1_Risultato,
+                                   T1_Risultato,
+                                   N1_Risultato))) %>% 
   dplyr::select(-c("INFCODinSOSPETTEICA","perRERICOVERO", "SDO1_Polo")) %>% # in particolare le prime tre perchè sono vuote
   clean_names()
   

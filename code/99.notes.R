@@ -221,13 +221,27 @@ db$num_infez_sito <- rowSums(db[ ,c("sangue", "urinario",
 
 db$sito <- ifelse(db$num_infez_sito >= 1, T, F) 
 
-frq(db$sito)
+frq(db$sito_pos)
+frq(db$sito_pos_2)
+frq(db$batterio_pos)
 frq(db$infetto)
+frq(db$prelievo)
 
-table(db$sito, db$infetto)
+frq(db$s1_risultato)
+frq(db$g1_risultato)
+frq(db$t1_risultato)
+frq(db$r1_risultato)
+frq(db$u1_risultato)
+frq(db$n1_risultato)
+
+
+names(db_orig)
+
+
+table(db$sito_pos, db$batterio_pos)
 db <- db %>%
   mutate(infetto_true = ifelse(infetto == T, T, 
-                               ifelse(sito == T, T, F)))
+                               ifelse(sito_pos == T, T, F)))
 frq(db$infetto_true)
 
 
@@ -251,3 +265,49 @@ save_as_docx(desc, path = "output/descrittive.docx")
 
 db_stp <- db_orig %>% 
   filter(STAPHYLOCOCCUS == 0)
+
+frq(db$sdo1_eta)
+
+prelievi <- db %>% 
+  filter(prelievo == 0 & batterio_pos == F)
+frq(db$prelievo)
+frq(db$batterio_pos)
+
+caso <- db_orig %>% 
+  filter(ID == 78)
+
+caso1 <- db %>% 
+  filter(id == 78)
+
+names(db_orig)
+frq(db_orig$N1_ID)
+
+
+db_risultati <- db_orig
+
+frq(db_orig$INFCODinSOSPETTEICA)
+db_codificati <- db_orig %>% 
+  filter(INFCODinSOSPETTEICA == 0)
+
+# Creo una tabella con gli infetti secondo il prelievo per cui non è stato registrato quale infezione hanno
+no_batterio <- db %>% 
+  filter(sito_pos_2 == T & batterio_pos == F) %>% 
+  dplyr::select(id, sito_pos_2)
+
+db_orig2 <- db_orig %>% 
+  rename(id = ID)
+
+no_batterio <- left_join(no_batterio, db_orig2)
+no_batterio1 <- no_batterio %>%   
+  dplyr::select(id,
+                ends_with ("Risultato"),
+                74:240)
+
+nomi_batteri <- db %>% 
+  filter(id == 78) %>% 
+  dplyr::select(c("acinetobacter":"staphylococcus"))
+
+names(db)
+
+export(no_batterio1, "output/no_batterio.xlsx")
+export(nomi_batteri, "output/nomi_batteri.xlsx")

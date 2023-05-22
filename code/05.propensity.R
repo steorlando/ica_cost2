@@ -192,4 +192,3 @@ summary4 <- db_desc %>%
   tbl_summary(by = infetto) %>% 
   add_p %>% 
   add_overall()
-

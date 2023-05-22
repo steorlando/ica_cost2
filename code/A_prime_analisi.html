@@ -290,6 +290,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
 max-width: 940px;
@@ -310,6 +311,9 @@ outline: none;
 }
 summary {
 display: list-item;
+}
+details > summary > p:only-child {
+display: inline;
 }
 pre code {
 padding: 0;
@@ -397,11 +401,11 @@ display: none;
 <h1>Prime analisi</h1>
 <p>Abbiamo provato a vedere le variabili che potrebbero essere correlate
 all’infezione</p>
-<div id="agrajpfwze" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qlobxdclgm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
-#agrajpfwze .gt_table {
+#qlobxdclgm .gt_table {
 display: table;
 border-collapse: collapse;
 margin-left: auto;
@@ -425,7 +429,7 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#agrajpfwze .gt_heading {
+#qlobxdclgm .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -436,30 +440,34 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#agrajpfwze .gt_title {
+#qlobxdclgm .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
 padding-top: 4px;
 padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#agrajpfwze .gt_subtitle {
+#qlobxdclgm .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
 padding-top: 0;
 padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#agrajpfwze .gt_bottom_border {
+#qlobxdclgm .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#agrajpfwze .gt_col_headings {
+#qlobxdclgm .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -473,7 +481,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#agrajpfwze .gt_col_heading {
+#qlobxdclgm .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -492,7 +500,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#agrajpfwze .gt_column_spanner_outer {
+#qlobxdclgm .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -503,13 +511,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#agrajpfwze .gt_column_spanner_outer:first-child {
+#qlobxdclgm .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#agrajpfwze .gt_column_spanner_outer:last-child {
+#qlobxdclgm .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#agrajpfwze .gt_column_spanner {
+#qlobxdclgm .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -520,8 +528,11 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#agrajpfwze .gt_group_heading {
-padding: 8px;
+#qlobxdclgm .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -541,7 +552,7 @@ border-right-width: 1px;
 border-right-color: #D3D3D3;
 vertical-align: middle;
 }
-#agrajpfwze .gt_empty_group_heading {
+#qlobxdclgm .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -555,13 +566,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#agrajpfwze .gt_from_md > :first-child {
+#qlobxdclgm .gt_from_md > :first-child {
 margin-top: 0;
 }
-#agrajpfwze .gt_from_md > :last-child {
+#qlobxdclgm .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#agrajpfwze .gt_row {
+#qlobxdclgm .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -579,7 +590,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#agrajpfwze .gt_stub {
+#qlobxdclgm .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -588,9 +599,26 @@ text-transform: inherit;
 border-right-style: solid;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
-padding-left: 12px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#agrajpfwze .gt_summary_row {
+#qlobxdclgm .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#qlobxdclgm .gt_row_group_first td {
+border-top-width: 2px;
+}
+#qlobxdclgm .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -599,16 +627,23 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#agrajpfwze .gt_first_summary_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
+#qlobxdclgm .gt_first_summary_row {
 border-top-style: solid;
-border-top-width: 2px;
 border-top-color: #D3D3D3;
 }
-#agrajpfwze .gt_grand_summary_row {
+#qlobxdclgm .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#qlobxdclgm .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#qlobxdclgm .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -617,7 +652,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#agrajpfwze .gt_first_grand_summary_row {
+#qlobxdclgm .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -626,10 +661,10 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#agrajpfwze .gt_striped {
+#qlobxdclgm .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#agrajpfwze .gt_table_body {
+#qlobxdclgm .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -637,7 +672,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#agrajpfwze .gt_footnotes {
+#qlobxdclgm .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -650,12 +685,15 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#agrajpfwze .gt_footnote {
+#qlobxdclgm .gt_footnote {
 margin: 0px;
 font-size: 90%;
-padding: 4px;
+padding-left: 4px;
+padding-right: 4px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#agrajpfwze .gt_sourcenotes {
+#qlobxdclgm .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -668,36 +706,67 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#agrajpfwze .gt_sourcenote {
+#qlobxdclgm .gt_sourcenote {
 font-size: 90%;
-padding: 4px;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#agrajpfwze .gt_left {
+#qlobxdclgm .gt_left {
 text-align: left;
 }
-#agrajpfwze .gt_center {
+#qlobxdclgm .gt_center {
 text-align: center;
 }
-#agrajpfwze .gt_right {
+#qlobxdclgm .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#agrajpfwze .gt_font_normal {
+#qlobxdclgm .gt_font_normal {
 font-weight: normal;
 }
-#agrajpfwze .gt_font_bold {
+#qlobxdclgm .gt_font_bold {
 font-weight: bold;
 }
-#agrajpfwze .gt_font_italic {
+#qlobxdclgm .gt_font_italic {
 font-style: italic;
 }
-#agrajpfwze .gt_super {
+#qlobxdclgm .gt_super {
 font-size: 65%;
 }
-#agrajpfwze .gt_footnote_marks {
+#qlobxdclgm .gt_two_val_uncert {
+display: inline-block;
+line-height: 1em;
+text-align: right;
+font-size: 60%;
+vertical-align: -0.25em;
+margin-left: 0.1em;
+}
+#qlobxdclgm .gt_footnote_marks {
 font-style: italic;
 font-weight: normal;
-font-size: 65%;
+font-size: 75%;
+vertical-align: 0.4em;
+}
+#qlobxdclgm .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#qlobxdclgm .gt_slash_mark {
+font-size: 0.7em;
+line-height: 0.7em;
+vertical-align: 0.15em;
+}
+#qlobxdclgm .gt_fraction_numerator {
+font-size: 0.6em;
+line-height: 0.6em;
+vertical-align: 0.45em;
+}
+#qlobxdclgm .gt_fraction_denominator {
+font-size: 0.6em;
+line-height: 0.6em;
+vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
@@ -706,8 +775,8 @@ font-size: 65%;
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Overall</strong>, N = 12,219<sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>FALSE</strong>, N = 10,939<sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>TRUE</strong>, N = 1,280<sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>FALSE</strong>, N = 10,879<sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>TRUE</strong>, N = 1,340<sup class="gt_footnote_marks">1</sup></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong><sup class="gt_footnote_marks">2</sup></th>
     </tr>
   </thead>
@@ -716,21 +785,21 @@ font-size: 65%;
 <td class="gt_row gt_center"></td>
 <td class="gt_row gt_center"></td>
 <td class="gt_row gt_center"></td>
-<td class="gt_row gt_center">0.8</td></tr>
+<td class="gt_row gt_center">0.9</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">F</td>
 <td class="gt_row gt_center">6,770 (55%)</td>
-<td class="gt_row gt_center">6,057 (55%)</td>
-<td class="gt_row gt_center">713 (56%)</td>
+<td class="gt_row gt_center">6,025 (55%)</td>
+<td class="gt_row gt_center">745 (56%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">M</td>
 <td class="gt_row gt_center">5,449 (45%)</td>
-<td class="gt_row gt_center">4,882 (45%)</td>
-<td class="gt_row gt_center">567 (44%)</td>
+<td class="gt_row gt_center">4,854 (45%)</td>
+<td class="gt_row gt_center">595 (44%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Age</td>
 <td class="gt_row gt_center">66 (52, 77)</td>
 <td class="gt_row gt_center">65 (52, 76)</td>
-<td class="gt_row gt_center">71 (58, 80)</td>
+<td class="gt_row gt_center">71 (59, 80)</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Admission modality</td>
 <td class="gt_row gt_center"></td>
@@ -739,8 +808,8 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Scheduled</td>
 <td class="gt_row gt_center">2,576 (21%)</td>
-<td class="gt_row gt_center">2,416 (22%)</td>
-<td class="gt_row gt_center">160 (12%)</td>
+<td class="gt_row gt_center">2,402 (22%)</td>
+<td class="gt_row gt_center">174 (13%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Scheduled with preospedalization</td>
 <td class="gt_row gt_center">1,550 (13%)</td>
@@ -749,13 +818,13 @@ font-size: 65%;
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Urgent</td>
 <td class="gt_row gt_center">8,093 (66%)</td>
-<td class="gt_row gt_center">6,980 (64%)</td>
-<td class="gt_row gt_center">1,113 (87%)</td>
+<td class="gt_row gt_center">6,934 (64%)</td>
+<td class="gt_row gt_center">1,159 (86%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Days of stay</td>
 <td class="gt_row gt_center">5 (2, 11)</td>
-<td class="gt_row gt_center">5 (2, 8)</td>
-<td class="gt_row gt_center">25 (14, 40)</td>
+<td class="gt_row gt_center">4 (2, 8)</td>
+<td class="gt_row gt_center">24 (14, 40)</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Medical-Surgical</td>
 <td class="gt_row gt_center"></td>
@@ -764,18 +833,18 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Medical</td>
 <td class="gt_row gt_center">5,775 (47%)</td>
-<td class="gt_row gt_center">5,035 (46%)</td>
-<td class="gt_row gt_center">740 (58%)</td>
+<td class="gt_row gt_center">4,999 (46%)</td>
+<td class="gt_row gt_center">776 (58%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Surgical</td>
 <td class="gt_row gt_center">6,444 (53%)</td>
-<td class="gt_row gt_center">5,904 (54%)</td>
-<td class="gt_row gt_center">540 (42%)</td>
+<td class="gt_row gt_center">5,880 (54%)</td>
+<td class="gt_row gt_center">564 (42%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Died</td>
 <td class="gt_row gt_center">631 (5.2%)</td>
-<td class="gt_row gt_center">364 (3.3%)</td>
-<td class="gt_row gt_center">267 (21%)</td>
+<td class="gt_row gt_center">354 (3.3%)</td>
+<td class="gt_row gt_center">277 (21%)</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Education level</td>
 <td class="gt_row gt_center"></td>
@@ -789,18 +858,18 @@ font-size: 65%;
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Primary school</td>
 <td class="gt_row gt_center">1,579 (13%)</td>
-<td class="gt_row gt_center">1,399 (13%)</td>
-<td class="gt_row gt_center">180 (14%)</td>
+<td class="gt_row gt_center">1,393 (13%)</td>
+<td class="gt_row gt_center">186 (14%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diploma</td>
 <td class="gt_row gt_center">7,775 (64%)</td>
-<td class="gt_row gt_center">6,868 (63%)</td>
-<td class="gt_row gt_center">907 (71%)</td>
+<td class="gt_row gt_center">6,822 (63%)</td>
+<td class="gt_row gt_center">953 (71%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">University degree or higher</td>
 <td class="gt_row gt_center">2,865 (23%)</td>
-<td class="gt_row gt_center">2,672 (24%)</td>
-<td class="gt_row gt_center">193 (15%)</td>
+<td class="gt_row gt_center">2,664 (24%)</td>
+<td class="gt_row gt_center">201 (15%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Employed-Unemployed-Retired</td>
 <td class="gt_row gt_center"></td>
@@ -809,18 +878,18 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Employed/Student/Housewife</td>
 <td class="gt_row gt_center">4,936 (40%)</td>
-<td class="gt_row gt_center">4,550 (42%)</td>
-<td class="gt_row gt_center">386 (30%)</td>
+<td class="gt_row gt_center">4,535 (42%)</td>
+<td class="gt_row gt_center">401 (30%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Retired/Disable</td>
 <td class="gt_row gt_center">6,768 (55%)</td>
-<td class="gt_row gt_center">5,926 (54%)</td>
-<td class="gt_row gt_center">842 (66%)</td>
+<td class="gt_row gt_center">5,885 (54%)</td>
+<td class="gt_row gt_center">883 (66%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Unemployed</td>
 <td class="gt_row gt_center">515 (4.2%)</td>
-<td class="gt_row gt_center">463 (4.2%)</td>
-<td class="gt_row gt_center">52 (4.1%)</td>
+<td class="gt_row gt_center">459 (4.2%)</td>
+<td class="gt_row gt_center">56 (4.2%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Department</td>
 <td class="gt_row gt_center"></td>
@@ -829,77 +898,77 @@ font-size: 65%;
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Cardiochirurgia</td>
 <td class="gt_row gt_center">356 (2.9%)</td>
-<td class="gt_row gt_center">292 (2.7%)</td>
-<td class="gt_row gt_center">64 (5.0%)</td>
+<td class="gt_row gt_center">286 (2.6%)</td>
+<td class="gt_row gt_center">70 (5.2%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Cardiologia</td>
 <td class="gt_row gt_center">1,245 (10%)</td>
-<td class="gt_row gt_center">1,230 (11%)</td>
-<td class="gt_row gt_center">15 (1.2%)</td>
+<td class="gt_row gt_center">1,228 (11%)</td>
+<td class="gt_row gt_center">17 (1.3%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia</td>
 <td class="gt_row gt_center">1,513 (12%)</td>
-<td class="gt_row gt_center">1,391 (13%)</td>
-<td class="gt_row gt_center">122 (9.5%)</td>
+<td class="gt_row gt_center">1,386 (13%)</td>
+<td class="gt_row gt_center">127 (9.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia Toracica</td>
 <td class="gt_row gt_center">245 (2.0%)</td>
-<td class="gt_row gt_center">237 (2.2%)</td>
-<td class="gt_row gt_center">8 (0.6%)</td>
+<td class="gt_row gt_center">236 (2.2%)</td>
+<td class="gt_row gt_center">9 (0.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia Vascolare</td>
 <td class="gt_row gt_center">257 (2.1%)</td>
-<td class="gt_row gt_center">246 (2.2%)</td>
-<td class="gt_row gt_center">11 (0.9%)</td>
+<td class="gt_row gt_center">246 (2.3%)</td>
+<td class="gt_row gt_center">11 (0.8%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Endocrinologia e Diabetologia</td>
 <td class="gt_row gt_center">199 (1.6%)</td>
-<td class="gt_row gt_center">115 (1.1%)</td>
-<td class="gt_row gt_center">84 (6.6%)</td>
+<td class="gt_row gt_center">114 (1.0%)</td>
+<td class="gt_row gt_center">85 (6.3%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Gastroenterologia</td>
 <td class="gt_row gt_center">745 (6.1%)</td>
-<td class="gt_row gt_center">679 (6.2%)</td>
-<td class="gt_row gt_center">66 (5.2%)</td>
+<td class="gt_row gt_center">675 (6.2%)</td>
+<td class="gt_row gt_center">70 (5.2%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Ginecologia</td>
 <td class="gt_row gt_center">247 (2.0%)</td>
-<td class="gt_row gt_center">246 (2.2%)</td>
+<td class="gt_row gt_center">246 (2.3%)</td>
 <td class="gt_row gt_center">1 (&lt;0.1%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Malattie apparato respiratorio</td>
 <td class="gt_row gt_center">324 (2.7%)</td>
-<td class="gt_row gt_center">254 (2.3%)</td>
-<td class="gt_row gt_center">70 (5.5%)</td>
+<td class="gt_row gt_center">251 (2.3%)</td>
+<td class="gt_row gt_center">73 (5.4%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Malattie Infettive</td>
 <td class="gt_row gt_center">207 (1.7%)</td>
-<td class="gt_row gt_center">152 (1.4%)</td>
-<td class="gt_row gt_center">55 (4.3%)</td>
+<td class="gt_row gt_center">149 (1.4%)</td>
+<td class="gt_row gt_center">58 (4.3%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Medicina interna</td>
 <td class="gt_row gt_center">843 (6.9%)</td>
-<td class="gt_row gt_center">643 (5.9%)</td>
-<td class="gt_row gt_center">200 (16%)</td>
+<td class="gt_row gt_center">636 (5.8%)</td>
+<td class="gt_row gt_center">207 (15%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Neurochirugia</td>
 <td class="gt_row gt_center">417 (3.4%)</td>
-<td class="gt_row gt_center">378 (3.5%)</td>
-<td class="gt_row gt_center">39 (3.0%)</td>
+<td class="gt_row gt_center">376 (3.5%)</td>
+<td class="gt_row gt_center">41 (3.1%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Neurologia</td>
 <td class="gt_row gt_center">1,574 (13%)</td>
-<td class="gt_row gt_center">1,464 (13%)</td>
-<td class="gt_row gt_center">110 (8.6%)</td>
+<td class="gt_row gt_center">1,457 (13%)</td>
+<td class="gt_row gt_center">117 (8.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Ortopedia</td>
 <td class="gt_row gt_center">1,122 (9.2%)</td>
-<td class="gt_row gt_center">1,103 (10%)</td>
-<td class="gt_row gt_center">19 (1.5%)</td>
+<td class="gt_row gt_center">1,098 (10%)</td>
+<td class="gt_row gt_center">24 (1.8%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Psichiatria e Psicologia Clinica</td>
 <td class="gt_row gt_center">275 (2.3%)</td>
-<td class="gt_row gt_center">267 (2.4%)</td>
+<td class="gt_row gt_center">267 (2.5%)</td>
 <td class="gt_row gt_center">8 (0.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Reumatologia</td>
@@ -910,7 +979,7 @@ font-size: 65%;
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Urologia</td>
 <td class="gt_row gt_center">366 (3.0%)</td>
 <td class="gt_row gt_center">340 (3.1%)</td>
-<td class="gt_row gt_center">26 (2.0%)</td>
+<td class="gt_row gt_center">26 (1.9%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOS UTIC</td>
 <td class="gt_row gt_center">696 (5.7%)</td>
@@ -929,8 +998,8 @@ font-size: 65%;
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD OBI e Medicina d&#39;urgenza</td>
 <td class="gt_row gt_center">525 (4.3%)</td>
-<td class="gt_row gt_center">351 (3.2%)</td>
-<td class="gt_row gt_center">174 (14%)</td>
+<td class="gt_row gt_center">344 (3.2%)</td>
+<td class="gt_row gt_center">181 (14%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Oculistica</td>
 <td class="gt_row gt_center">88 (0.7%)</td>
@@ -939,23 +1008,23 @@ font-size: 65%;
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Oncologia</td>
 <td class="gt_row gt_center">136 (1.1%)</td>
-<td class="gt_row gt_center">128 (1.2%)</td>
-<td class="gt_row gt_center">8 (0.6%)</td>
+<td class="gt_row gt_center">127 (1.2%)</td>
+<td class="gt_row gt_center">9 (0.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Otorinolaringoiatria</td>
 <td class="gt_row gt_center">244 (2.0%)</td>
 <td class="gt_row gt_center">242 (2.2%)</td>
-<td class="gt_row gt_center">2 (0.2%)</td>
+<td class="gt_row gt_center">2 (0.1%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Patologie linfoproliferative</td>
 <td class="gt_row gt_center">225 (1.8%)</td>
-<td class="gt_row gt_center">113 (1.0%)</td>
-<td class="gt_row gt_center">112 (8.8%)</td>
+<td class="gt_row gt_center">108 (1.0%)</td>
+<td class="gt_row gt_center">117 (8.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Terapia Intensiva</td>
 <td class="gt_row gt_center">125 (1.0%)</td>
-<td class="gt_row gt_center">65 (0.6%)</td>
-<td class="gt_row gt_center">60 (4.7%)</td>
+<td class="gt_row gt_center">64 (0.6%)</td>
+<td class="gt_row gt_center">61 (4.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Primary diagnosis</td>
 <td class="gt_row gt_center"></td>
@@ -975,82 +1044,82 @@ font-size: 65%;
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Congenital anomalies</td>
 <td class="gt_row gt_center">95 (0.8%)</td>
 <td class="gt_row gt_center">93 (0.9%)</td>
-<td class="gt_row gt_center">2 (0.2%)</td>
+<td class="gt_row gt_center">2 (0.1%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the blood</td>
 <td class="gt_row gt_center">65 (0.5%)</td>
 <td class="gt_row gt_center">55 (0.5%)</td>
-<td class="gt_row gt_center">10 (0.8%)</td>
+<td class="gt_row gt_center">10 (0.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the circulatory system</td>
 <td class="gt_row gt_center">3,589 (29%)</td>
-<td class="gt_row gt_center">3,286 (30%)</td>
-<td class="gt_row gt_center">303 (24%)</td>
+<td class="gt_row gt_center">3,274 (30%)</td>
+<td class="gt_row gt_center">315 (24%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the digestive system</td>
 <td class="gt_row gt_center">1,250 (10%)</td>
-<td class="gt_row gt_center">1,146 (10%)</td>
-<td class="gt_row gt_center">104 (8.1%)</td>
+<td class="gt_row gt_center">1,142 (10%)</td>
+<td class="gt_row gt_center">108 (8.1%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the genitourinary system</td>
 <td class="gt_row gt_center">547 (4.5%)</td>
-<td class="gt_row gt_center">492 (4.5%)</td>
-<td class="gt_row gt_center">55 (4.3%)</td>
+<td class="gt_row gt_center">487 (4.5%)</td>
+<td class="gt_row gt_center">60 (4.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the musculoskeletal system</td>
 <td class="gt_row gt_center">506 (4.1%)</td>
-<td class="gt_row gt_center">486 (4.4%)</td>
-<td class="gt_row gt_center">20 (1.6%)</td>
+<td class="gt_row gt_center">486 (4.5%)</td>
+<td class="gt_row gt_center">20 (1.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the nervous system</td>
 <td class="gt_row gt_center">598 (4.9%)</td>
-<td class="gt_row gt_center">567 (5.2%)</td>
-<td class="gt_row gt_center">31 (2.4%)</td>
+<td class="gt_row gt_center">564 (5.2%)</td>
+<td class="gt_row gt_center">34 (2.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the respiratory system</td>
 <td class="gt_row gt_center">998 (8.2%)</td>
-<td class="gt_row gt_center">787 (7.2%)</td>
-<td class="gt_row gt_center">211 (16%)</td>
+<td class="gt_row gt_center">779 (7.2%)</td>
+<td class="gt_row gt_center">219 (16%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the skin</td>
 <td class="gt_row gt_center">59 (0.5%)</td>
 <td class="gt_row gt_center">37 (0.3%)</td>
-<td class="gt_row gt_center">22 (1.7%)</td>
+<td class="gt_row gt_center">22 (1.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Endocrine, nutritional and metabolic diseases, and immunity disorders</td>
 <td class="gt_row gt_center">393 (3.2%)</td>
-<td class="gt_row gt_center">319 (2.9%)</td>
-<td class="gt_row gt_center">74 (5.8%)</td>
+<td class="gt_row gt_center">318 (2.9%)</td>
+<td class="gt_row gt_center">75 (5.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Infectious and parasitic diseases</td>
 <td class="gt_row gt_center">195 (1.6%)</td>
-<td class="gt_row gt_center">124 (1.1%)</td>
-<td class="gt_row gt_center">71 (5.5%)</td>
+<td class="gt_row gt_center">119 (1.1%)</td>
+<td class="gt_row gt_center">76 (5.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Injury and poisoning</td>
 <td class="gt_row gt_center">1,269 (10%)</td>
-<td class="gt_row gt_center">1,148 (10%)</td>
-<td class="gt_row gt_center">121 (9.5%)</td>
+<td class="gt_row gt_center">1,141 (10%)</td>
+<td class="gt_row gt_center">128 (9.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Mental disorders</td>
 <td class="gt_row gt_center">360 (2.9%)</td>
-<td class="gt_row gt_center">345 (3.2%)</td>
-<td class="gt_row gt_center">15 (1.2%)</td>
+<td class="gt_row gt_center">344 (3.2%)</td>
+<td class="gt_row gt_center">16 (1.2%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Neoplasms</td>
 <td class="gt_row gt_center">1,521 (12%)</td>
-<td class="gt_row gt_center">1,326 (12%)</td>
-<td class="gt_row gt_center">195 (15%)</td>
+<td class="gt_row gt_center">1,318 (12%)</td>
+<td class="gt_row gt_center">203 (15%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Supplemental classification</td>
 <td class="gt_row gt_center">379 (3.1%)</td>
-<td class="gt_row gt_center">368 (3.4%)</td>
-<td class="gt_row gt_center">11 (0.9%)</td>
+<td class="gt_row gt_center">366 (3.4%)</td>
+<td class="gt_row gt_center">13 (1.0%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Symptoms, signs, and ill-defined conditions</td>
 <td class="gt_row gt_center">390 (3.2%)</td>
-<td class="gt_row gt_center">355 (3.2%)</td>
-<td class="gt_row gt_center">35 (2.7%)</td>
+<td class="gt_row gt_center">351 (3.2%)</td>
+<td class="gt_row gt_center">39 (2.9%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Invasive procedure</td>
 <td class="gt_row gt_center"></td>
@@ -1059,41 +1128,27 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">FALSE</td>
 <td class="gt_row gt_center">11,395 (93%)</td>
-<td class="gt_row gt_center">10,440 (95%)</td>
-<td class="gt_row gt_center">955 (75%)</td>
+<td class="gt_row gt_center">10,392 (96%)</td>
+<td class="gt_row gt_center">1,003 (75%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">TRUE</td>
 <td class="gt_row gt_center">824 (6.7%)</td>
-<td class="gt_row gt_center">499 (4.6%)</td>
-<td class="gt_row gt_center">325 (25%)</td>
+<td class="gt_row gt_center">487 (4.5%)</td>
+<td class="gt_row gt_center">337 (25%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Log Real Reimbursement</td>
 <td class="gt_row gt_center">8.27 (7.67, 8.88)</td>
 <td class="gt_row gt_center">8.23 (7.67, 8.84)</td>
-<td class="gt_row gt_center">8.82 (8.27, 9.63)</td>
+<td class="gt_row gt_center">8.82 (8.24, 9.64)</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
   </tbody>
   
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="5">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          n (%); Median (IQR)
-          <br />
-        </p>
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>2</em>
-          </sup>
-           
-          Pearson&#39;s Chi-squared test; Wilcoxon rank sum test
-          <br />
-        </p>
-      </td>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="5"><sup class="gt_footnote_marks">1</sup> n (%); Median (IQR)</td>
+    </tr>
+    <tr>
+      <td class="gt_footnote" colspan="5"><sup class="gt_footnote_marks">2</sup> Pearson&#39;s Chi-squared test; Wilcoxon rank sum test</td>
     </tr>
   </tfoot>
 </table>
@@ -1102,7 +1157,7 @@ font-size: 65%;
 casi e pochissimi o zero infetti. Ipotizziamo che si tratti di
 situazioni poco rilevanti in uno studio sulle ICA quindi li togliamo. I
 reparti con meno di 5 casi sono</p>
-<template id="aee0012b-9cca-4f24-8222-fb510a3bad08"><style>
+<template id="18a9bd39-892a-4370-9686-b1d6d7301832"><style>
 .tabwid table{
 border-spacing:0px !important;
 border-collapse:collapse;
@@ -1136,12 +1191,12 @@ background-color: transparent;
 .tabwid table tr {
 background-color: transparent;
 }
-</style><div class="tabwid"><style>.cl-b6392b88{table-layout:auto;width:0%;}.cl-b636aa84{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-b636b592{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-b636b593{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-b636ce74{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b636ce7e{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b636ce7f{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b636ce80{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b636ce81{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b636ce88{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b636ce89{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b636ce8a{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table class="cl-b6392b88">
-<thead><tr style="overflow-wrap:break-word;"><td class="cl-b636ce8a"><p class="cl-b636b592"><span class="cl-b636aa84">reparto</span></p></td><td class="cl-b636ce89"><p class="cl-b636b593"><span class="cl-b636aa84">infected</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-b636ce7e"><p class="cl-b636b592"><span class="cl-b636aa84">UOC Ginecologia</span></p></td><td class="cl-b636ce74"><p class="cl-b636b593"><span class="cl-b636aa84">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b636ce7e"><p class="cl-b636b592"><span class="cl-b636aa84">UOC Reumatologia</span></p></td><td class="cl-b636ce74"><p class="cl-b636b593"><span class="cl-b636aa84">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b636ce7e"><p class="cl-b636b592"><span class="cl-b636aa84">UOSD Chirurgia Maxillo facciale</span></p></td><td class="cl-b636ce74"><p class="cl-b636b593"><span class="cl-b636aa84">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b636ce7e"><p class="cl-b636b592"><span class="cl-b636aa84">UOSD Nefrologia e Dialisi</span></p></td><td class="cl-b636ce74"><p class="cl-b636b593"><span class="cl-b636aa84">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b636ce80"><p class="cl-b636b592"><span class="cl-b636aa84">UOSD Oculistica</span></p></td><td class="cl-b636ce7f"><p class="cl-b636b593"><span class="cl-b636aa84">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b636ce88"><p class="cl-b636b592"><span class="cl-b636aa84">UOSD Otorinolaringoiatria</span></p></td><td class="cl-b636ce81"><p class="cl-b636b593"><span class="cl-b636aa84">2</span></p></td></tr></tbody></table></div></template>
-<div class="flextable-shadow-host" id="e1d30bc2-8de6-4de8-9dcb-49f73344e94e"></div>
+</style><div class="tabwid"><style>.cl-07c21a98{table-layout:auto;width:0%;}.cl-07bf7112{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-07bf7afe{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-07bf7b08{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-07bf9494{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07bf9495{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07bf949e{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07bf949f{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07bf94a8{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07bf94a9{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07bf94aa{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07bf94b2{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table class="cl-07c21a98">
+<thead><tr style="overflow-wrap:break-word;"><td class="cl-07bf94b2"><p class="cl-07bf7afe"><span class="cl-07bf7112">reparto</span></p></td><td class="cl-07bf94aa"><p class="cl-07bf7b08"><span class="cl-07bf7112">infected</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-07bf9495"><p class="cl-07bf7afe"><span class="cl-07bf7112">UOC Ginecologia</span></p></td><td class="cl-07bf9494"><p class="cl-07bf7b08"><span class="cl-07bf7112">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-07bf9495"><p class="cl-07bf7afe"><span class="cl-07bf7112">UOC Reumatologia</span></p></td><td class="cl-07bf9494"><p class="cl-07bf7b08"><span class="cl-07bf7112">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-07bf9495"><p class="cl-07bf7afe"><span class="cl-07bf7112">UOSD Chirurgia Maxillo facciale</span></p></td><td class="cl-07bf9494"><p class="cl-07bf7b08"><span class="cl-07bf7112">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-07bf9495"><p class="cl-07bf7afe"><span class="cl-07bf7112">UOSD Nefrologia e Dialisi</span></p></td><td class="cl-07bf9494"><p class="cl-07bf7b08"><span class="cl-07bf7112">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-07bf949f"><p class="cl-07bf7afe"><span class="cl-07bf7112">UOSD Oculistica</span></p></td><td class="cl-07bf949e"><p class="cl-07bf7b08"><span class="cl-07bf7112">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-07bf94a9"><p class="cl-07bf7afe"><span class="cl-07bf7112">UOSD Otorinolaringoiatria</span></p></td><td class="cl-07bf94a8"><p class="cl-07bf7b08"><span class="cl-07bf7112">2</span></p></td></tr></tbody></table></div></template>
+<div class="flextable-shadow-host" id="7113350b-d5d6-406e-8841-79606218d9d4"></div>
 <script>
-var dest = document.getElementById("e1d30bc2-8de6-4de8-9dcb-49f73344e94e");
-var template = document.getElementById("aee0012b-9cca-4f24-8222-fb510a3bad08");
+var dest = document.getElementById("7113350b-d5d6-406e-8841-79606218d9d4");
+var template = document.getElementById("18a9bd39-892a-4370-9686-b1d6d7301832");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";
@@ -1155,7 +1210,7 @@ fantome.appendChild(templateContent);
 </script>
 
 <p>Invece le diagnosi con meno di 5 pazienti in tutto sono</p>
-<template id="e71d9d8d-e588-4570-92c5-983cdef37be4"><style>
+<template id="2383bc7e-1df0-449a-a3d7-8423b2f0e218"><style>
 .tabwid table{
 border-spacing:0px !important;
 border-collapse:collapse;
@@ -1189,12 +1244,12 @@ background-color: transparent;
 .tabwid table tr {
 background-color: transparent;
 }
-</style><div class="tabwid"><style>.cl-b641718a{table-layout:auto;width:0%;}.cl-b63f6818{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-b63f6dae{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-b63f6daf{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-b63f7eca{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b63f7ecb{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b63f7ed4{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b63f7ed5{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b63f7ede{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b63f7edf{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table class="cl-b641718a">
-<thead><tr style="overflow-wrap:break-word;"><td class="cl-b63f7ede"><p class="cl-b63f6dae"><span class="cl-b63f6818">dia_pri</span></p></td><td class="cl-b63f7edf"><p class="cl-b63f6daf"><span class="cl-b63f6818">patients</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-b63f7eca"><p class="cl-b63f6dae"><span class="cl-b63f6818">Complications of pregnancy and childbirth</span></p></td><td class="cl-b63f7ecb"><p class="cl-b63f6daf"><span class="cl-b63f6818">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-b63f7ed4"><p class="cl-b63f6dae"><span class="cl-b63f6818">Conditions originating in the perinatal period</span></p></td><td class="cl-b63f7ed5"><p class="cl-b63f6daf"><span class="cl-b63f6818">4</span></p></td></tr></tbody></table></div></template>
-<div class="flextable-shadow-host" id="61491f1b-13b9-493d-92ea-4d17dfc8a33f"></div>
+</style><div class="tabwid"><style>.cl-07cad2a0{table-layout:auto;width:0%;}.cl-07c8baec{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-07c8c154{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-07c8c15e{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-07c8d50e{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07c8d518{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07c8d522{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07c8d523{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07c8d524{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-07c8d52c{background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table class="cl-07cad2a0">
+<thead><tr style="overflow-wrap:break-word;"><td class="cl-07c8d524"><p class="cl-07c8c154"><span class="cl-07c8baec">dia_pri</span></p></td><td class="cl-07c8d52c"><p class="cl-07c8c15e"><span class="cl-07c8baec">patients</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-07c8d50e"><p class="cl-07c8c154"><span class="cl-07c8baec">Complications of pregnancy and childbirth</span></p></td><td class="cl-07c8d518"><p class="cl-07c8c15e"><span class="cl-07c8baec">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-07c8d522"><p class="cl-07c8c154"><span class="cl-07c8baec">Conditions originating in the perinatal period</span></p></td><td class="cl-07c8d523"><p class="cl-07c8c15e"><span class="cl-07c8baec">4</span></p></td></tr></tbody></table></div></template>
+<div class="flextable-shadow-host" id="e0fe2011-8d1c-4508-9679-d0b85f76354c"></div>
 <script>
-var dest = document.getElementById("61491f1b-13b9-493d-92ea-4d17dfc8a33f");
-var template = document.getElementById("e71d9d8d-e588-4570-92c5-983cdef37be4");
+var dest = document.getElementById("e0fe2011-8d1c-4508-9679-d0b85f76354c");
+var template = document.getElementById("2383bc7e-1df0-449a-a3d7-8423b2f0e218");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";
@@ -1209,11 +1264,11 @@ fantome.appendChild(templateContent);
 
 <p>Quindi ripetiamo la tabella di sintesi esplorativa togliendo quei
 reparti e quelle diagnosi</p>
-<div id="ioqdhgdrya" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="spopiakiaa" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
-#ioqdhgdrya .gt_table {
+#spopiakiaa .gt_table {
 display: table;
 border-collapse: collapse;
 margin-left: auto;
@@ -1237,7 +1292,7 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_heading {
+#spopiakiaa .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -1248,30 +1303,34 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_title {
+#spopiakiaa .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
 padding-top: 4px;
 padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#ioqdhgdrya .gt_subtitle {
+#spopiakiaa .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
 padding-top: 0;
 padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#ioqdhgdrya .gt_bottom_border {
+#spopiakiaa .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_col_headings {
+#spopiakiaa .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -1285,7 +1344,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_col_heading {
+#spopiakiaa .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1304,7 +1363,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#ioqdhgdrya .gt_column_spanner_outer {
+#spopiakiaa .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1315,13 +1374,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#ioqdhgdrya .gt_column_spanner_outer:first-child {
+#spopiakiaa .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#ioqdhgdrya .gt_column_spanner_outer:last-child {
+#spopiakiaa .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#ioqdhgdrya .gt_column_spanner {
+#spopiakiaa .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -1332,8 +1391,11 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#ioqdhgdrya .gt_group_heading {
-padding: 8px;
+#spopiakiaa .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1353,7 +1415,7 @@ border-right-width: 1px;
 border-right-color: #D3D3D3;
 vertical-align: middle;
 }
-#ioqdhgdrya .gt_empty_group_heading {
+#spopiakiaa .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -1367,13 +1429,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#ioqdhgdrya .gt_from_md > :first-child {
+#spopiakiaa .gt_from_md > :first-child {
 margin-top: 0;
 }
-#ioqdhgdrya .gt_from_md > :last-child {
+#spopiakiaa .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#ioqdhgdrya .gt_row {
+#spopiakiaa .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1391,7 +1453,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#ioqdhgdrya .gt_stub {
+#spopiakiaa .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1400,9 +1462,26 @@ text-transform: inherit;
 border-right-style: solid;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
-padding-left: 12px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#ioqdhgdrya .gt_summary_row {
+#spopiakiaa .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#spopiakiaa .gt_row_group_first td {
+border-top-width: 2px;
+}
+#spopiakiaa .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -1411,16 +1490,23 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#ioqdhgdrya .gt_first_summary_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
+#spopiakiaa .gt_first_summary_row {
 border-top-style: solid;
-border-top-width: 2px;
 border-top-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_grand_summary_row {
+#spopiakiaa .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#spopiakiaa .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#spopiakiaa .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -1429,7 +1515,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#ioqdhgdrya .gt_first_grand_summary_row {
+#spopiakiaa .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1438,10 +1524,10 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_striped {
+#spopiakiaa .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#ioqdhgdrya .gt_table_body {
+#spopiakiaa .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -1449,7 +1535,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_footnotes {
+#spopiakiaa .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -1462,12 +1548,15 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_footnote {
+#spopiakiaa .gt_footnote {
 margin: 0px;
 font-size: 90%;
-padding: 4px;
+padding-left: 4px;
+padding-right: 4px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#ioqdhgdrya .gt_sourcenotes {
+#spopiakiaa .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -1480,36 +1569,67 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#ioqdhgdrya .gt_sourcenote {
+#spopiakiaa .gt_sourcenote {
 font-size: 90%;
-padding: 4px;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#ioqdhgdrya .gt_left {
+#spopiakiaa .gt_left {
 text-align: left;
 }
-#ioqdhgdrya .gt_center {
+#spopiakiaa .gt_center {
 text-align: center;
 }
-#ioqdhgdrya .gt_right {
+#spopiakiaa .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#ioqdhgdrya .gt_font_normal {
+#spopiakiaa .gt_font_normal {
 font-weight: normal;
 }
-#ioqdhgdrya .gt_font_bold {
+#spopiakiaa .gt_font_bold {
 font-weight: bold;
 }
-#ioqdhgdrya .gt_font_italic {
+#spopiakiaa .gt_font_italic {
 font-style: italic;
 }
-#ioqdhgdrya .gt_super {
+#spopiakiaa .gt_super {
 font-size: 65%;
 }
-#ioqdhgdrya .gt_footnote_marks {
+#spopiakiaa .gt_two_val_uncert {
+display: inline-block;
+line-height: 1em;
+text-align: right;
+font-size: 60%;
+vertical-align: -0.25em;
+margin-left: 0.1em;
+}
+#spopiakiaa .gt_footnote_marks {
 font-style: italic;
 font-weight: normal;
-font-size: 65%;
+font-size: 75%;
+vertical-align: 0.4em;
+}
+#spopiakiaa .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#spopiakiaa .gt_slash_mark {
+font-size: 0.7em;
+line-height: 0.7em;
+vertical-align: 0.15em;
+}
+#spopiakiaa .gt_fraction_numerator {
+font-size: 0.6em;
+line-height: 0.6em;
+vertical-align: 0.45em;
+}
+#spopiakiaa .gt_fraction_denominator {
+font-size: 0.6em;
+line-height: 0.6em;
+vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
@@ -1518,8 +1638,8 @@ font-size: 65%;
     <tr>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>Overall</strong>, N = 11,391<sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>FALSE</strong>, N = 10,119<sup class="gt_footnote_marks">1</sup></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>TRUE</strong>, N = 1,272<sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>FALSE</strong>, N = 10,059<sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>TRUE</strong>, N = 1,332<sup class="gt_footnote_marks">1</sup></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong><sup class="gt_footnote_marks">2</sup></th>
     </tr>
   </thead>
@@ -1528,21 +1648,21 @@ font-size: 65%;
 <td class="gt_row gt_center"></td>
 <td class="gt_row gt_center"></td>
 <td class="gt_row gt_center"></td>
-<td class="gt_row gt_center">0.6</td></tr>
+<td class="gt_row gt_center">0.5</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">F</td>
 <td class="gt_row gt_center">6,439 (57%)</td>
-<td class="gt_row gt_center">5,729 (57%)</td>
-<td class="gt_row gt_center">710 (56%)</td>
+<td class="gt_row gt_center">5,697 (57%)</td>
+<td class="gt_row gt_center">742 (56%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">M</td>
 <td class="gt_row gt_center">4,952 (43%)</td>
-<td class="gt_row gt_center">4,390 (43%)</td>
-<td class="gt_row gt_center">562 (44%)</td>
+<td class="gt_row gt_center">4,362 (43%)</td>
+<td class="gt_row gt_center">590 (44%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Age</td>
 <td class="gt_row gt_center">67 (53, 77)</td>
 <td class="gt_row gt_center">66 (53, 77)</td>
-<td class="gt_row gt_center">71 (58, 80)</td>
+<td class="gt_row gt_center">71 (59, 80)</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Admission modality</td>
 <td class="gt_row gt_center"></td>
@@ -1551,23 +1671,23 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Scheduled</td>
 <td class="gt_row gt_center">2,519 (22%)</td>
-<td class="gt_row gt_center">2,364 (23%)</td>
-<td class="gt_row gt_center">155 (12%)</td>
+<td class="gt_row gt_center">2,350 (23%)</td>
+<td class="gt_row gt_center">169 (13%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Scheduled with preospedalization</td>
 <td class="gt_row gt_center">899 (7.9%)</td>
-<td class="gt_row gt_center">893 (8.8%)</td>
+<td class="gt_row gt_center">893 (8.9%)</td>
 <td class="gt_row gt_center">6 (0.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Urgent</td>
 <td class="gt_row gt_center">7,973 (70%)</td>
-<td class="gt_row gt_center">6,862 (68%)</td>
-<td class="gt_row gt_center">1,111 (87%)</td>
+<td class="gt_row gt_center">6,816 (68%)</td>
+<td class="gt_row gt_center">1,157 (87%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Days of stay</td>
 <td class="gt_row gt_center">6 (3, 11)</td>
 <td class="gt_row gt_center">5 (2, 9)</td>
-<td class="gt_row gt_center">25 (14, 40)</td>
+<td class="gt_row gt_center">24 (14, 40)</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Medical-Surgical</td>
 <td class="gt_row gt_center"></td>
@@ -1576,18 +1696,18 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Medical</td>
 <td class="gt_row gt_center">5,657 (50%)</td>
-<td class="gt_row gt_center">4,921 (49%)</td>
-<td class="gt_row gt_center">736 (58%)</td>
+<td class="gt_row gt_center">4,885 (49%)</td>
+<td class="gt_row gt_center">772 (58%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Surgical</td>
 <td class="gt_row gt_center">5,734 (50%)</td>
-<td class="gt_row gt_center">5,198 (51%)</td>
-<td class="gt_row gt_center">536 (42%)</td>
+<td class="gt_row gt_center">5,174 (51%)</td>
+<td class="gt_row gt_center">560 (42%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Died</td>
 <td class="gt_row gt_center">631 (5.5%)</td>
-<td class="gt_row gt_center">364 (3.6%)</td>
-<td class="gt_row gt_center">267 (21%)</td>
+<td class="gt_row gt_center">354 (3.5%)</td>
+<td class="gt_row gt_center">277 (21%)</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Education level</td>
 <td class="gt_row gt_center"></td>
@@ -1601,18 +1721,18 @@ font-size: 65%;
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Primary school</td>
 <td class="gt_row gt_center">1,496 (13%)</td>
-<td class="gt_row gt_center">1,317 (13%)</td>
-<td class="gt_row gt_center">179 (14%)</td>
+<td class="gt_row gt_center">1,311 (13%)</td>
+<td class="gt_row gt_center">185 (14%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diploma</td>
 <td class="gt_row gt_center">7,467 (66%)</td>
-<td class="gt_row gt_center">6,563 (65%)</td>
-<td class="gt_row gt_center">904 (71%)</td>
+<td class="gt_row gt_center">6,517 (65%)</td>
+<td class="gt_row gt_center">950 (71%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">University degree or higher</td>
 <td class="gt_row gt_center">2,428 (21%)</td>
-<td class="gt_row gt_center">2,239 (22%)</td>
-<td class="gt_row gt_center">189 (15%)</td>
+<td class="gt_row gt_center">2,231 (22%)</td>
+<td class="gt_row gt_center">197 (15%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Employed-Unemployed-Retired</td>
 <td class="gt_row gt_center"></td>
@@ -1621,18 +1741,18 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Employed/Student/Housewife</td>
 <td class="gt_row gt_center">4,398 (39%)</td>
-<td class="gt_row gt_center">4,014 (40%)</td>
-<td class="gt_row gt_center">384 (30%)</td>
+<td class="gt_row gt_center">3,999 (40%)</td>
+<td class="gt_row gt_center">399 (30%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Retired/Disable</td>
 <td class="gt_row gt_center">6,554 (58%)</td>
-<td class="gt_row gt_center">5,718 (57%)</td>
-<td class="gt_row gt_center">836 (66%)</td>
+<td class="gt_row gt_center">5,677 (56%)</td>
+<td class="gt_row gt_center">877 (66%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Unemployed</td>
 <td class="gt_row gt_center">439 (3.9%)</td>
-<td class="gt_row gt_center">387 (3.8%)</td>
-<td class="gt_row gt_center">52 (4.1%)</td>
+<td class="gt_row gt_center">383 (3.8%)</td>
+<td class="gt_row gt_center">56 (4.2%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Department</td>
 <td class="gt_row gt_center"></td>
@@ -1641,72 +1761,72 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Cardiochirurgia</td>
 <td class="gt_row gt_center">356 (3.1%)</td>
-<td class="gt_row gt_center">292 (2.9%)</td>
-<td class="gt_row gt_center">64 (5.0%)</td>
+<td class="gt_row gt_center">286 (2.8%)</td>
+<td class="gt_row gt_center">70 (5.3%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Cardiologia</td>
 <td class="gt_row gt_center">1,245 (11%)</td>
-<td class="gt_row gt_center">1,230 (12%)</td>
-<td class="gt_row gt_center">15 (1.2%)</td>
+<td class="gt_row gt_center">1,228 (12%)</td>
+<td class="gt_row gt_center">17 (1.3%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia</td>
 <td class="gt_row gt_center">1,513 (13%)</td>
-<td class="gt_row gt_center">1,391 (14%)</td>
-<td class="gt_row gt_center">122 (9.6%)</td>
+<td class="gt_row gt_center">1,386 (14%)</td>
+<td class="gt_row gt_center">127 (9.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia Toracica</td>
 <td class="gt_row gt_center">245 (2.2%)</td>
-<td class="gt_row gt_center">237 (2.3%)</td>
-<td class="gt_row gt_center">8 (0.6%)</td>
+<td class="gt_row gt_center">236 (2.3%)</td>
+<td class="gt_row gt_center">9 (0.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia Vascolare</td>
 <td class="gt_row gt_center">257 (2.3%)</td>
 <td class="gt_row gt_center">246 (2.4%)</td>
-<td class="gt_row gt_center">11 (0.9%)</td>
+<td class="gt_row gt_center">11 (0.8%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Endocrinologia e Diabetologia</td>
 <td class="gt_row gt_center">199 (1.7%)</td>
-<td class="gt_row gt_center">115 (1.1%)</td>
-<td class="gt_row gt_center">84 (6.6%)</td>
+<td class="gt_row gt_center">114 (1.1%)</td>
+<td class="gt_row gt_center">85 (6.4%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Gastroenterologia</td>
 <td class="gt_row gt_center">745 (6.5%)</td>
-<td class="gt_row gt_center">679 (6.7%)</td>
-<td class="gt_row gt_center">66 (5.2%)</td>
+<td class="gt_row gt_center">675 (6.7%)</td>
+<td class="gt_row gt_center">70 (5.3%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Malattie apparato respiratorio</td>
 <td class="gt_row gt_center">324 (2.8%)</td>
-<td class="gt_row gt_center">254 (2.5%)</td>
-<td class="gt_row gt_center">70 (5.5%)</td>
+<td class="gt_row gt_center">251 (2.5%)</td>
+<td class="gt_row gt_center">73 (5.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Malattie Infettive</td>
 <td class="gt_row gt_center">207 (1.8%)</td>
-<td class="gt_row gt_center">152 (1.5%)</td>
-<td class="gt_row gt_center">55 (4.3%)</td>
+<td class="gt_row gt_center">149 (1.5%)</td>
+<td class="gt_row gt_center">58 (4.4%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Medicina interna</td>
 <td class="gt_row gt_center">841 (7.4%)</td>
-<td class="gt_row gt_center">641 (6.3%)</td>
-<td class="gt_row gt_center">200 (16%)</td>
+<td class="gt_row gt_center">634 (6.3%)</td>
+<td class="gt_row gt_center">207 (16%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Neurochirugia</td>
 <td class="gt_row gt_center">417 (3.7%)</td>
-<td class="gt_row gt_center">378 (3.7%)</td>
-<td class="gt_row gt_center">39 (3.1%)</td>
+<td class="gt_row gt_center">376 (3.7%)</td>
+<td class="gt_row gt_center">41 (3.1%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Neurologia</td>
 <td class="gt_row gt_center">1,573 (14%)</td>
-<td class="gt_row gt_center">1,463 (14%)</td>
-<td class="gt_row gt_center">110 (8.6%)</td>
+<td class="gt_row gt_center">1,456 (14%)</td>
+<td class="gt_row gt_center">117 (8.8%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Ortopedia</td>
 <td class="gt_row gt_center">1,122 (9.8%)</td>
-<td class="gt_row gt_center">1,103 (11%)</td>
-<td class="gt_row gt_center">19 (1.5%)</td>
+<td class="gt_row gt_center">1,098 (11%)</td>
+<td class="gt_row gt_center">24 (1.8%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Psichiatria e Psicologia Clinica</td>
 <td class="gt_row gt_center">275 (2.4%)</td>
-<td class="gt_row gt_center">267 (2.6%)</td>
+<td class="gt_row gt_center">267 (2.7%)</td>
 <td class="gt_row gt_center">8 (0.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Urologia</td>
@@ -1717,27 +1837,27 @@ font-size: 65%;
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOS UTIC</td>
 <td class="gt_row gt_center">696 (6.1%)</td>
 <td class="gt_row gt_center">675 (6.7%)</td>
-<td class="gt_row gt_center">21 (1.7%)</td>
+<td class="gt_row gt_center">21 (1.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD OBI e Medicina d&#39;urgenza</td>
 <td class="gt_row gt_center">525 (4.6%)</td>
-<td class="gt_row gt_center">351 (3.5%)</td>
-<td class="gt_row gt_center">174 (14%)</td>
+<td class="gt_row gt_center">344 (3.4%)</td>
+<td class="gt_row gt_center">181 (14%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Oncologia</td>
 <td class="gt_row gt_center">136 (1.2%)</td>
-<td class="gt_row gt_center">128 (1.3%)</td>
-<td class="gt_row gt_center">8 (0.6%)</td>
+<td class="gt_row gt_center">127 (1.3%)</td>
+<td class="gt_row gt_center">9 (0.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Patologie linfoproliferative</td>
 <td class="gt_row gt_center">225 (2.0%)</td>
-<td class="gt_row gt_center">113 (1.1%)</td>
-<td class="gt_row gt_center">112 (8.8%)</td>
+<td class="gt_row gt_center">108 (1.1%)</td>
+<td class="gt_row gt_center">117 (8.8%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Terapia Intensiva</td>
 <td class="gt_row gt_center">125 (1.1%)</td>
-<td class="gt_row gt_center">65 (0.6%)</td>
-<td class="gt_row gt_center">60 (4.7%)</td>
+<td class="gt_row gt_center">64 (0.6%)</td>
+<td class="gt_row gt_center">61 (4.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Primary diagnosis</td>
 <td class="gt_row gt_center"></td>
@@ -1746,7 +1866,7 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Congenital anomalies</td>
 <td class="gt_row gt_center">88 (0.8%)</td>
-<td class="gt_row gt_center">86 (0.8%)</td>
+<td class="gt_row gt_center">86 (0.9%)</td>
 <td class="gt_row gt_center">2 (0.2%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the blood</td>
@@ -1756,33 +1876,33 @@ font-size: 65%;
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the circulatory system</td>
 <td class="gt_row gt_center">3,586 (31%)</td>
-<td class="gt_row gt_center">3,283 (32%)</td>
-<td class="gt_row gt_center">303 (24%)</td>
+<td class="gt_row gt_center">3,271 (33%)</td>
+<td class="gt_row gt_center">315 (24%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the digestive system</td>
 <td class="gt_row gt_center">1,124 (9.9%)</td>
-<td class="gt_row gt_center">1,021 (10%)</td>
-<td class="gt_row gt_center">103 (8.1%)</td>
+<td class="gt_row gt_center">1,017 (10%)</td>
+<td class="gt_row gt_center">107 (8.0%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the genitourinary system</td>
 <td class="gt_row gt_center">445 (3.9%)</td>
-<td class="gt_row gt_center">390 (3.9%)</td>
-<td class="gt_row gt_center">55 (4.3%)</td>
+<td class="gt_row gt_center">385 (3.8%)</td>
+<td class="gt_row gt_center">60 (4.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the musculoskeletal system</td>
 <td class="gt_row gt_center">479 (4.2%)</td>
-<td class="gt_row gt_center">460 (4.5%)</td>
-<td class="gt_row gt_center">19 (1.5%)</td>
+<td class="gt_row gt_center">460 (4.6%)</td>
+<td class="gt_row gt_center">19 (1.4%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the nervous system</td>
 <td class="gt_row gt_center">477 (4.2%)</td>
-<td class="gt_row gt_center">446 (4.4%)</td>
-<td class="gt_row gt_center">31 (2.4%)</td>
+<td class="gt_row gt_center">443 (4.4%)</td>
+<td class="gt_row gt_center">34 (2.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the respiratory system</td>
 <td class="gt_row gt_center">854 (7.5%)</td>
-<td class="gt_row gt_center">645 (6.4%)</td>
-<td class="gt_row gt_center">209 (16%)</td>
+<td class="gt_row gt_center">637 (6.3%)</td>
+<td class="gt_row gt_center">217 (16%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the skin</td>
 <td class="gt_row gt_center">52 (0.5%)</td>
@@ -1791,38 +1911,38 @@ font-size: 65%;
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Endocrine, nutritional and metabolic diseases, and immunity disorders</td>
 <td class="gt_row gt_center">388 (3.4%)</td>
-<td class="gt_row gt_center">314 (3.1%)</td>
-<td class="gt_row gt_center">74 (5.8%)</td>
+<td class="gt_row gt_center">313 (3.1%)</td>
+<td class="gt_row gt_center">75 (5.6%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Infectious and parasitic diseases</td>
 <td class="gt_row gt_center">193 (1.7%)</td>
-<td class="gt_row gt_center">122 (1.2%)</td>
-<td class="gt_row gt_center">71 (5.6%)</td>
+<td class="gt_row gt_center">117 (1.2%)</td>
+<td class="gt_row gt_center">76 (5.7%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Injury and poisoning</td>
 <td class="gt_row gt_center">1,206 (11%)</td>
-<td class="gt_row gt_center">1,086 (11%)</td>
-<td class="gt_row gt_center">120 (9.4%)</td>
+<td class="gt_row gt_center">1,079 (11%)</td>
+<td class="gt_row gt_center">127 (9.5%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Mental disorders</td>
 <td class="gt_row gt_center">359 (3.2%)</td>
-<td class="gt_row gt_center">344 (3.4%)</td>
-<td class="gt_row gt_center">15 (1.2%)</td>
+<td class="gt_row gt_center">343 (3.4%)</td>
+<td class="gt_row gt_center">16 (1.2%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Neoplasms</td>
 <td class="gt_row gt_center">1,350 (12%)</td>
-<td class="gt_row gt_center">1,157 (11%)</td>
-<td class="gt_row gt_center">193 (15%)</td>
+<td class="gt_row gt_center">1,149 (11%)</td>
+<td class="gt_row gt_center">201 (15%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Supplemental classification</td>
 <td class="gt_row gt_center">345 (3.0%)</td>
-<td class="gt_row gt_center">334 (3.3%)</td>
-<td class="gt_row gt_center">11 (0.9%)</td>
+<td class="gt_row gt_center">332 (3.3%)</td>
+<td class="gt_row gt_center">13 (1.0%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Symptoms, signs, and ill-defined conditions</td>
 <td class="gt_row gt_center">383 (3.4%)</td>
-<td class="gt_row gt_center">348 (3.4%)</td>
-<td class="gt_row gt_center">35 (2.8%)</td>
+<td class="gt_row gt_center">344 (3.4%)</td>
+<td class="gt_row gt_center">39 (2.9%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Invasive procedure</td>
 <td class="gt_row gt_center"></td>
@@ -1831,41 +1951,27 @@ font-size: 65%;
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">FALSE</td>
 <td class="gt_row gt_center">10,575 (93%)</td>
-<td class="gt_row gt_center">9,626 (95%)</td>
-<td class="gt_row gt_center">949 (75%)</td>
+<td class="gt_row gt_center">9,578 (95%)</td>
+<td class="gt_row gt_center">997 (75%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">TRUE</td>
 <td class="gt_row gt_center">816 (7.2%)</td>
-<td class="gt_row gt_center">493 (4.9%)</td>
-<td class="gt_row gt_center">323 (25%)</td>
+<td class="gt_row gt_center">481 (4.8%)</td>
+<td class="gt_row gt_center">335 (25%)</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left">Log Real Reimbursement</td>
 <td class="gt_row gt_center">8.27 (7.76, 9.00)</td>
 <td class="gt_row gt_center">8.27 (7.67, 8.87)</td>
-<td class="gt_row gt_center">8.82 (8.27, 9.65)</td>
+<td class="gt_row gt_center">8.82 (8.25, 9.65)</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
   </tbody>
   
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="5">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          n (%); Median (IQR)
-          <br />
-        </p>
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>2</em>
-          </sup>
-           
-          Pearson&#39;s Chi-squared test; Wilcoxon rank sum test
-          <br />
-        </p>
-      </td>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="5"><sup class="gt_footnote_marks">1</sup> n (%); Median (IQR)</td>
+    </tr>
+    <tr>
+      <td class="gt_footnote" colspan="5"><sup class="gt_footnote_marks">2</sup> Pearson&#39;s Chi-squared test; Wilcoxon rank sum test</td>
     </tr>
   </tfoot>
 </table>
@@ -1874,11 +1980,11 @@ font-size: 65%;
 <h2>Propensity</h2>
 <p><strong>Primo passo:</strong> facciamo una regrssione logistica con
 tutte le variabili identificate rispetto all’infezione</p>
-<div id="pzsnhnsmva" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="cexotewoli" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
-#pzsnhnsmva .gt_table {
+#cexotewoli .gt_table {
 display: table;
 border-collapse: collapse;
 margin-left: auto;
@@ -1902,7 +2008,7 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_heading {
+#cexotewoli .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -1913,30 +2019,34 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_title {
+#cexotewoli .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
 padding-top: 4px;
 padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#pzsnhnsmva .gt_subtitle {
+#cexotewoli .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
 padding-top: 0;
 padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#pzsnhnsmva .gt_bottom_border {
+#cexotewoli .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_col_headings {
+#cexotewoli .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -1950,7 +2060,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_col_heading {
+#cexotewoli .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1969,7 +2079,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#pzsnhnsmva .gt_column_spanner_outer {
+#cexotewoli .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1980,13 +2090,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#pzsnhnsmva .gt_column_spanner_outer:first-child {
+#cexotewoli .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#pzsnhnsmva .gt_column_spanner_outer:last-child {
+#cexotewoli .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#pzsnhnsmva .gt_column_spanner {
+#cexotewoli .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -1997,8 +2107,11 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#pzsnhnsmva .gt_group_heading {
-padding: 8px;
+#cexotewoli .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -2018,7 +2131,7 @@ border-right-width: 1px;
 border-right-color: #D3D3D3;
 vertical-align: middle;
 }
-#pzsnhnsmva .gt_empty_group_heading {
+#cexotewoli .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -2032,13 +2145,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#pzsnhnsmva .gt_from_md > :first-child {
+#cexotewoli .gt_from_md > :first-child {
 margin-top: 0;
 }
-#pzsnhnsmva .gt_from_md > :last-child {
+#cexotewoli .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#pzsnhnsmva .gt_row {
+#cexotewoli .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -2056,7 +2169,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#pzsnhnsmva .gt_stub {
+#cexotewoli .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -2065,9 +2178,26 @@ text-transform: inherit;
 border-right-style: solid;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
-padding-left: 12px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#pzsnhnsmva .gt_summary_row {
+#cexotewoli .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#cexotewoli .gt_row_group_first td {
+border-top-width: 2px;
+}
+#cexotewoli .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -2076,16 +2206,23 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pzsnhnsmva .gt_first_summary_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
+#cexotewoli .gt_first_summary_row {
 border-top-style: solid;
-border-top-width: 2px;
 border-top-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_grand_summary_row {
+#cexotewoli .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#cexotewoli .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#cexotewoli .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -2094,7 +2231,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pzsnhnsmva .gt_first_grand_summary_row {
+#cexotewoli .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -2103,10 +2240,10 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_striped {
+#cexotewoli .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#pzsnhnsmva .gt_table_body {
+#cexotewoli .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -2114,7 +2251,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_footnotes {
+#cexotewoli .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -2127,12 +2264,15 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_footnote {
+#cexotewoli .gt_footnote {
 margin: 0px;
 font-size: 90%;
-padding: 4px;
+padding-left: 4px;
+padding-right: 4px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#pzsnhnsmva .gt_sourcenotes {
+#cexotewoli .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -2145,36 +2285,67 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#pzsnhnsmva .gt_sourcenote {
+#cexotewoli .gt_sourcenote {
 font-size: 90%;
-padding: 4px;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
 }
-#pzsnhnsmva .gt_left {
+#cexotewoli .gt_left {
 text-align: left;
 }
-#pzsnhnsmva .gt_center {
+#cexotewoli .gt_center {
 text-align: center;
 }
-#pzsnhnsmva .gt_right {
+#cexotewoli .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#pzsnhnsmva .gt_font_normal {
+#cexotewoli .gt_font_normal {
 font-weight: normal;
 }
-#pzsnhnsmva .gt_font_bold {
+#cexotewoli .gt_font_bold {
 font-weight: bold;
 }
-#pzsnhnsmva .gt_font_italic {
+#cexotewoli .gt_font_italic {
 font-style: italic;
 }
-#pzsnhnsmva .gt_super {
+#cexotewoli .gt_super {
 font-size: 65%;
 }
-#pzsnhnsmva .gt_footnote_marks {
+#cexotewoli .gt_two_val_uncert {
+display: inline-block;
+line-height: 1em;
+text-align: right;
+font-size: 60%;
+vertical-align: -0.25em;
+margin-left: 0.1em;
+}
+#cexotewoli .gt_footnote_marks {
 font-style: italic;
 font-weight: normal;
-font-size: 65%;
+font-size: 75%;
+vertical-align: 0.4em;
+}
+#cexotewoli .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#cexotewoli .gt_slash_mark {
+font-size: 0.7em;
+line-height: 0.7em;
+vertical-align: 0.15em;
+}
+#cexotewoli .gt_fraction_numerator {
+font-size: 0.6em;
+line-height: 0.6em;
+vertical-align: 0.45em;
+}
+#cexotewoli .gt_fraction_denominator {
+font-size: 0.6em;
+line-height: 0.6em;
+vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
@@ -2201,16 +2372,16 @@ font-size: 65%;
 <td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Scheduled with preospedalization</td>
-<td class="gt_row gt_center">0.17</td>
-<td class="gt_row gt_center">0.06, 0.46</td>
+<td class="gt_row gt_center">0.16</td>
+<td class="gt_row gt_center">0.06, 0.43</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Urgent</td>
-<td class="gt_row gt_center">1.15</td>
-<td class="gt_row gt_center">0.89, 1.50</td>
-<td class="gt_row gt_center">0.3</td></tr>
+<td class="gt_row gt_center">1.07</td>
+<td class="gt_row gt_center">0.83, 1.38</td>
+<td class="gt_row gt_center">0.6</td></tr>
     <tr><td class="gt_row gt_left">Days of stay</td>
 <td class="gt_row gt_center">1.12</td>
-<td class="gt_row gt_center">1.11, 1.12</td>
+<td class="gt_row gt_center">1.11, 1.13</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Medical-Surgical</td>
 <td class="gt_row gt_center"></td>
@@ -2221,9 +2392,9 @@ font-size: 65%;
 <td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Surgical</td>
-<td class="gt_row gt_center">0.84</td>
-<td class="gt_row gt_center">0.67, 1.05</td>
-<td class="gt_row gt_center">0.12</td></tr>
+<td class="gt_row gt_center">0.81</td>
+<td class="gt_row gt_center">0.65, 1.01</td>
+<td class="gt_row gt_center">0.063</td></tr>
     <tr><td class="gt_row gt_left">Died</td>
 <td class="gt_row gt_center"></td>
 <td class="gt_row gt_center"></td>
@@ -2233,8 +2404,8 @@ font-size: 65%;
 <td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">TRUE</td>
-<td class="gt_row gt_center">2.52</td>
-<td class="gt_row gt_center">1.95, 3.25</td>
+<td class="gt_row gt_center">2.58</td>
+<td class="gt_row gt_center">2.00, 3.32</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Department</td>
 <td class="gt_row gt_center"></td>
@@ -2245,80 +2416,80 @@ font-size: 65%;
 <td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Cardiologia</td>
-<td class="gt_row gt_center">0.40</td>
-<td class="gt_row gt_center">0.20, 0.77</td>
-<td class="gt_row gt_center">0.006</td></tr>
+<td class="gt_row gt_center">0.39</td>
+<td class="gt_row gt_center">0.21, 0.73</td>
+<td class="gt_row gt_center">0.003</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia</td>
-<td class="gt_row gt_center">2.67</td>
-<td class="gt_row gt_center">1.58, 4.52</td>
+<td class="gt_row gt_center">2.39</td>
+<td class="gt_row gt_center">1.43, 3.99</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia Toracica</td>
-<td class="gt_row gt_center">0.73</td>
-<td class="gt_row gt_center">0.29, 1.82</td>
-<td class="gt_row gt_center">0.5</td></tr>
+<td class="gt_row gt_center">0.70</td>
+<td class="gt_row gt_center">0.29, 1.67</td>
+<td class="gt_row gt_center">0.4</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Chirurgia Vascolare</td>
-<td class="gt_row gt_center">0.61</td>
-<td class="gt_row gt_center">0.27, 1.38</td>
-<td class="gt_row gt_center">0.2</td></tr>
+<td class="gt_row gt_center">0.50</td>
+<td class="gt_row gt_center">0.22, 1.14</td>
+<td class="gt_row gt_center">0.10</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Endocrinologia e Diabetologia</td>
-<td class="gt_row gt_center">3.74</td>
-<td class="gt_row gt_center">1.97, 7.12</td>
+<td class="gt_row gt_center">3.19</td>
+<td class="gt_row gt_center">1.69, 6.01</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Gastroenterologia</td>
-<td class="gt_row gt_center">1.87</td>
-<td class="gt_row gt_center">1.03, 3.38</td>
-<td class="gt_row gt_center">0.039</td></tr>
+<td class="gt_row gt_center">1.69</td>
+<td class="gt_row gt_center">0.94, 3.01</td>
+<td class="gt_row gt_center">0.077</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Malattie apparato respiratorio</td>
-<td class="gt_row gt_center">3.17</td>
-<td class="gt_row gt_center">1.80, 5.59</td>
+<td class="gt_row gt_center">2.79</td>
+<td class="gt_row gt_center">1.60, 4.86</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Malattie Infettive</td>
-<td class="gt_row gt_center">2.11</td>
-<td class="gt_row gt_center">1.11, 4.02</td>
-<td class="gt_row gt_center">0.023</td></tr>
+<td class="gt_row gt_center">1.88</td>
+<td class="gt_row gt_center">1.00, 3.55</td>
+<td class="gt_row gt_center">0.051</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Medicina interna</td>
-<td class="gt_row gt_center">1.72</td>
-<td class="gt_row gt_center">1.04, 2.85</td>
-<td class="gt_row gt_center">0.036</td></tr>
+<td class="gt_row gt_center">1.46</td>
+<td class="gt_row gt_center">0.89, 2.39</td>
+<td class="gt_row gt_center">0.14</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Neurochirugia</td>
-<td class="gt_row gt_center">0.88</td>
-<td class="gt_row gt_center">0.47, 1.64</td>
-<td class="gt_row gt_center">0.7</td></tr>
+<td class="gt_row gt_center">0.82</td>
+<td class="gt_row gt_center">0.44, 1.51</td>
+<td class="gt_row gt_center">0.5</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Neurologia</td>
-<td class="gt_row gt_center">1.23</td>
-<td class="gt_row gt_center">0.76, 1.99</td>
-<td class="gt_row gt_center">0.4</td></tr>
+<td class="gt_row gt_center">1.12</td>
+<td class="gt_row gt_center">0.70, 1.79</td>
+<td class="gt_row gt_center">0.6</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Ortopedia</td>
-<td class="gt_row gt_center">0.18</td>
-<td class="gt_row gt_center">0.09, 0.39</td>
+<td class="gt_row gt_center">0.22</td>
+<td class="gt_row gt_center">0.11, 0.45</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Psichiatria e Psicologia Clinica</td>
-<td class="gt_row gt_center">0.37</td>
-<td class="gt_row gt_center">0.09, 1.57</td>
-<td class="gt_row gt_center">0.2</td></tr>
+<td class="gt_row gt_center">0.24</td>
+<td class="gt_row gt_center">0.06, 0.98</td>
+<td class="gt_row gt_center">0.046</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOC Urologia</td>
-<td class="gt_row gt_center">1.64</td>
-<td class="gt_row gt_center">0.81, 3.33</td>
-<td class="gt_row gt_center">0.2</td></tr>
+<td class="gt_row gt_center">1.22</td>
+<td class="gt_row gt_center">0.61, 2.46</td>
+<td class="gt_row gt_center">0.6</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOS UTIC</td>
-<td class="gt_row gt_center">0.52</td>
-<td class="gt_row gt_center">0.27, 1.00</td>
-<td class="gt_row gt_center">0.051</td></tr>
+<td class="gt_row gt_center">0.45</td>
+<td class="gt_row gt_center">0.23, 0.86</td>
+<td class="gt_row gt_center">0.016</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD OBI e Medicina d&#39;urgenza</td>
-<td class="gt_row gt_center">1.75</td>
-<td class="gt_row gt_center">1.04, 2.93</td>
-<td class="gt_row gt_center">0.033</td></tr>
+<td class="gt_row gt_center">1.50</td>
+<td class="gt_row gt_center">0.90, 2.48</td>
+<td class="gt_row gt_center">0.12</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Oncologia</td>
-<td class="gt_row gt_center">1.67</td>
-<td class="gt_row gt_center">0.66, 4.25</td>
+<td class="gt_row gt_center">1.54</td>
+<td class="gt_row gt_center">0.63, 3.75</td>
 <td class="gt_row gt_center">0.3</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Patologie linfoproliferative</td>
-<td class="gt_row gt_center">6.34</td>
-<td class="gt_row gt_center">3.47, 11.6</td>
+<td class="gt_row gt_center">5.65</td>
+<td class="gt_row gt_center">3.12, 10.2</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">UOSD Terapia Intensiva</td>
-<td class="gt_row gt_center">3.35</td>
-<td class="gt_row gt_center">1.78, 6.32</td>
+<td class="gt_row gt_center">2.88</td>
+<td class="gt_row gt_center">1.54, 5.41</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td class="gt_row gt_left">Primary diagnosis</td>
 <td class="gt_row gt_center"></td>
@@ -2329,65 +2500,65 @@ font-size: 65%;
 <td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the blood</td>
-<td class="gt_row gt_center">2.41</td>
-<td class="gt_row gt_center">0.43, 13.5</td>
+<td class="gt_row gt_center">2.54</td>
+<td class="gt_row gt_center">0.45, 14.3</td>
 <td class="gt_row gt_center">0.3</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the circulatory system</td>
-<td class="gt_row gt_center">2.19</td>
-<td class="gt_row gt_center">0.47, 10.2</td>
+<td class="gt_row gt_center">2.35</td>
+<td class="gt_row gt_center">0.50, 11.0</td>
 <td class="gt_row gt_center">0.3</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the digestive system</td>
-<td class="gt_row gt_center">1.76</td>
-<td class="gt_row gt_center">0.37, 8.27</td>
-<td class="gt_row gt_center">0.5</td></tr>
+<td class="gt_row gt_center">1.92</td>
+<td class="gt_row gt_center">0.41, 9.12</td>
+<td class="gt_row gt_center">0.4</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the genitourinary system</td>
-<td class="gt_row gt_center">2.94</td>
-<td class="gt_row gt_center">0.61, 14.1</td>
-<td class="gt_row gt_center">0.2</td></tr>
+<td class="gt_row gt_center">3.78</td>
+<td class="gt_row gt_center">0.78, 18.3</td>
+<td class="gt_row gt_center">0.10</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the musculoskeletal system</td>
-<td class="gt_row gt_center">2.55</td>
-<td class="gt_row gt_center">0.49, 13.1</td>
+<td class="gt_row gt_center">2.51</td>
+<td class="gt_row gt_center">0.48, 13.1</td>
 <td class="gt_row gt_center">0.3</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the nervous system</td>
-<td class="gt_row gt_center">1.48</td>
-<td class="gt_row gt_center">0.30, 7.31</td>
-<td class="gt_row gt_center">0.6</td></tr>
+<td class="gt_row gt_center">1.75</td>
+<td class="gt_row gt_center">0.35, 8.65</td>
+<td class="gt_row gt_center">0.5</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the respiratory system</td>
-<td class="gt_row gt_center">2.19</td>
-<td class="gt_row gt_center">0.47, 10.3</td>
+<td class="gt_row gt_center">2.43</td>
+<td class="gt_row gt_center">0.51, 11.5</td>
 <td class="gt_row gt_center">0.3</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Diseases of the skin</td>
-<td class="gt_row gt_center">6.40</td>
-<td class="gt_row gt_center">1.20, 34.2</td>
-<td class="gt_row gt_center">0.030</td></tr>
+<td class="gt_row gt_center">6.86</td>
+<td class="gt_row gt_center">1.27, 37.0</td>
+<td class="gt_row gt_center">0.025</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Endocrine, nutritional and metabolic diseases, and immunity disorders</td>
-<td class="gt_row gt_center">2.59</td>
-<td class="gt_row gt_center">0.53, 12.7</td>
+<td class="gt_row gt_center">2.83</td>
+<td class="gt_row gt_center">0.57, 14.0</td>
 <td class="gt_row gt_center">0.2</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Infectious and parasitic diseases</td>
-<td class="gt_row gt_center">4.18</td>
-<td class="gt_row gt_center">0.86, 20.2</td>
-<td class="gt_row gt_center">0.076</td></tr>
+<td class="gt_row gt_center">5.19</td>
+<td class="gt_row gt_center">1.06, 25.4</td>
+<td class="gt_row gt_center">0.042</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Injury and poisoning</td>
-<td class="gt_row gt_center">4.30</td>
-<td class="gt_row gt_center">0.91, 20.2</td>
-<td class="gt_row gt_center">0.065</td></tr>
+<td class="gt_row gt_center">4.67</td>
+<td class="gt_row gt_center">0.98, 22.2</td>
+<td class="gt_row gt_center">0.053</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Mental disorders</td>
-<td class="gt_row gt_center">1.33</td>
-<td class="gt_row gt_center">0.21, 8.53</td>
-<td class="gt_row gt_center">0.8</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Neoplasms</td>
-<td class="gt_row gt_center">1.55</td>
-<td class="gt_row gt_center">0.33, 7.22</td>
-<td class="gt_row gt_center">0.6</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Supplemental classification</td>
-<td class="gt_row gt_center">0.92</td>
-<td class="gt_row gt_center">0.17, 4.93</td>
-<td class="gt_row gt_center">&gt;0.9</td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Symptoms, signs, and ill-defined conditions</td>
 <td class="gt_row gt_center">1.76</td>
-<td class="gt_row gt_center">0.36, 8.70</td>
+<td class="gt_row gt_center">0.28, 11.0</td>
 <td class="gt_row gt_center">0.5</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Neoplasms</td>
+<td class="gt_row gt_center">1.67</td>
+<td class="gt_row gt_center">0.36, 7.87</td>
+<td class="gt_row gt_center">0.5</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Supplemental classification</td>
+<td class="gt_row gt_center">1.16</td>
+<td class="gt_row gt_center">0.22, 6.15</td>
+<td class="gt_row gt_center">0.9</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Symptoms, signs, and ill-defined conditions</td>
+<td class="gt_row gt_center">2.26</td>
+<td class="gt_row gt_center">0.46, 11.2</td>
+<td class="gt_row gt_center">0.3</td></tr>
     <tr><td class="gt_row gt_left">Invasive procedure</td>
 <td class="gt_row gt_center"></td>
 <td class="gt_row gt_center"></td>
@@ -2397,23 +2568,14 @@ font-size: 65%;
 <td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">TRUE</td>
-<td class="gt_row gt_center">2.11</td>
-<td class="gt_row gt_center">1.64, 2.69</td>
+<td class="gt_row gt_center">2.23</td>
+<td class="gt_row gt_center">1.74, 2.86</td>
 <td class="gt_row gt_center">&lt;0.001</td></tr>
   </tbody>
   
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="4">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          OR = Odds Ratio, CI = Confidence Interval
-          <br />
-        </p>
-      </td>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><sup class="gt_footnote_marks">1</sup> OR = Odds Ratio, CI = Confidence Interval</td>
     </tr>
   </tfoot>
 </table>
