@@ -38,8 +38,6 @@ source(here::here("code","05.propensity.R"))
 source(here::here("code","06.PS_batteri_siti.R"))
 
 
-
-
 # Save image ####
 save.image (file = "code/my_work_space.RData")
 
