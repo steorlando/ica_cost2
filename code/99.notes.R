@@ -311,3 +311,31 @@ names(db)
 
 export(no_batterio1, "output/no_batterio.xlsx")
 export(nomi_batteri, "output/nomi_batteri.xlsx")
+
+
+names(db)
+db <- db %>% 
+  mutate(data_sangue = as_date(ifelse(sangue == 0, s1_a_dp1, NA )),
+         data_urinario = as_date(ifelse(urinario == 0, u1_a_dp1, NA)),
+         data_rettale = as_date(ifelse(rettale == 0, g1_a_dp1, NA)),
+         data_respiratorio = as_date(ifelse(respiratorio == 0, r1_a_dp1, NA)),
+         data_ferita = as_date(ifelse(ferita == 0, t1_a_dp1, NA)),
+         data_altro_sito = as_date(ifelse(altro_sito == 0, n1_a_dp1, NA)),
+         min_data = pmin(c(data_sangue:data_altro_sito))
+  )
+
+db <- db %>%
+  mutate(sangue =       ifelse(s1_risultato != "", 0, 1),
+         urinario =     ifelse(u1_risultato != "", 0, 1),
+         rettale =      ifelse(g1_risultato != "", 0, 1),
+         respiratorio = ifelse(r1_risultato != "", 0, 1),
+         ferita =       ifelse(t1_risultato != "", 0, 1),
+         altro_sito =   ifelse(n1_risultato != "", 0, 1))
+
+db <- db %>%
+  mutate(min_data = pmin(data_sangue, 
+                         data_urinario, 
+                         data_rettale, 
+                         data_respiratorio,
+                         data_ferita,
+                         data_altro_sito))

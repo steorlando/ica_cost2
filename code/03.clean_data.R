@@ -321,7 +321,41 @@ db <- db %>%
   mutate(cost_ln = log(cost))
 
 
+#creo data primo tampone
+db <- db %>% 
+  mutate(data_sangue = as_date(ifelse(sangue == 0, s1_a_dp1, NA )),
+         data_urinario = as_date(ifelse(urinario == 0, u1_a_dp1, NA)),
+         data_rettale = as_date(ifelse(rettale == 0, g1_a_dp1, NA)),
+         data_respiratorio = as_date(ifelse(respiratorio == 0, r1_a_dp1, NA)),
+         data_ferita = as_date(ifelse(ferita == 0, t1_a_dp1, NA)),
+         data_altro_sito = as_date(ifelse(altro_sito == 0, n1_a_dp1, NA))
+  )
 
-# modifiche al db da verificare ####
+db <- db %>%
+  mutate(across(starts_with("data_"), ~ if_else(is.na(.), as.Date('2100-01-01'), as.Date(.)))) %>%
+  mutate(sample_data = pmin(data_sangue, 
+                         data_urinario, 
+                         data_rettale, 
+                         data_respiratorio,
+                         data_ferita,
+                         data_altro_sito, na.rm = TRUE)) %>%
+  mutate(sample_data = if_else(sample_data == as.Date('2100-01-01'), NA_Date_, sample_data)) %>%
+  mutate(date_inv = ifelse(cod_proc %in% c(311,3129,9604,9605,9670,9671,9672), as.Date(data_respiratorio), ""),
+         date_inv = ifelse(cod_proc %in% c(3891,3893,3894,3895,8607,8962,8964), as.Date(data_sangue), date_inv),
+         date_inv = ifelse(cod_proc %in% c(598, 5794), as.Date(data_urinario), date_inv),
+         date_inv = ifelse(cod_proc %in% c(8622,8628), as.Date(data_ferita), date_inv),
+         date_inv = ifelse(date_inv == 47482, "", date_inv),
+         ) %>%
+  mutate(date_inv = as.numeric(date_inv))
 
-# tolgo i reparti con meno di 5 infezioni 
+
+db <- db %>%  
+  mutate(date_inv = as.Date(date_inv, origin = "1970-01-01"))
+
+db <- db %>%
+  mutate(across(starts_with("data_"), ~ if_else(. == as.Date('2100-01-01'), "", as.character(.))))
+
+# includere in db i campi con le date delle procedure
+# convertire quei campi in un formato data comprensibile (sono strani)
+# creare un campo data_prc_inv in cui la data viene riportata solo se il codice è uno di quelle delle procedure invasive
+# creare un campo proc_inv_real che è TRUE se la data_prc_inv + 2 giorni < date_inv

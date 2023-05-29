@@ -10,10 +10,11 @@ db_select <- db_orig %>%  # Elimino alcune variabili che non mi servono
                                    U1_Risultato,
                                    R1_Risultato,
                                    T1_Risultato,
-                                   N1_Risultato))) %>% 
+                                   N1_Risultato,
+                                   ends_with ("DP1")))) %>% 
   dplyr::select(-c("INFCODinSOSPETTEICA","perRERICOVERO", "SDO1_Polo")) %>% # in particolare le prime tre perchè sono vuote
   clean_names()
-  
+
 db_select <- db_select %>%  # queste le tolgo perchè non ho idea di cosa si tratti o mi sembrano inutili per l'analisi
   dplyr::select(-c("sdo1_prog_sdo", 
             "sdo1_com_nas",
@@ -71,4 +72,3 @@ db_select <- db_select %>%  # queste le tolgo perchè non ho idea di cosa si tra
             "sesso",
             "sdo1_num_sch"            
             ))
-
