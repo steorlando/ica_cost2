@@ -397,4 +397,21 @@ for (var in variabili_date) {
 
 
 # creare un campo data_prc_inv in cui la data viene riportata solo se il codice è uno di quelle delle procedure invasive
+codici_procedure_invasive <- c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622, 8628, 8962, 8964, 9604, 9605, 9670, 9671, 9672)
+
+# Creazione della variabile "data_proc_inv"
+db <- db %>%
+  mutate(data_proc_inv = case_when(
+    sdo1_int_pri %in% codici_procedure_invasive ~ sdo1_dat_in_p,
+  sdo1_int_se1 %in% codici_procedure_invasive ~ sdo1_d_in_se1,
+    sdo1_int_se2 %in% codici_procedure_invasive ~ sdo1_d_in_se2,
+    sdo1_int_se3 %in% codici_procedure_invasive ~ sdo1_d_in_se3,
+    sdo1_int_se4 %in% codici_procedure_invasive ~ sdo1_d_in_se4,
+    sdo1_int_se5 %in% codici_procedure_invasive ~ sdo1_d_in_se5,
+    TRUE ~ NA_Date_
+  ))
 # creare un campo proc_inv_real che è TRUE se la data_prc_inv + 2 giorni < date_inv
+db <- db %>%
+  mutate(data_proc_inv = as_date(data_proc_inv),
+         date_inv = as_date(date_inv),
+         proc_inv_real = if_else(data_proc_inv + days(2) < date_inv, TRUE, FALSE, NA))
