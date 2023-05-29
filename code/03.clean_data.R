@@ -228,12 +228,38 @@ db <- db %>%
 db <- db %>%  #Elimino la variabile già ricodificata
   dplyr::select(-c(sdo1_terapia))
 
-# Creo le variabili numero_di_infezioni e almeno_una_infezione #####
 
+# Inserisco anche gli altri 72 sogg  #### 
+batterio_mancante <- import("data/Batterio_mancante2.xlsx") %>% 
+  clean_names()
+
+
+db <- left_join(db, batterio_mancante, by = "id")
+
+# Lista delle variabili senza il suffisso _y
+variabili <- c("acinetobacter", "escherichia_coli", "klebsiella_pnm", "pseudomonas", "clostridium", "candida", "enterococcus", "staphylococcus")
+
+# Loop attraverso le variabili
+for (var in variabili) {
+  # Trova il nome della corrispondente variabile con il suffisso _y
+  var_y <- paste0(var, "_y")
+  
+  # Aggiungi i valori della variabile _y alla variabile senza il suffisso _y
+  db[[var]] <- ifelse(is.na(db[[var_y]]), db[[var]], as.integer(!db[[var_y]]))
+  
+  # Rimuovi la variabile con il suffisso _y dal dataset
+  db[[var_y]] <- NULL
+}
+
+# Trasformazione dei valori nella variabile "other_microorg"
+# Trasformazione dei valori nella variabile "other_microorg"
+db$other_microorg <- ifelse(is.na(db$other_microorg), 1, ifelse(db$other_microorg == TRUE, 0, db$other_microorg))
+
+# Creo le variabili numero_di_infezioni e almeno_una_infezione #####
 db$num_infezioni <- rowSums(db[ ,c("acinetobacter", "escherichia_coli",
                                          "klebsiella_pnm", "pseudomonas", 
                                          "clostridium", "candida", "enterococcus", 
-                                         "staphylococcus")] == 0) # nel db 0 vuol dire che ha l'infezione
+                                         "staphylococcus", "other_microorg")] == 0) # nel db 0 vuol dire che ha l'infezione
 
 
 
@@ -355,7 +381,20 @@ db <- db %>%
 db <- db %>%
   mutate(across(starts_with("data_"), ~ if_else(. == as.Date('2100-01-01'), "", as.character(.))))
 
-# includere in db i campi con le date delle procedure
+
+# includere in db i campi con le date delle procedure - FATTO
 # convertire quei campi in un formato data comprensibile (sono strani)
+
+db$sdo1_dat_in_p <- as.Date(db$sdo1_dat_in_p, origin = "1899-12-30")
+
+# Elenco delle variabili da trasformare
+variabili_date <- c("sdo1_d_in_se1", "sdo1_d_in_se2", "sdo1_d_in_se3", "sdo1_d_in_se4", "sdo1_d_in_se5")
+
+# Loop attraverso le variabili
+for (var in variabili_date) {
+  db[[var]] <- as.Date(as.character(db[[var]]), format = "%d%m%Y")
+}
+
+
 # creare un campo data_prc_inv in cui la data viene riportata solo se il codice è uno di quelle delle procedure invasive
 # creare un campo proc_inv_real che è TRUE se la data_prc_inv + 2 giorni < date_inv
