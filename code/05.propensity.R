@@ -27,7 +27,8 @@ db_prop <- db %>%
          pseudomonas,
          candida,
          staphylococcus,
-         num_infezioni  #inserisco in db_prop num_infezioni poi vediamo come usarle
+         batterio_pos, #inserisco in db_prop num_infezioni poi vediamo come usarle
+         proc_inv_real
          )
 
 reparti_null <- db_prop %>%
@@ -56,13 +57,11 @@ db_prop <- db_prop %>%
 # sto togliendo i costi = zero, ma poi devo imputarli per bene ####
 db_prop <- db_prop[db_prop$cost != 0, ]
 
-# togliamo le infezioni rettali perchè non siamo sicuri che siano ICA, 
-# prima dell'articolo facciamo una analisi sulla data del campione rispetto al 
-# ricovero, per vedere se lo sono e magari li reinseriamo
-db_prop <- db_prop[db_prop$rettale != 0, ]
+# togliamo le infezioni rettali perchè non siamo sicuri che siano ICA
+#db_prop <- db_prop[db_prop$rettale != 0, ]  #lascio rettale perchè è stato ricodificato
 
-db_prop <- db_prop %>% 
-  dplyr::select(-rettale)
+#db_prop <- db_prop %>% 
+  #dplyr::select(-rettale)
 
 db_prop <- db_prop %>% 
   mutate(cost_ln = log(cost))
