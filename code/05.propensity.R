@@ -2,6 +2,8 @@
 
 db_prop <- db %>% 
   dplyr::select(infetto,
+                proc_inv_real,
+                proc_inv,
          sdo1_sesso,
          sdo1_eta, 
          sdo1_modali,
@@ -27,8 +29,7 @@ db_prop <- db %>%
          pseudomonas,
          candida,
          staphylococcus,
-         batterio_pos, #inserisco in db_prop num_infezioni poi vediamo come usarle
-         proc_inv_real
+         batterio_pos #inserisco in db_prop num_infezioni poi vediamo come usarle
          )
 
 # sto togliendo i costi = zero, ma poi devo imputarli per bene ####

@@ -415,7 +415,8 @@ db <- db %>%
 db <- db %>%
   mutate(data_proc_inv = as_date(data_proc_inv),
          date_inv = as_date(date_inv),
-         proc_inv_real = if_else(data_proc_inv + days(2) < date_inv, TRUE, FALSE, NA))
+         proc_inv_real = if_else(data_proc_inv + days(2) < date_inv, TRUE, FALSE, NA)) %>%
+  mutate(proc_inv_real = ifelse(is.na(proc_inv_real), FALSE, proc_inv_real))
 
 # eliminare reparti e diagnosi con meno di X utenti
 
