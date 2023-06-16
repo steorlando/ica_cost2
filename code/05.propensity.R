@@ -30,29 +30,6 @@ db_prop <- db %>%
          num_infezioni  #inserisco in db_prop num_infezioni poi vediamo come usarle
          )
 
-reparti_null <- db_prop %>%
-  group_by(reparto) %>% 
-  summarise(infected = sum(infetto)) %>% 
-  filter(infected < 5) %>% 
-  mutate(filt = 1) %>% 
-  dplyr::select(reparto, filt)
-
-diag_null <- db_prop %>%
-  group_by(dia_pri) %>% 
-  summarise(patients = n()) %>% 
-  filter(patients < 5) %>% 
-  mutate(filt1 = 1) %>% 
-  dplyr::select(dia_pri, filt1)
-
-db_prop <- left_join(db_prop, reparti_null) %>% mutate(filt = ifelse(is.na(filt),0,filt))
-db_prop <- left_join(db_prop, diag_null) %>% mutate(filt1 = ifelse(is.na(filt1),0,filt1))
-
-db_prop <- db_prop %>% 
-  filter(!filt == 1) %>% 
-  filter(!filt1 == 1) %>% 
-  dplyr::select(-c(filt, filt1))
-
-
 # sto togliendo i costi = zero, ma poi devo imputarli per bene ####
 db_prop <- db_prop[db_prop$cost != 0, ]
 

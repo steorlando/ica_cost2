@@ -415,3 +415,29 @@ db <- db %>%
   mutate(data_proc_inv = as_date(data_proc_inv),
          date_inv = as_date(date_inv),
          proc_inv_real = if_else(data_proc_inv + days(2) < date_inv, TRUE, FALSE, NA))
+
+# eliminare reparti e diagnosi con meno di X utenti
+
+soglia_acc <- 5
+
+reparti_null <- db %>%
+  group_by(reparto) %>% 
+  summarise(patients = n()) %>% 
+  filter(patients < soglia_acc) %>% 
+  mutate(filt = T) %>% 
+  dplyr::select(reparto, filt)
+
+diag_null <- db %>%
+  group_by(dia_pri) %>% 
+  summarise(patients = n()) %>% 
+  filter(patients < soglia_acc) %>% 
+  mutate(filt1 = T) %>% 
+  dplyr::select(dia_pri, filt1)
+
+db <- left_join(db, reparti_null) %>% mutate(filt = ifelse(is.na(filt), FALSE, filt))
+db <- left_join(db, diag_null) %>% mutate(filt1 = ifelse(is.na(filt1), FALSE, filt1))
+
+db <- db %>% 
+  filter(!filt == TRUE) %>% 
+  filter(!filt1 == TRUE) %>% 
+  dplyr::select(-c(filt, filt1))
