@@ -396,6 +396,7 @@ for (var in variabili_date) {
 }
 
 
+# procedure invasive ####
 # creare un campo data_prc_inv in cui la data viene riportata solo se il codice è uno di quelle delle procedure invasive
 codici_procedure_invasive <- c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622, 8628, 8962, 8964, 9604, 9605, 9670, 9671, 9672)
 
