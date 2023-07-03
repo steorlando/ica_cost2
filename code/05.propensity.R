@@ -2,7 +2,6 @@
 
 db_prop <- db %>% 
   dplyr::select(infetto,
-                proc_inv_real,
                 proc_inv,
          sdo1_sesso,
          sdo1_eta, 

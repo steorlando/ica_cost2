@@ -382,7 +382,7 @@ db <- db %>%
   mutate(across(starts_with("data_"), ~ if_else(. == as.Date('2100-01-01'), "", as.character(.))))
 
 
-# includere in db i campi con le date delle procedure - FATTO
+# includere in db i campi con le date delle procedure
 # convertire quei campi in un formato data comprensibile (sono strani)
 
 db$sdo1_dat_in_p <- as.Date(db$sdo1_dat_in_p, origin = "1899-12-30")

@@ -20,5 +20,6 @@ db <- db %>%
              infetto            = "Infection detected",
              dia_pri            = "Primary diagnosis",
              proc_inv           = "Invasive procedure",
-             decessodico        = "Died"
+             decessodico        = "Died",
+             proc_inv_real      = "Invesive procedure before sample"
   )

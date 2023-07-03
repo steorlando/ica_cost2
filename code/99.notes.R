@@ -20,6 +20,7 @@ uor <- db_orig %>%
   print()
 
 
+
 library(usethis)
 use_git_config(user.name = "Stefano Orlando", user.email = "steorlando@gmail.com")
 usethis::git_default_branch_configure()
@@ -343,3 +344,7 @@ db <- db %>%
 
 
 frq(db$proc_inv)
+frq(db$proc_inv_real)
+
+table(db$proc_inv_real, db$infetto)
+table(db$proc_inv, db$infetto)
