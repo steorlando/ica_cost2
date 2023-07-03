@@ -5,16 +5,23 @@ db_regr <- db_prop
 db_regr <- db_regr[db_regr$cost != 0, ]
 
 db_regr <- db_regr %>% 
-  mutate(cost_ln = log(cost))
-
+  dplyr::select(-c(cost, sangue:cost_ln))
 
 univariata <- tbl_uvregression(data = db_regr,
                                method = glm,
-                               family = binomial("logit"),
                                y = infetto,
+                               method.args = list(family = binomial),
                                exponentiate = T)
 
-univariata
+# Formula per il modello
+formula <- infetto ~ proc_inv_real
+
+# Creazione del modello di regressione logistica
+model <- glm(formula, data = db_regr, family = "binomial")
+
+# Stampare il sommario del modello
+summary(model)
+
 
 #Regressione multivariata
 #Reparto a rischio - reparto non a rischio 
