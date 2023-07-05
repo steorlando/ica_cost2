@@ -385,6 +385,8 @@ db <- db %>%
 # includere in db i campi con le date delle procedure
 # convertire quei campi in un formato data comprensibile (sono strani)
 
+# CORREZIONE DATE CON 7 CARATTERI ####
+
 db$sdo1_dat_in_p <- as.Date(db$sdo1_dat_in_p, origin = "1899-12-30")
 
 # Elenco delle variabili da trasformare
@@ -450,3 +452,16 @@ db <- db %>%
   filter(!filt == TRUE) %>% 
   filter(!filt1 == TRUE) %>% 
   dplyr::select(-c(filt, filt1))
+
+db1 <- db %>% #ATTENZIONE DB1
+  mutate(reparto = as.factor(reparto))
+
+# puoi usare una funzione di package forcats per mettere il livello
+# UOC Neurochirugia prima degli altri. 
+# Poi si rifa l'univariata
+# tutti i reparti con un OR maggiore di 1 e p < 0.05 li consideriamo reparti a rischio
+# quindi creiamo un campo Reparto a rischio con valore TRUE e FALSE
+
+
+
+

@@ -348,3 +348,23 @@ frq(db$proc_inv_real)
 
 table(db$proc_inv_real, db$infetto)
 table(db$proc_inv, db$infetto)
+
+frq(db$reparto)
+
+db_invasive <- db %>% filter(proc_inv == TRUE) %>%
+  dplyr::select(id, infetto, date_inv, data_proc_inv, proc_inv, proc_inv_real)
+
+caso <- db %>% filter(id == 32)
+
+db_prova <- db %>%
+  mutate(reparto = ifelse(reparto == "UOS UTIC", "UOC Cardiologia", reparto))
+
+reparti <- db %>%
+tabyl(reparto, infetto) %>%
+  rename(noninf = "FALSE",
+         inf = "TRUE")
+
+reparti <- reparti %>%
+  mutate(perc = inf/(inf+noninf)) %>% 
+  arrange(perc)
+reparti

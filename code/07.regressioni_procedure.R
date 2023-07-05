@@ -6,15 +6,13 @@ db_regr <- db %>%
                 sdo1_sesso,
                 sdo1_eta, 
                 sdo1_cittad,
-                family,
                 education,
                 profession_simple,
                 sdo1_modali,
                 sdo1_degenza,
                 terapia, 
                 decessodico,
-                reparto,
-                dia_pri
+                reparto
   )
 
 
@@ -43,13 +41,13 @@ univariata <- tbl_uvregression(data = db_regr,
 #Regressione multivariata
 #Reparto a rischio - reparto non a rischio 
 #risk department - no_risk department ifelse
-#
+# poi si rifa l'uivariata (codice scritto)
 
 db_multi <- db_regr %>% 
   filter(!reparto == "UOSD Oculistica")
 
 model_multi <- glm(
-  infetto ~ proc_inv_real + sdo1_eta + + family + education + profession_simple + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri, 
+  infetto ~ proc_inv_real + sdo1_eta + education + profession_simple + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto, 
   data = db_multi,
   family = binomial("logit")
 )

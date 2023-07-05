@@ -93,7 +93,7 @@ tab %>%
 
 # Analisi univariata dell'odds ratio di infezione rispetto alle variabili che potrebbero essere correlate da un punto di vista clinico
 
-```{r analisi univariata}
+```{r analisi_univariata}
 # Create a FlexTable object
 tab <- as_flex_table(univariata)
 
