@@ -40,9 +40,9 @@ std_border <- fp_border(color = "grey", style = "solid", width = 1 )
 
 Abbiamo identificato i pazienti con una procedura invasiva se hanno tra i codici delle procedure uno di questi codici: 311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622, 8628, 8962, 8964, 9604, 9605, 9670, 9671, 9672.
 
-Poi però abbiamo creato un'altra variabile in cui la procedura invasiva veniva considerata solo se era stata eseguita prima di due giorni dalla data del test positivo alle ICA, e addirittura vedendo il sito della infezione perchè fosse coerente con il tipo di procedura.
+Poi però abbiamo creato un'altra variabile in cui la procedura invasiva non veniva considerata se era stata eseguita dopo la data del test - due giorni, perchè evidentemente non poteva essere correlata con l'infezione.
 
-Ne sono risutlati solo 105 pazienti con una procedura invasiva potenzialmente correlata con una ICa che abbiamo definito: Procedure invasive "reali".
+Ne sono risutlati solo 766 pazienti con una procedura invasiva potenzialmente correlata con una ICA (invece degli 824 precedenti) che abbiamo definito: Procedure invasive "reali".
 
 # Cross-table procedure invasive e infezione ospedaliera
 
@@ -69,7 +69,7 @@ tab %>%
 
 ```
 
-In questa tabella invece consideriamo che un paziente ha subito una procedura invasiva "Reale". Come si può vedere il 100% dei pazienti in questo gruppo sono anche infetti! il calcolo dell'odds ratio darebbe un valore pare a infinito, di difficile interpretazione. insomma dobbiamo pensare a come riportare e interpretare questo dato.
+In questa tabella invece consideriamo che un paziente ha subito una procedura invasiva "Reale". Come si può vedere il divario è meno evidente ma è comunque importante.
 
 ```{r cross_inv_real}
 tab <- flextable(t_inv_real)
@@ -95,10 +95,10 @@ tab %>%
 
 ```{r analisi univariata}
 # Create a FlexTable object
-tab <- as_flextable(univariata)
+tab <- as_flex_table(univariata)
 
 #Add the caption
-tab <- set_caption(tab, caption = "Analisi univariata dell'odds ratio di infezione (con tutte le variabili")
+tab <- set_caption(tab, caption = "Analisi univariata dell'odds ratio di infezione con tutte le variabili")
 
 # Autofit the table
 tab %>%  
@@ -111,7 +111,7 @@ tab %>%
 Emerge che sono correlate con un maggior rischio di infezione
 
 -   Le procedure invasive
--   Le procedure invasive con data (ma con quel valore esagerato su cui riflettere)
+-   Le procedure invasive reali
 -   L'età
 -   Il non vivere da soli (strano)
 -   L'avere un titolo di studio universitario
@@ -123,9 +123,9 @@ Emerge che sono correlate con un maggior rischio di infezione
 -   Alcuni reparti. Solo che qui tutto è confrontato con la cardiochirurgia per un motivo casuale. Non so quale reparto dovremmo prendere come reparto base. Forse quello che secondo la letteratura ha il rischio maggiore o minore? O quello con più ricoveri?
 -   Alcune diagnosi primarie
 
-Quindi eseguo una analisi multivariabile inserendo queste variabili nel modello. Però non uso le procedure invasive "reali" ma quelle generali. Ho tolto l'oculistica perchè aveva zero casi e rendeva la tabella illeggibile.
+Quindi eseguo una analisi multivariabile inserendo queste variabili nel modello usando le procedure invasive "reali". Ho tolto l'oculistica perchè aveva zero casi e rendeva la tabella illeggibile.
 
-La cosa interessante è che le procedure invasive restano significative, con un odds ratio piuttosto altro (2.23).
+La cosa interessante è che le procedure invasive restano significative, con un odds ratio piuttosto alto (1.62).
 
 *Le cose seguenti sono sopratutto per Mariagrazia*
 
@@ -139,7 +139,7 @@ Forse si può anche effettuare qualche test che di solito si fa tipo quello di c
 
 ```{r tab_multi}
 # Create a FlexTable object
-tab <- as_flextable(multivariata)
+tab <- as_flex_table(multivariata)
 
 #Add the caption
 tab <- set_caption(tab, caption = "Analisi multivariabile dell'odds ratio di infezione (con le variabili significative")
