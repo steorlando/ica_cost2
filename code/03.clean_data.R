@@ -392,9 +392,15 @@ db$sdo1_dat_in_p <- as.Date(db$sdo1_dat_in_p, origin = "1899-12-30")
 # Elenco delle variabili da trasformare
 variabili_date <- c("sdo1_d_in_se1", "sdo1_d_in_se2", "sdo1_d_in_se3", "sdo1_d_in_se4", "sdo1_d_in_se5")
 
-# Loop attraverso le variabili
+# Trasforma le date in formato numerico in formato carattere, aggiungendo uno zero per quelle con 7 cifre
 for (var in variabili_date) {
-  db[[var]] <- as.Date(as.character(db[[var]]), format = "%d%m%Y")
+  db[[var]] <- as.character(db[[var]])  # Trasforma la variabile in carattere
+  db[[var]] <- ifelse(nchar(db[[var]]) == 7, paste0("0", db[[var]]), db[[var]])  # Aggiunge uno zero per le date con 7 cifre
+}
+
+# Trasforma le variabili carattere in formato data "%d%m%Y"
+for (var in variabili_date) {
+  db[[var]] <- as.Date(db[[var]], format = "%d%m%Y")
 }
 
 
@@ -453,12 +459,13 @@ db <- db %>%
   filter(!filt1 == TRUE) %>% 
   dplyr::select(-c(filt, filt1))
 
-db1 <- db %>% #ATTENZIONE DB1
+db <- db %>% #ATTENZIONE DB1
   mutate(reparto = as.factor(reparto))
 
-# puoi usare una funzione di package forcats per mettere il livello
-# UOC Neurochirugia prima degli altri. 
-# Poi si rifa l'univariata
+# Imposta "UOC Neurochirurgia" come livello di riferimento
+db$reparto <- fct_relevel(db$reparto, "UOC Neurochirugia")
+
+
 # tutti i reparti con un OR maggiore di 1 e p < 0.05 li consideriamo reparti a rischio
 # quindi creiamo un campo Reparto a rischio con valore TRUE e FALSE
 

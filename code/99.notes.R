@@ -368,3 +368,5 @@ reparti <- reparti %>%
   mutate(perc = inf/(inf+noninf)) %>% 
   arrange(perc)
 reparti
+
+

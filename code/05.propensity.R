@@ -2,7 +2,7 @@
 
 db_prop <- db %>% 
   dplyr::select(infetto,
-                proc_inv,
+                proc_inv_real,
          sdo1_sesso,
          sdo1_eta, 
          sdo1_modali,
@@ -12,8 +12,7 @@ db_prop <- db %>%
          education,
          profession_simple,
          reparto,
-         dia_pri,
-         proc_inv,
+         #dia_pri, #abbiamo deciso di escluderla
          cost,
          sangue,   #inserisco in db_prop variabili relative alla sede dell'infezione 
          urinario,
@@ -68,15 +67,24 @@ db_prop <- db_prop %>%
              decessodico        = "Died"
   )
 
+# Aumenta le dimensioni del workspace
+options(fexact_workspace_size = 2^30)
+
+# Aumenta il valore 'mult'
+options(fexact_mult = 1000000)
+
+
 summary3 <- db_prop %>% 
   tbl_summary(by = infetto) %>% 
   add_p %>% 
   add_overall()
 
+summary3
+
 
 # Step 1: PS estimation with logistic regression -----------------------
 model <- glm(
-  infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  infetto ~ proc_inv_real + sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto, 
   data = db_prop,
   family = binomial("logit")
 )
@@ -119,7 +127,7 @@ match_object <- Match(
 # Step 3: balance assessment -------------------------------------------
 balance_table <- bal.tab(
   match_object,
-  infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + proc_inv_real, 
   data = db_prop,
   continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
   un = T, stats = c('means.diffs', 'variance.ratios')
@@ -168,3 +176,4 @@ summary4 <- db_desc %>%
   tbl_summary(by = infetto) %>% 
   add_p %>% 
   add_overall()
+summary4

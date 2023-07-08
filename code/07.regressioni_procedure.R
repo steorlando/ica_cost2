@@ -36,12 +36,14 @@ univariata <- tbl_uvregression(data = db_regr,
                                y = infetto,
                                method.args = list(family = binomial),
                                exponentiate = T)
+univariata
 
 
 #Regressione multivariata
 #Reparto a rischio - reparto non a rischio 
 #risk department - no_risk department ifelse
 # poi si rifa l'uivariata (codice scritto)
+
 
 db_multi <- db_regr %>% 
   filter(!reparto == "UOSD Oculistica")
@@ -54,4 +56,4 @@ model_multi <- glm(
 
 multivariata <- model_multi %>% 
   tbl_regression(exponentiate = T) 
-
+multivariata
