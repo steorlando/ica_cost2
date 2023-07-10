@@ -26,7 +26,8 @@ pacman::p_load(pacman,
                skimr,
                quantreg,
                lubridate,
-               epitools
+               epitools,
+               lsr
                )
 
 rm(list = ls())

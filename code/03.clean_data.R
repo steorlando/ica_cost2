@@ -1,5 +1,5 @@
 # devo ricodificare le categoriche e le continue per quello che sono ####
-
+frq(db_select$sdo1_tit_stu)
 db <- db_select %>%
   mutate(sdo1_costo = as_numeric(sdo1_costo)) %>%     # e metto il costo numerico
   mutate(sdo1_sesso = ifelse(sdo1_sesso == 1, "F", "M"), # decodifico il sesso in M e F
@@ -83,7 +83,7 @@ db <- db %>%
          sdo1_cittad = as_factor(sdo1_cittad),
          sdo1_sta_civ = as_factor(sdo1_sta_civ),
          family = as_factor(family),
-         education = factor(education, levels = c("No title", "Primary school", "Diploma", "University degree or higher")),
+         education = factor(education, levels = c("Primary school", "Diploma", "University degree or higher")),
          profession = factor(profession, levels = c("Employed", "Student", "Housewife", "Retired/Disable", "Looking for a Job", "Unemployed")),
          profession_simple = factor(profession_simple, levels = c("Employed/Student/Housewife", "Retired/Disable", "Unemployed"))
          )
@@ -291,6 +291,7 @@ db <- db %>%
 
 db <- db %>% mutate(infetto = ifelse(sito_pos == T, T, F))  # l'infezione si basa sui siti perchè i batteri vanno corretti
 
+# Variabili per analisi procedure ####
 
 #Creo variabile proc_inv che mi dice T se il pz ha subito almeno una proc invasiva di quelle definite elenco
 int_inv <- as.integer(c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622,  
@@ -298,6 +299,33 @@ int_inv <- as.integer(c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622
 
 db$proc_inv <- ifelse(db$sdo1_int_pri %in% int_inv | db$sdo1_int_se1 %in% int_inv | db$sdo1_int_se2 %in% int_inv |
                         db$sdo1_int_se3 %in% int_inv | db$sdo1_int_se4 %in% int_inv | db$sdo1_int_se5 %in% int_inv, "TRUE", "FALSE")
+
+
+db$all_procedures <- paste(db$sdo1_int_pri, db$sdo1_int_se1, db$sdo1_int_se2,
+                           db$sdo1_int_se3, db$sdo1_int_se4, db$sdo1_int_se5, sep = ",")
+
+get_invasive_codes <- function(all_procedures, int_inv) {
+  procedure_list <- as.integer(unlist(strsplit(all_procedures, ",")))
+  invasive_procedures <- procedure_list[procedure_list %in% int_inv]
+  return(paste(invasive_procedures, collapse = ","))
+}
+
+db$invasive_codes <- sapply(db$all_procedures, get_invasive_codes, int_inv = int_inv)
+
+for(code in int_inv){
+  colname = paste("code", code, sep = "_")
+  db[[colname]] <- sapply(db$invasive_codes, function(x) {
+    as.character(code) %in% strsplit(x, ",")[[1]]
+  })
+}
+
+# Get the column names that start with "code_"
+code_cols <- grep("^code_", names(db), value = TRUE)
+
+# Iterate over the code_cols and set the value to FALSE when proc_inv_real is FALSE
+for(col in code_cols){
+  db[[col]][db$proc_inv_real == FALSE] <- FALSE
+}
 
 #Creo variabile cod_proc che mi dice per i pz che hanno avuto TRUE il codice di 
 #quale procedura hanno avuto
@@ -431,7 +459,13 @@ db <- db %>%
   mutate(proc_inv_real = ifelse(proc_inv == TRUE & is.na(date_inv) & infetto == FALSE, TRUE, proc_inv_real)) %>% 
   mutate(proc_inv_real = ifelse(is.na(proc_inv_real), FALSE, proc_inv_real))
 
-# eliminare reparti e diagnosi con meno di X utenti
+# tolgo quelli ricoverati con più di 60 giorni ####
+
+db <- db %>% filter(sdo1_degenza < 61)
+
+
+
+# eliminare reparti e diagnosi con meno di X utenti ####
 
 soglia_acc <- 5
 
@@ -442,31 +476,35 @@ reparti_null <- db %>%
   mutate(filt = T) %>% 
   dplyr::select(reparto, filt)
 
-diag_null <- db %>%
-  group_by(dia_pri) %>% 
-  summarise(patients = n()) %>% 
-  filter(patients < soglia_acc) %>% 
-  mutate(filt1 = T) %>% 
-  dplyr::select(dia_pri, filt1)
-
 db <- left_join(db, reparti_null) %>% mutate(filt = ifelse(is.na(filt), FALSE, filt))
-db <- left_join(db, diag_null) %>% mutate(filt1 = ifelse(is.na(filt1), FALSE, filt1))
 
 db <- db %>% 
   filter(!filt == TRUE) %>% 
-  filter(!filt1 == TRUE) %>% 
-  dplyr::select(-c(filt, filt1))
+  dplyr::select(-c(filt))
 
-db <- db %>% #ATTENZIONE DB1
+db <- db %>% 
   mutate(reparto = as.factor(reparto))
 
 # Imposta "UOC Neurochirurgia" come livello di riferimento
 db$reparto <- fct_relevel(db$reparto, "UOC Neurochirugia")
 
+# Creo variabile con reparto a rischio ####
 
-# tutti i reparti con un OR maggiore di 1 e p < 0.05 li consideriamo reparti a rischio
-# quindi creiamo un campo Reparto a rischio con valore TRUE e FALSE
+# Dopo aver fatto una univariata ligistica rispetto alla infezione, i seguenti reparti risultano 
+# con un odds ratio maggiore di 1 e p < 0.05 (in realtà quasi tutti 0.0001)
 
+db <- db %>% 
+  mutate(risk_dep = ifelse(reparto %in% c(
+    "UOC Cardiochirurgia",
+    "UOC Endocrinologia e Diabetologia",
+    "UOC Malattie apparato respiratorio",
+    "UOC Malattie Infettive",
+    "UOC Medicina interna",
+    "UOSD OBI e Medicina d'urgenza",
+    "UOSD Patologie linfoproliferative",
+    "UOSD Terapia Intensiva"
+  ), TRUE, FALSE)
+  )
 
 
 

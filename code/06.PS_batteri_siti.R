@@ -15,7 +15,7 @@ db_acineto <- db_acineto[db_acineto$acineto_vs_noninfetto !="", ] #elimino campi
 db_acineto$acineto_vs_noninfetto <- ifelse(db_acineto$acineto_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_acineto <- glm(
-  acineto_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  acineto_vs_noninfetto ~ sdo1_eta + sdo1_modali + terapia + risk_dep + proc_inv_real, 
   data = db_acineto,
   family = binomial("logit")
 )
@@ -51,23 +51,6 @@ match_obj_acineto_ln <- Match(
   replace = FALSE
 )
 
-# Balance assessment 
-balance_acineto <- bal.tab(
-  match_obj_acineto,
-  acineto_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_acineto,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-##print(balance_acineto)
-
-bal.plot(
-  match_obj_acineto,
-  formula = acineto_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_acineto,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_acineto)
@@ -105,7 +88,7 @@ db_klebsiella <- db_klebsiella[db_klebsiella$klebsiella_vs_noninfetto !="", ] #e
 db_klebsiella$klebsiella_vs_noninfetto <- ifelse(db_klebsiella$klebsiella_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_klebsiella <- glm(
-  klebsiella_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  klebsiella_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_klebsiella,
   family = binomial("logit")
 )
@@ -140,23 +123,7 @@ match_obj_klebsiella_ln <- Match(
   replace = FALSE
 )
 
-# Balance assessment 
-balance_klebsiella <- bal.tab(
-  match_obj_klebsiella,
-  klebsiella_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_klebsiella,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
 
-#print(balance_klebsiella)
-
-bal.plot(
-  match_obj_klebsiella,
-  formula = klebsiella_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_klebsiella,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_klebsiella)
@@ -193,7 +160,7 @@ db_clostridium <- db_clostridium[db_clostridium$clostridium_vs_noninfetto !="", 
 db_clostridium$clostridium_vs_noninfetto <- ifelse(db_clostridium$clostridium_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_clostridium <- glm(
-  clostridium_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  clostridium_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_clostridium,
   family = binomial("logit")
 )
@@ -228,23 +195,7 @@ match_obj_clostridium_ln <- Match(
   replace = FALSE
 )
 
-# Balance assessment 
-balance_clostridium <- bal.tab(
-  match_obj_clostridium,
-  clostridium_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_clostridium,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
 
-#print(balance_clostridium)
-
-bal.plot(
-  match_obj_clostridium,
-  formula = clostridium_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_clostridium,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_clostridium)
@@ -281,7 +232,7 @@ db_entero <- db_entero[db_entero$entero_vs_noninfetto !="", ] #elimino campi vuo
 db_entero$entero_vs_noninfetto <- ifelse(db_entero$entero_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_entero <- glm(
-  entero_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  entero_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_entero,
   family = binomial("logit")
 )
@@ -316,23 +267,6 @@ match_obj_entero_ln <- Match(
   replace = FALSE
 )
 
-# Balance assessment 
-balance_entero <- bal.tab(
-  match_obj_entero,
-  entero_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_entero,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_entero)
-
-bal.plot(
-  match_obj_entero,
-  formula = entero_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_entero,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_entero)
@@ -370,7 +304,7 @@ db_escherichia <- db_escherichia[db_escherichia$escherichia_vs_noninfetto !="", 
 db_escherichia$escherichia_vs_noninfetto <- ifelse(db_escherichia$escherichia_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_escherichia <- glm(
-  escherichia_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  escherichia_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_escherichia,
   family = binomial("logit")
 )
@@ -405,24 +339,6 @@ match_obj_escherichia_ln <- Match(
   replace = FALSE
 )
 
-
-# Balance assessment 
-balance_escherichia <- bal.tab(
-  match_obj_escherichia,
-  escherichia_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_escherichia,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_escherichia)
-
-bal.plot(
-  match_obj_escherichia,
-  formula = escherichia_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_escherichia,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_escherichia)
@@ -460,7 +376,7 @@ db_pseudo <- db_pseudo[db_pseudo$pseudo_vs_noninfetto !="", ] #elimino campi vuo
 db_pseudo$pseudo_vs_noninfetto <- ifelse(db_pseudo$pseudo_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_pseudo <- glm(
-  pseudo_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  pseudo_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_pseudo,
   family = binomial("logit")
 )
@@ -493,24 +409,6 @@ match_obj_pseudo_ln <- Match(
   M = 1,                  # 1:2 matching,
   ties = FALSE,
   replace = FALSE
-)
-
-# Balance assessment
-balance_pseudo <- bal.tab(
-  match_obj_pseudo,
-  pseudo_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_pseudo,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_pseudo)
-
-bal.plot(
-  match_obj_pseudo,
-  formula = pseudo_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_pseudo,
-  var.name = "sdo1_degenza", which = "both"
 )
 
 # Outcome analysis
@@ -548,7 +446,7 @@ db_candida <- db_candida[db_candida$candida_vs_noninfetto !="", ] #elimino campi
 db_candida$candida_vs_noninfetto <- ifelse(db_candida$candida_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_candida <- glm(
-  candida_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  candida_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_candida,
   family = binomial("logit")
 )
@@ -583,23 +481,6 @@ match_obj_candida_ln <- Match(
   replace = FALSE
 )
 
-# Balance assessment 
-balance_candida <- bal.tab(
-  match_obj_candida,
-  candida_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_candida,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_candida)
-
-bal.plot(
-  match_obj_candida,
-  formula = candida_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_candida,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_candida)
@@ -636,7 +517,7 @@ db_staphylo <- db_staphylo[db_staphylo$staphylo_vs_noninfetto !="", ] #elimino c
 db_staphylo$staphylo_vs_noninfetto <- ifelse(db_staphylo$staphylo_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_staphylo <- glm(
-  staphylo_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  staphylo_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_staphylo,
   family = binomial("logit")
 )
@@ -671,23 +552,6 @@ match_obj_staphylo_ln <- Match(
   replace = FALSE
 )
 
-# Balance assessment 
-balance_staphylo <- bal.tab(
-  match_obj_staphylo,
- staphylo_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_staphylo,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_staphylo)
-
-bal.plot(
-  match_obj_staphylo,
-  formula = staphylo_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_staphylo,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_staphylo)
@@ -725,7 +589,7 @@ db_sangue <- db_sangue[db_sangue$sangue_vs_noninfetto !="", ] #elimino campi vuo
 db_sangue$sangue_vs_noninfetto <- ifelse(db_sangue$sangue_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_sangue <- glm(
-  sangue_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  sangue_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_sangue,
   family = binomial("logit")
 )
@@ -760,23 +624,6 @@ match_obj_sangue_ln <- Match(
   replace = FALSE
 )
 
-# Balance assessment 
-balance_sangue <- bal.tab(
-  match_obj_sangue,
-  sangue_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_sangue,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_sangue)
-
-bal.plot(
-  match_obj_sangue,
-  formula = sangue_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_sangue,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_sangue)
@@ -814,7 +661,7 @@ db_urinario <- db_urinario[db_urinario$urinario_vs_noninfetto !="", ] #elimino c
 db_urinario$urinario_vs_noninfetto <- ifelse(db_urinario$urinario_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_urinario <- glm(
-  urinario_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  urinario_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_urinario,
   family = binomial("logit")
 )
@@ -847,24 +694,6 @@ match_obj_urinario_ln <- Match(
   M = 1,                  # 1:2 matching,
   ties = FALSE,
   replace = FALSE
-)
-
-# Balance assessment 
-balance_urinario <- bal.tab(
-  match_obj_urinario,
-  urinario_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_urinario,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_urinario)
-
-bal.plot(
-  match_obj_urinario,
-  formula = urinario_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_urinario,
-  var.name = "sdo1_degenza", which = "both"
 )
 
 # Outcome analysis
@@ -904,7 +733,7 @@ db_resp <- db_resp[db_resp$resp_vs_noninfetto !="", ] #elimino campi vuoti (infe
 db_resp$resp_vs_noninfetto <- ifelse(db_resp$resp_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_resp <- glm(
-  resp_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  resp_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_resp,
   family = binomial("logit")
 )
@@ -939,23 +768,6 @@ match_obj_resp_ln <- Match(
   replace = FALSE
 )
 
-# Balance assessment 
-balance_resp <- bal.tab(
-  match_obj_resp,
-  resp_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_resp,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_resp)
-
-bal.plot(
-  match_obj_resp,
-  formula = resp_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_resp,
-  var.name = "sdo1_degenza", which = "both"
-)
 
 # Outcome analysis
 summary(match_obj_resp)
@@ -995,7 +807,7 @@ db_ferita <- db_ferita[db_ferita$ferita_vs_noninfetto !="", ] #elimino campi vuo
 db_ferita$ferita_vs_noninfetto <- ifelse(db_ferita$ferita_vs_noninfetto == 1, T, F) #trasformo in logico
 
 model_ferita <- glm(
-  ferita_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
+  ferita_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
   data = db_ferita,
   family = binomial("logit")
 )
@@ -1031,24 +843,6 @@ match_obj_ferita_ln <- Match(
 )
 
 
-# Balance assessment 
-balance_ferita <- bal.tab(
-  match_obj_ferita,
-  ferita_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_ferita,
-  continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
-  un = T, stats = c('means.diffs', 'variance.ratios')
-)
-
-#print(balance_ferita)
-
-bal.plot(
-  match_obj_ferita,
-  formula = ferita_vs_noninfetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + dia_pri + proc_inv, 
-  data = db_ferita,
-  var.name = "sdo1_degenza", which = "both"
-)
-
 # Outcome analysis
 summary(match_obj_ferita)
 summary(match_obj_ferita_ln)
@@ -1068,27 +862,102 @@ low_fe_ln <- ((exp(lower_fe_ln)) - 1) * 100
 high_fe_ln <- ((exp(upper_fe_ln)) - 1) * 100
 
 
+
+## PS analysis rettale  vs non infetti   ####
+#mi creo db_rettale per eseguire modifiche e analisi senza toccare db_prop
+db_rettale <- db_prop
+db_rettale$rettale <- ifelse(db_rettale$rettale== 0, 1, 0) #inverto i valori di 0 e 1
+
+#Mi creo variabile non infetti vs infetti solo rettale
+db_rettale$rettale_vs_noninfetto <- ifelse(db_rettale$infetto == 0 & db_rettale$rettale == 0, 0,
+                                         ifelse(db_rettale$infetto == 1 & db_rettale$rettale == 1, 1,
+                                                ifelse(db_rettale$infetto == 1 & db_rettale$rettale == 0, "", "")))
+
+db_rettale <- db_rettale[db_rettale$rettale_vs_noninfetto !="", ] #elimino campi vuoti (infetti in altri siti)
+
+
+#Faccio matching con PS
+db_rettale$rettale_vs_noninfetto <- ifelse(db_rettale$rettale_vs_noninfetto == 1, T, F) #trasformo in logico
+
+model_rettale <- glm(
+  rettale_vs_noninfetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep  + proc_inv_real, 
+  data = db_rettale,
+  family = binomial("logit")
+)
+
+#matching using PS 
+# Get PS values
+ps_values_ret <- model_rettale$fitted.values
+
+# Define outcome and treatment vector
+outcome_ret <- db_rettale$cost
+outcome_ret_ln <- db_rettale$cost_ln
+treatment_ret <- db_rettale$rettale_vs_noninfetto
+
+# Matching
+match_obj_rettale <- Match(
+  Y = outcome_ret,            # vector with the outcome
+  Tr = treatment_ret,         # vector with treatment
+  X = ps_values_ret,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+match_obj_rettale_ln <- Match(
+  Y = outcome_ret_ln,            # vector with the outcome
+  Tr = treatment_ret,         # vector with treatment
+  X = ps_values_ret,          # vector with individual propensity scores
+  estimand = "ATT",       # average treatment effect on treated
+  M = 1,                  # 1:2 matching,
+  ties = FALSE,
+  replace = FALSE
+)
+
+
+# Outcome analysis
+summary(match_obj_rettale)
+summary(match_obj_rettale_ln)
+
+#Aggiusto cost_ln
+cost_ret_exp <- exp(match_obj_rettale_ln$est)
+cost_ret_ln_agg <- (cost_ret_exp - 1) * 100
+
+# Compute confidence intervals -----------------------------------------
+lower_ret <- match_obj_rettale$est - 2 * match_obj_rettale$se.standard
+upper_ret <- match_obj_rettale$est + 2 * match_obj_rettale$se.standard
+
+lower_ret_ln <- match_obj_rettale_ln$est - 2 * match_obj_rettale_ln$se.standard
+upper_ret_ln <- match_obj_rettale_ln$est + 2 * match_obj_rettale_ln$se.standard
+
+low_ret_ln <- ((exp(lower_ret_ln)) - 1) * 100
+high_ret_ln <- ((exp(upper_ret_ln)) - 1) * 100
+
+
+
+
 #Creo dataframe 
 
 df_ica <- data.frame(
   "Batteri/Siti" = c("Overall", "Acinobacter", "klebsiella", "Clostridium", "Enterococcus", 
                     "Escherichiacoli", "Pseudomonas", "Candida", "Staphylococcus",
-                    "Blood", "Urinary", "Respiratory", "Wound"),
+                    "Blood", "Urinary", "Respiratory", "Wound", "Rectal"),
   "Eff_cost" = c(match_object$est, match_obj_acineto$est, match_obj_klebsiella$est, match_obj_clostridium$est,
             match_obj_entero$est, match_obj_escherichia$est, match_obj_pseudo$est, match_obj_candida$est,
             match_obj_staphylo$est, match_obj_sangue$est, match_obj_urinario$est, 
-            match_obj_resp$est, match_obj_ferita$est),
+            match_obj_resp$est, match_obj_ferita$est, match_obj_rettale$est),
  "c_low" = c(lower, lower_ac, lower_kl, lower_cl, lower_ent, lower_es, lower_pseudo, lower_ca, lower_st,
-             lower_sangue, lower_ur, lower_resp, lower_fe),
+             lower_sangue, lower_ur, lower_resp, lower_fe, lower_ret),
  "c_high" = c(upper, upper_ac, upper_kl, upper_cl, upper_ent, upper_es, upper_pseudo, upper_ca, upper_st,
-              upper_sangue, upper_ur, upper_resp, upper_fe),
+              upper_sangue, upper_ur, upper_resp, upper_fe, upper_ret),
  "Eff_ln" = c(cost_ln_agg, cost_ac_ln_agg, cost_kl_ln_agg, cost_cl_ln_agg, cost_ent_ln_agg,
               cost_es_ln_agg, cost_pseudo_ln_agg, cost_ca_ln_agg, cost_st_ln_agg,
-              cost_sangue_ln_agg, cost_ur_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg),
+              cost_sangue_ln_agg, cost_ur_ln_agg, cost_resp_ln_agg, cost_fe_ln_agg, cost_ret_ln_agg),
  "ln_low" = c(low_ln, low_ac_ln, low_kl_ln, low_cl_ln, low_ent_ln, low_es_ln, low_pseudo_ln, low_ca_ln, low_st_ln,
-              low_sangue_ln, low_ur_ln, low_resp_ln, low_fe_ln),
+              low_sangue_ln, low_ur_ln, low_resp_ln, low_fe_ln, lower_ret_ln),
  "ln_high" = c(high_ln, high_ac_ln, high_kl_ln, high_cl_ln, high_ent_ln, high_es_ln, high_pseudo_ln, 
-               high_ca_ln, high_st_ln, high_sangue_ln, high_ur_ln, high_resp_ln, high_fe_ln)
+               high_ca_ln, high_st_ln, high_sangue_ln, high_ur_ln, high_resp_ln, high_fe_ln, high_ret_ln)
 )
 
 zero_to_one <- function(x) {ifelse(x == 0,1,0)
@@ -1107,7 +976,8 @@ db_count <- db_prop %>%
                   sangue,
                   urinario,
                   respiratorio,
-                  ferita)) %>% 
+                  ferita,
+                  rettale)) %>% 
   mutate(infetto = ifelse(infetto == TRUE, 0, 1)) %>% 
   mutate_all(zero_to_one)
 

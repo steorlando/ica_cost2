@@ -21,5 +21,6 @@ db <- db %>%
              dia_pri            = "Primary diagnosis",
              proc_inv           = "Invasive procedure",
              decessodico        = "Died",
-             proc_inv_real      = "Invesive procedure before sample"
+             proc_inv_real      = "Invasive procedure verified",
+             risk_dep           = "High-risk department"
   )

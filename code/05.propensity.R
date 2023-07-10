@@ -11,7 +11,8 @@ db_prop <- db %>%
          decessodico,
          education,
          profession_simple,
-         reparto,
+         #reparto,
+         risk_dep,
          #dia_pri, #abbiamo deciso di escluderla
          cost,
          sangue,   #inserisco in db_prop variabili relative alla sede dell'infezione 
@@ -26,9 +27,11 @@ db_prop <- db %>%
          escherichia_coli,
          pseudomonas,
          candida,
-         staphylococcus,
-         batterio_pos #inserisco in db_prop num_infezioni poi vediamo come usarle
+         staphylococcus
+          #inserisco in db_prop num_infezioni poi vediamo come usarle
          )
+
+
 
 # sto togliendo i costi = zero, ma poi devo imputarli per bene ####
 db_prop <- db_prop[db_prop$cost != 0, ]
@@ -63,15 +66,10 @@ db_prop <- db_prop %>%
              num_infezioni      = "Infections number",
              infetto            = "Infection detected",
              dia_pri            = "Primary diagnosis",
-             proc_inv           = "Invasive procedure",
-             decessodico        = "Died"
+             proc_inv_real      = "Invasive procedure",
+             decessodico        = "Died",
+             risk_dep           = "High-risk department"
   )
-
-# Aumenta le dimensioni del workspace
-options(fexact_workspace_size = 2^30)
-
-# Aumenta il valore 'mult'
-options(fexact_mult = 1000000)
 
 
 summary3 <- db_prop %>% 
@@ -83,12 +81,24 @@ summary3
 
 
 # Step 1: PS estimation with logistic regression -----------------------
+
+model_type <- 0
+
+if (model_type == 1) {
+
 model <- glm(
-  infetto ~ proc_inv_real + sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto, 
+  infetto ~ proc_inv_real + sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + risk_dep, 
   data = db_prop,
   family = binomial("logit")
 )
-
+} else {
+   model <- glm(
+     infetto ~ proc_inv_real + sdo1_eta + sdo1_modali + terapia  + risk_dep, 
+     data = db_prop,
+     family = binomial("logit")
+   )
+ }
+   
 # model %>% tbl_regression(exponentiate = T)
 
 
@@ -125,15 +135,26 @@ match_object <- Match(
 )
 
 # Step 3: balance assessment -------------------------------------------
+
+if (model_type == 1) {
 balance_table <- bal.tab(
   match_object,
-  infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto + proc_inv_real, 
+  infetto ~ sdo1_eta + sdo1_modali + sdo1_degenza + terapia + decessodico + risk_dep + proc_inv_real, 
   data = db_prop,
   continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
   un = T, stats = c('means.diffs', 'variance.ratios')
 )
+} else {
+  balance_table <- bal.tab(
+    match_object,
+    infetto ~ sdo1_eta + sdo1_modali  + terapia  + risk_dep + proc_inv_real, 
+    data = db_prop,
+    continuous = "std", binary = "std", s.d.denom = "treated", disp = c('means', 'sds'),
+    un = T, stats = c('means.diffs', 'variance.ratios')
+  )
+}
 
-# print(balance_table)
+#print(balance_table)
 
 # se lo rifacciamo per l'articolo cambiando qualcosa, qui è utile fare i bar plot con le variabili
 # aggiustate (il codice sta nei file di MG) bar.plot (match_object, etc.)
@@ -165,7 +186,7 @@ db_match <- bind_rows(
 # creo un db per le descrittive in cui inverto  zero con TRUE e 1 con FALSE
 
 # Define the columns to be transformed
-columns_to_transform <- c("sangue", "urinario", "respiratorio", "ferita", "acinetobacter", "klebsiella_pnm", "clostridium", "enterococcus", "escherichia_coli", "pseudomonas", "candida", "staphylococcus")
+columns_to_transform <- c("rettale", "sangue", "urinario", "respiratorio", "ferita", "acinetobacter", "klebsiella_pnm", "clostridium", "enterococcus", "escherichia_coli", "pseudomonas", "candida", "staphylococcus")
 
 # Transform the dataframe
 db_desc <- db_prop %>%
@@ -176,4 +197,6 @@ summary4 <- db_desc %>%
   tbl_summary(by = infetto) %>% 
   add_p %>% 
   add_overall()
+
 summary4
+
