@@ -420,18 +420,16 @@ db <- db %>%
     TRUE ~ NA_Date_
   ))
 
+frq(db$proc_inv)
+frq(db$proc_inv_real)
 
 # creare un campo proc_inv_real che è TRUE se la data_prc_inv + 2 giorni < date_inv
 db <- db %>%
   mutate(data_proc_inv = as_date(data_proc_inv),
          date_inv = as_date(date_inv),
-         proc_inv_real = if_else(data_proc_inv + days(2) > date_inv , FALSE, as.logical(proc_inv))) %>%
-  mutate(proc_inv_real = ifelse(proc_inv == TRUE & is.na(data_proc_inv), TRUE, proc_inv_real)) %>% 
-  mutate(proc_inv_real = ifelse(proc_inv == TRUE & is.na(date_inv), TRUE, proc_inv_real)) %>% 
+         proc_inv_real = if_else(data_proc_inv + days(2) > date_inv , FALSE, as.logical(proc_inv))) %>% 
+  mutate(proc_inv_real = ifelse(proc_inv == TRUE & is.na(date_inv) & infetto == FALSE, TRUE, proc_inv_real)) %>% 
   mutate(proc_inv_real = ifelse(is.na(proc_inv_real), FALSE, proc_inv_real))
-
-frq(db$proc_inv)
-frq(db$proc_inv_real)
 
 # eliminare reparti e diagnosi con meno di X utenti
 
