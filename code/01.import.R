@@ -72,3 +72,4 @@ db_select <- db_select %>%  # queste le tolgo perchè non ho idea di cosa si tra
             "sesso",
             "sdo1_num_sch"            
             ))
+

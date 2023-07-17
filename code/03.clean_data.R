@@ -1,5 +1,4 @@
 # devo ricodificare le categoriche e le continue per quello che sono ####
-frq(db_select$sdo1_tit_stu)
 db <- db_select %>%
   mutate(sdo1_costo = as_numeric(sdo1_costo)) %>%     # e metto il costo numerico
   mutate(sdo1_sesso = ifelse(sdo1_sesso == 1, "F", "M"), # decodifico il sesso in M e F
@@ -448,8 +447,6 @@ db <- db %>%
     TRUE ~ NA_Date_
   ))
 
-frq(db$proc_inv)
-frq(db$proc_inv_real)
 
 # creare un campo proc_inv_real che è TRUE se la data_prc_inv + 2 giorni < date_inv
 db <- db %>%
@@ -462,8 +459,6 @@ db <- db %>%
 # tolgo quelli ricoverati con più di 60 giorni ####
 
 db <- db %>% filter(sdo1_degenza < 61)
-
-
 
 # eliminare reparti e diagnosi con meno di X utenti ####
 

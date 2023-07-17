@@ -16,6 +16,7 @@ db_regr <- db %>%
                 risk_dep
   )
 
+frq(db_regr$proc_inv)
 
 # Cross-table procedure invasive e infetto ####
 t_inv <- db_regr %>% 
@@ -38,8 +39,6 @@ univariata <- tbl_uvregression(data = db_regr,
                                y = infetto,
                                method.args = list(family = binomial),
                                exponentiate = T)
-
-univariata
 
 db_corr <- db_regr %>% 
   dplyr::select(-c(proc_inv, reparto))
@@ -65,7 +64,23 @@ multivariata <- model_multi %>%
   tbl_regression(exponentiate = T) 
 
 multivariata
+
 # prova usando il reparto "aggregato"
+
+# test per testare la relazione tra età e professione ####
+result <- kruskal.test(sdo1_eta ~ profession_simple, data = db)
+print(result)
+
+# Crea un modello lineare
+model <- aov(sdo1_eta ~ profession_simple, data = db)
+
+# Esegui l'ANOVA
+result <- summary(model)
+
+# Stampa i risultati
+print(result)
+
+# analisi multivariabile definitiva ####
 model_multi_2 <- glm(
   infetto ~ 
     proc_inv_real + 
@@ -81,6 +96,8 @@ model_multi_2 <- glm(
   data = db_regr,
   family = binomial("logit")
 )
+
+
 
 multivariata_2 <- model_multi_2 %>% 
   tbl_regression(exponentiate = T) 
