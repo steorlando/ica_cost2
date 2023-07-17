@@ -26,6 +26,8 @@ hoslem_test <- hoslem.test(model_multi$y, fitted(model_multi))
 print(hoslem_test)
 
 
+
+
 super_corr <- function(df) {
   
   # function to get chi square p value and Cramers V
@@ -89,3 +91,72 @@ summary(db$degenza)
 
 frq(db$proc_inv)
 frq(db$proc_inv_real)
+
+# multivariabile per ciascuna procedura ####
+# Definisci i codici delle procedure invasive 
+codici_procedure_invasive <- c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622, 8628, 8962, 8964, 9604, 9605, 9670, 9671, 9672)
+
+# Crea una lista per conservare i risultati
+results <- list()
+
+# Esegui una regressione per ogni codice di procedura
+for (code in codici_procedure_invasive) {
+  
+  # Costruisci la formula per la regressione
+  formula <- as.formula(paste("infetto ~ ", paste0("code_", code), " + sdo1_eta + education + sdo1_modali + terapia + risk_dep", sep = ""))
+  
+  # Esegui la regressione logistica
+  model <- glm(formula, data = db, family = binomial("logit"))
+  
+  # Estrai l'odds ratio, l'intervallo di confidenza e il p-value per la procedura, se esiste
+  code_str <- paste0("code_", code,"TRUE")
+  if (code_str %in% rownames(summary(model)$coefficients)) {
+    coef <- summary(model)$coefficients[code_str, ]
+    odds_ratio <- exp(coef["Estimate"])
+    conf_int <- exp(confint(model)[code_str, ])
+    p_value <- coef["Pr(>|z|)"]
+  } else {
+    odds_ratio <- NA
+    conf_int <- c(NA, NA)
+    p_value <- NA
+  }
+  
+  # Formatta l'odds ratio, l'intervallo di confidenza e il p-value
+  odds_ratio <- round(odds_ratio, 2)
+  conf_int <- round(conf_int, 2)
+  if (p_value < 0.001) {
+    p_value <- "<0.001"
+  } else if (p_value < 0.01) {
+    p_value <- "<0.01"
+  } else if (p_value < 0.05) {
+    p_value <- "<0.05"
+  } else {
+    p_value <- round(p_value, 3)
+  }
+  
+  # Aggiungi i risultati alla lista
+  results[[as.character(code)]] <- c(odds_ratio, conf_int, p_value)
+}
+
+# Combina tutti i risultati in un dataframe
+results_df <- do.call(rbind, results)
+colnames(results_df) <- c("Odds Ratio", "Lower 95% CI", "Upper 95% CI", "p-value")
+
+# Trasforma la matrice in un tibble
+results_tibble <- as_tibble(results_df, rownames = "Procedure Code")
+
+# Visualizza il risultato
+print(results_tibble)
+
+frq(db$infetto)
+export(final_results, "output/procedure.xlsx")
+
+
+db_procedure <- db %>% 
+  dplyr::select(starts_with("code_"))
+db_procedure <- db_procedure %>% 
+  mutate(proc_sum = rowSums(db_procedure)) %>% 
+  mutate(invasiva = proc_sum > 0)
+
+frq(db_procedure$invasiva)
+

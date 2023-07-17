@@ -321,10 +321,6 @@ for(code in int_inv){
 # Get the column names that start with "code_"
 code_cols <- grep("^code_", names(db), value = TRUE)
 
-# Iterate over the code_cols and set the value to FALSE when proc_inv_real is FALSE
-for(col in code_cols){
-  db[[col]][db$proc_inv_real == FALSE] <- FALSE
-}
 
 #Creo variabile cod_proc che mi dice per i pz che hanno avuto TRUE il codice di 
 #quale procedura hanno avuto
@@ -456,6 +452,12 @@ db <- db %>%
   mutate(proc_inv_real = ifelse(proc_inv == TRUE & is.na(date_inv) & infetto == FALSE, TRUE, proc_inv_real)) %>% 
   mutate(proc_inv_real = ifelse(is.na(proc_inv_real), FALSE, proc_inv_real))
 
+
+# Iterate over the code_cols and set the value to FALSE when proc_inv_real is FALSE
+for(col in code_cols){
+  db[[col]][db$proc_inv_real == FALSE] <- FALSE
+}
+
 # tolgo quelli ricoverati con più di 60 giorni ####
 
 db <- db %>% filter(sdo1_degenza < 61)
@@ -481,7 +483,7 @@ db <- db %>%
   mutate(reparto = as.factor(reparto))
 
 # Imposta "UOC Neurochirurgia" come livello di riferimento
-db$reparto <- fct_relevel(db$reparto, "UOC Neurochirugia")
+db$reparto <- fct_relevel(db$reparto, "UOC Gastroenterologia")
 
 # Creo variabile con reparto a rischio ####
 

@@ -111,17 +111,28 @@ tab %>%
 Emerge che sono correlate con un maggior rischio di infezione
 
 -   Le procedure invasive
--   Le procedure invasive reali
--   L'età
--   L'avere un titolo di studio universitario rispetto al titolo di scuola elementare
--   L'essere pensionato o disabile
--   La modalità di ammissione (gli urgenti hanno più rischio dei programmati, e ancora di più dei programmati con pre-ospedalizzazione)
--   La durata del ricovero
--   L'esito di morte
--   L'aver subito interventi chirurgici (con un rischio minore rispetto ai ricveri medici)
--   Alcuni reparti. Confrontati con la Neurochirurgia che ha il tasso di infezioni più vicino a quello dell'intero ospedale
 
-Nell'analisi multivariata quindi inseriamo
+-   Le procedure invasive reali
+
+-   L'età
+
+-   L'avere un titolo di studio universitario rispetto al titolo di scuola elementare
+
+-   L'essere pensionato o disabile
+
+-   La modalità di ammissione (gli urgenti hanno più rischio dei programmati, e ancora di più dei programmati con pre-ospedalizzazione)
+
+-   La durata del ricovero
+
+-   L'esito di morte
+
+-   L'aver subito interventi chirurgici (con un rischio minore rispetto ai ricveri medici)
+
+-   Alcuni reparti. Confrontati con la Gastroenterologia che ha il tasso di infezioni più vicino a quello dell'intero ospedale
+
+    # Analisi multivariabile dell'odds ratio di infezione rispetto alle variabili che potrebbero essere correlate da un punto di vista clinico
+
+Nell'analisi multivariabile quindi inseriamo
 
 -   L'aver subito una procedura invasiva "reale"
 
@@ -157,13 +168,30 @@ tab %>%
 
 ```
 
-Solo che a questo punto le procedure invasive non sono più collegate al richiso (p = 0.083). In pratica è possibile che il risultato significativo nella univariata sia influenzato da alcuni confounders quali età e dipartimento. Cioè non è che le procedure aumentano il rischio, ma le procedure si fanno soprattutto ad anziani, e in alcuni reparti, e quello che aumenta il rischio di ICA è l'età e il reparto, non la prcedura invasiva.
+Solo che a questo punto le procedure invasive non sono più collegate al richio di infezione (p = 0.083). In pratica è possibile che il risultato significativo nella univariata sia influenzato da alcuni confounders quali età e dipartimento. Cioè non è che le procedure aumentano il rischio, ma le procedure si fanno soprattutto ad anziani, e in alcuni reparti, e quello che aumenta il rischio di ICA è l'età e il reparto, non la procedura invasiva.
 
 Quando abbiamo fatto insieme queste prove forse ci stavamo concentrando solo sull'odds ratio e non sul p e non ce ne eravamo accorti.
 
-Se questo è vero per le procedure invasive nel loro insieme, potrebbe essere diverso per ciascuna procedura presa singolarmente. Quindi forse ha senso fare la regressione per ogni tipo di rpocedura, per vedere quali sono correlate, ma ha senso farlo anche in una analisi multivariabile per escludere l'ipotesi confounder.
+Se questo è vero per le procedure invasive nel loro insieme, potrebbe essere diverso per ciascuna procedura presa singolarmente. Quindi forse ha senso fare la regressione per ogni tipo di procedura, per vedere quali sono correlate, ma ha senso farlo anche in una analisi multivariabile per escludere l'ipotesi confounder.
 
-Questa è l'univariata per ciascuna procedura rispetto al resto del campione
+Per vedere quanti pazienti hanno subito queste procedure, e quanti di loro hanno contratto un ICA potenzialmente associata a quella procedura, si può vedere questa tabella descrittiva. Bisogna notare che alcune procedure sono state eseguite pochissime volte.
+
+```{r procedure_descrittive}
+tab <- as_flex_table(db_proc_sum)
+
+#Add the caption
+tab <- set_caption(tab, caption = "Analisi della frequenza di ciascuna procedura divisa per infezione")
+
+# Autofit the table
+tab %>%  
+  theme_booktabs() %>% 
+  autofit() %>% 
+  fontsize(size = 9, part = "body") %>% 
+  padding(padding.top = 0, padding.bottom = 0.5, part = "all")
+
+```
+
+Questa è l'univariata per calcolare l'odds ratio associato a ciascuna procedura rispetto al resto del campione
 
 ```{r singole procedure}
 # Create a FlexTable object
@@ -180,39 +208,45 @@ tab %>%
   padding(padding.top = 0, padding.bottom = 0.5, part = "all")
 ```
 
-Alcune hanno odds ratio altissimi. Ma farei la multivariabile per
+Alcune hanno odds ratio piuttosto alti (anche se sono diminuiti ora che ho usato solo le procedure "reali"), ma è vero che per alcune procedure il numero di infetti rispetto al campione è molto alto. Ad esempio per la 311 abbiamo 20 positivi e 6 negativi. Nel campione totale i positivi sono il 10% del totale!
 
--   311
+Quelle che aumentano il rischio sono: 311, 3893, 3895, 8962, 9672.
 
--   3129
+A questo punto però ha senso vedere l'odds ratio aggiustato per le altre variabili come abbiamo fatto per l'altra multivariabile. La tabella riporta l'odds ratio aggiustato per ciascuna procedura
 
--   3893
-
--   3895
-
--   8622
-
--   8962
-
--   8964
-
--   9604
-
--   9670
-
--   9671
-
--   9672
-
-A meno che non abbia senso accorparne alcuna perchè sono simili.
-
-Per vedere quanti pazienti hanno subito queste procedure si può vedere questa tabella descrittiva. Alcune hanno talmente pochi casi che forse si possono togliere dall'analisi.
-
-```{r procedure_descrittive}
-tab <- as_flex_table(db_proc_sum)
+```{r procedure_adjusted}
+# Create a FlexTable object
+tab <- flextable(final_results)
 
 #Add the caption
-tab <- set_caption(tab, caption = "Analisi univariata dell'odds ratio di infezione per ogni singola procedura invasiva")
+tab <- set_caption(tab, caption = "Analisi multivariabile dell'odds ratio di infezione per ogni singola procedura invasiva")
+
+# Autofit the table
+tab %>%  
+  theme_booktabs() %>% 
+  autofit() %>% 
+  fontsize(size = 9, part = "body") %>% 
+  padding(padding.top = 0, padding.bottom = 0.5, part = "all")
+
+
+```
+
+Sono significative, ma con un OR diverso, queste procedure: 311, 3129, 3893, 8962, 9672
+
+Quindi si è aggiunta la 3129 e si è tolta la 3895
+
+Tuttavia alcune hanno proprio pochi casi, su un dataset così grande, sarebbe da ragionare se accorparle con qualche criterio. Comunque con pochi casi ma p significativo c'è solo la 3129.
+
+Sarebbe da riflettere se, come per il dipartimento, nella propensity, invece di proc_inv_real che abbiamo messo per il matching, forse sbagliando, dovremmo mettere il fatto di aver subito una di queste procedure, e non una qualsiasi procedura....
+
+Questo sarebbe il risultato della multivariabile con questo campo per le procedure invasive
+
+```{r multi_rev_proc_risk}
+# Create a FlexTable object
+tab <- as_flex_table(multivariata_3)
+
+#Add the caption
+tab <- set_caption(tab, caption = "Analisi multivariabile dell'odds ratio di infezione (con le variabili significative (e le procedure invasive rischiose")
 
 # Autofit the table
 tab %>%  

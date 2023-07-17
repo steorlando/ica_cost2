@@ -1,0 +1,11 @@
+Con le procedure "sbagliate"
+
+COSTO
+Estimate...  4766.2 SE.........  418.82 T-stat.....  11.38 p.val......  < 2.22e-16 
+
+COSTO_ln
+Estimate...  0.54381 = 63.7SE.........  0.035722 T-stat.....  15.223 p.val......  < 2.22e-16Con le procedure "giuste"
+COSTO
+Estimate...  4443 SE.........  430.59 T-stat.....  10.318 p.val......  < 2.22e-16 COSTO_ln
+Estimate...  0.48649 = 62.7SE.........  0.035045 T-stat.....  13.882 p.val......  < 2.22e-16 
+

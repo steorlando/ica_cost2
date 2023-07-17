@@ -3,6 +3,7 @@
 db_prop <- db %>% 
   dplyr::select(infetto,
                 proc_inv_real,
+                proc_risk,
          sdo1_sesso,
          sdo1_eta, 
          sdo1_modali,
@@ -68,7 +69,8 @@ db_prop <- db_prop %>%
              dia_pri            = "Primary diagnosis",
              proc_inv_real      = "Invasive procedure",
              decessodico        = "Died",
-             risk_dep           = "High-risk department"
+             risk_dep           = "High-risk department",
+             proc_risk          = "high-risk procedure"
   )
 
 
@@ -76,8 +78,6 @@ summary3 <- db_prop %>%
   tbl_summary(by = infetto) %>% 
   add_p %>% 
   add_overall()
-
-summary3
 
 
 # Step 1: PS estimation with logistic regression -----------------------
@@ -197,6 +197,4 @@ summary4 <- db_desc %>%
   tbl_summary(by = infetto) %>% 
   add_p %>% 
   add_overall()
-
-summary4
 

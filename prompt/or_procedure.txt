@@ -1,0 +1,38 @@
+Ho caricato un database che include i dati dei ricoveri in un anno in un ospedale di Roma. Il campo "infetto" identifica gli individui che hanno contratto una infezione correlata all'assistenza (ICA). 
+Voglio indagare la correlazione tra l'infezione e le procedure invasive subite.
+
+Il campo proc_inv_real == TRUE identifica i pazienti che hanno subito una procedura invasiva.
+
+I campi con il prefisso "code_" indicano quale procedura è stata eseguita. Il numero dopo il prefisso "code_"indica il tipo di procedura.
+
+Questi sono i codici delle procedure invasive 
+ 
+codici_procedure_invasive <- c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622, 8628, 8962, 8964, 9604, 9605, 9670, 9671, 9672)
+
+Il codice seguente esegue una regressione logistica multivariata con alcune delle variabili correlate con il rischio di infezione.
+
+---
+
+# analisi multivariabile definitiva ####model_multi_2 <- glm(  infetto ~     proc_inv_real +     sdo1_eta +     education +     #profession_simple +     sdo1_modali +     terapia +     #sdo1_degenza +     #decessodico +    risk_dep  ,   data = db_regr,  family = binomial("logit"))multivariata_2 <- model_multi_2 %>%   tbl_regression(exponentiate = T) ---
+
+Il risultato di questa regressione indica che la variabile "proc_inv_real" che indica le procedure invasive non è associata al rischio di infezione OR 1.24, p = 0.083.
+
+Vorrei vedere il rischio, o l'odds ratio associato ad ogni singola procedura, ovvero a ciascuna delle variabili con il prefisso "code_" in una regressione multivariabile con le stesse covariate di quella principale con le procedure aggregate.
+
+Puoi scrivere il codice in R per eseguire queste analisi e riassumere i risultati in una tabella? 
+
+
+Ho fatto delle modifiche al tuo codice perchè funzionasse, e in questo modo ha prodotto la tabella desiderata. 
+
+---
+
+# Definisci i codici delle procedure invasive codici_procedure_invasive <- c(311, 3129, 3891, 3893, 3894, 3895, 598, 5794, 8607, 8622, 8628, 8962, 8964, 9604, 9605, 9670, 9671, 9672)# Crea una lista per conservare i risultatiresults <- list()# Esegui una regressione per ogni codice di procedurafor (code in codici_procedure_invasive) {    # Costruisci la formula per la regressione  formula <- as.formula(paste("infetto ~ ", paste0("code_", code), " + sdo1_eta + education + sdo1_modali + terapia + risk_dep", sep = ""))    # Esegui la regressione logistica  model <- glm(formula, data = db, family = binomial("logit"))    # Estrai l'odds ratio e il p-value per la procedura, se esiste  code_str <- paste0("code_", code,"TRUE")  if (code_str %in% rownames(summary(model)$coefficients)) {    coef <- summary(model)$coefficients[code_str, ]    odds_ratio <- exp(coef["Estimate"])    p_value <- coef["Pr(>|z|)"]  } else {    odds_ratio <- NA    p_value <- NA  }    # Aggiungi i risultati alla lista  results[[as.character(code)]] <- c(odds_ratio, p_value)}# Combina tutti i risultati in un dataframeresults_df <- do.call(rbind, results)colnames(results_df) <- c("Odds Ratio", "p-value")# Visualizza i risultatiprint(results_df)
+
+---
+
+A questo punto vorrei migliorare la tabella results_df in questo modo
+- Esprimere l'Odds Ratio con solo due cifre decimali
+- includere i limiti inferiore e superiore dell'intervallo di confidenza al 95% dell'odds ratio
+- esprimere il p-value con il formato delle riviste scientifiche, ovvero <0.001, <0.01, <0.05, valore con 3 decimale se superiore a 0.05.
+
+Puoi modificare il codice per ottenere questo risultato? 

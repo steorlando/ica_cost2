@@ -369,4 +369,4 @@ reparti <- reparti %>%
   arrange(perc)
 reparti
 
-
+export(db, "processed/database.csv")
