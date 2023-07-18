@@ -370,3 +370,5 @@ reparti <- reparti %>%
 reparti
 
 export(db, "processed/database.csv")
+
+frq(db$proc_inv)
