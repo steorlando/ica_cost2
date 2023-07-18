@@ -102,6 +102,9 @@ model <- glm(
 # model %>% tbl_regression(exponentiate = T)
 
 
+
+
+
 # Get PS values
 ps_values <- model$fitted.values
 
