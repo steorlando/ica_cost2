@@ -371,17 +371,90 @@ reparti
 
 export(db, "processed/database.csv")
 
-outliers <- db %>%
-  filter(degenza > 60)
+#Prove modelli  ####
 
-frq(outliers$infetto)
-frq(db$proc_inv_real)
+model_1 <- glm(
+  infetto ~ 
+    proc_risk + 
+    sdo1_eta + 
+    education + 
+    sdo1_modali + 
+    terapia + 
+    sdo1_degenza + 
+    decessodico +
+    risk_dep, 
+  data = db,
+  family = binomial("logit")
+)
 
-t_inv_real <- outliers %>% 
-  tabyl(proc_inv_real, infetto) %>% 
-  adorn_totals("row") %>%
-  adorn_percentages("row") %>%
-  adorn_pct_formatting(digits = 1) %>%
-  adorn_ns
+
+model_2 <- glm(
+  infetto ~ 
+    #proc_risk + 
+    sdo1_eta + 
+    education + 
+    sdo1_modali + 
+    terapia + 
+    sdo1_degenza + 
+    decessodico +
+    risk_dep +
+  proc_inv_real,
+  data = db,
+  family = binomial("logit")
+)
+
+
+model_3 <- glm(
+  infetto ~ 
+    proc_risk + 
+    sdo1_eta + 
+    education + 
+    sdo1_modali + 
+    terapia + 
+    sdo1_degenza + 
+    #decessodico +
+    risk_dep +
+    proc_inv_real,
+  data = db,
+  family = binomial("logit")
+)
+
+model_4 <- glm(
+  infetto ~ 
+    #proc_risk + 
+    sdo1_eta + 
+    education + 
+    sdo1_modali + 
+    terapia + 
+    sdo1_degenza + 
+    #decessodico +
+    risk_dep +
+    proc_inv_real,
+  data = db,
+  family = binomial("logit")
+)
+
+model_5 <- glm(
+  infetto ~ 
+    #proc_risk + 
+    sdo1_eta + 
+    education + 
+    sdo1_modali + 
+    terapia + 
+    #sdo1_degenza + 
+    #decessodico +
+    risk_dep +
+    proc_inv_real,
+  data = db,
+  family = binomial("logit")
+)
+
+model_list <- list(model_1, model_2, model_3, model_4, model_5)
+
+# Calcola l'AIC per tutti i modelli nella lista
+aic_values <- lapply(model_list, AIC)
+
+print(aic_values)
+>>>>>>> ebaeba636bb9b99a40f20807bbd7f2cfc67973a3
 
 
