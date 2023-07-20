@@ -370,3 +370,18 @@ reparti <- reparti %>%
 reparti
 
 export(db, "processed/database.csv")
+
+outliers <- db %>%
+  filter(degenza > 60)
+
+frq(outliers$infetto)
+frq(db$proc_inv_real)
+
+t_inv_real <- outliers %>% 
+  tabyl(proc_inv_real, infetto) %>% 
+  adorn_totals("row") %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 1) %>%
+  adorn_ns
+
+
