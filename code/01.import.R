@@ -11,6 +11,7 @@ db_select <- db_orig %>%  # Elimino alcune variabili che non mi servono
                                    R1_Risultato,
                                    T1_Risultato,
                                    N1_Risultato,
+                                   U1_Descrizione,
                                    ends_with ("DP1")))) %>% 
   dplyr::select(-c("INFCODinSOSPETTEICA","perRERICOVERO", "SDO1_Polo")) %>% # in particolare le prime tre perchè sono vuote
   clean_names()

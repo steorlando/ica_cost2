@@ -371,6 +371,8 @@ reparti
 
 export(db, "processed/database.csv")
 
+names(db)
+
 #Prove modelli  ####
 
 model_1 <- glm(
@@ -458,3 +460,8 @@ print(aic_values)
 >>>>>>> ebaeba636bb9b99a40f20807bbd7f2cfc67973a3
 
 
+cateteri <- db %>%
+  tabyl(u1_descrizione, infetto) %>%
+  rename(noninf = "FALSE",
+         inf = "TRUE")
+cateteri
