@@ -19,8 +19,8 @@ db <- db %>%
              num_infezioni      = "Infections number",
              infetto            = "Infection detected",
              dia_pri            = "Primary diagnosis",
-             proc_inv           = "Invasive procedure",
-             decessodico        = "Died",
-             proc_inv_real      = "Invasive procedure verified",
-             risk_dep           = "High-risk department"
+             proc_inv           = "Invasive procedure not confirmed",
+             decessodico        = "Mortality outcome",
+             proc_inv_real      = "Invasive procedure",
+             risk_dep           = "Department at risk of HAI"
   )

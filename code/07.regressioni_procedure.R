@@ -1,7 +1,6 @@
 # Dataframe per indagare ruolo procedure invasive 
 db_regr <- db %>% 
   dplyr::select(infetto,
-                proc_inv,
                 proc_inv_real,
                 sdo1_sesso,
                 sdo1_eta, 
@@ -12,9 +11,14 @@ db_regr <- db %>%
                 sdo1_degenza,
                 terapia, 
                 decessodico,
-                reparto,
+                department,
                 risk_dep
   )
+
+descr <- db_regr %>% 
+  tbl_summary()
+
+descr
 
 # Cross-table procedure invasive e infetto ####
 t_inv <- db_regr %>% 
@@ -40,6 +44,13 @@ univariata <- tbl_uvregression(data = db_regr,
 
 
 
+descr_uni <- tbl_merge(
+  tbls <- list(descr, univariata),
+  tab_spanner = c("Descriptive", "Univariate Regression")
+)
+
+descr_uni
+
 #Regressione multivariata
 
 
@@ -61,6 +72,7 @@ model_multi_2 <- glm(
   infetto ~ 
     proc_inv_real + 
     sdo1_eta + 
+    # sdo1_cittad +
     education + 
     #profession_simple + 
     sdo1_modali + 
@@ -76,7 +88,6 @@ model_multi_2 <- glm(
 
 multivariata_2 <- model_multi_2 %>% 
   tbl_regression(exponentiate = T) 
-
 
 # Analisi per procedura ####
 db_procedure <- db %>% 

@@ -536,3 +536,44 @@ db <- db %>%
     )
   )
 
+db <- db %>%
+  mutate(
+    proc_inv_real = case_when(
+      proc_inv_real == TRUE ~ "Executed",
+      proc_inv_real == FALSE ~ "Not-executed"
+    ),
+    proc_inv_real = factor(proc_inv_real, levels = c("Not-executed", "Executed"))
+  )
+
+
+db <- db %>%
+  mutate(
+    decessodico = case_when(
+      decessodico == TRUE ~ "Deceased",
+      decessodico == FALSE ~ "Survived"
+    ),
+    decessodico = factor(decessodico, levels = c("Survived", "Deceased"))
+  ) 
+
+
+db <- db %>%
+  mutate(
+    sdo1_sesso = case_when(
+      sdo1_sesso == "F" ~ "Female",
+      sdo1_sesso == "M" ~ "Male"
+    )
+  )
+
+
+db <- db %>%
+  mutate(
+    risk_dep = case_when(
+      risk_dep == TRUE ~ "High-risk-department",
+      risk_dep == FALSE ~ "Low-risk-department"
+    ),
+    risk_dep = factor(risk_dep, levels = c("Low-risk-department", "High-risk-department"))
+  )
+
+frq(db$risk_dep)
+
+
