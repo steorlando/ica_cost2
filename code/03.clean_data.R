@@ -503,5 +503,36 @@ db <- db %>%
   ), TRUE, FALSE)
   )
 
-
+# Create a new column 'department' with English translations
+db <- db %>%
+  mutate(
+    department = case_when(
+      reparto == "UOC Malattie Infettive" ~ "Infectious Diseases",
+      reparto == "UOC Cardiochirurgia" ~ "Cardiac Surgery",
+      reparto == "UOSD Terapia Intensiva" ~ "Intensive Care Unit",
+      reparto == "UOC Malattie apparato respiratorio" ~ "Respiratory Diseases",
+      reparto == "UOSD Patologie linfoproliferative" ~ "Lymphoproliferative Disorders",
+      reparto == "UOC Neurochirugia" ~ "Neurosurgery",
+      reparto == "UOC Endocrinologia e Diabetologia" ~ "Endocrinology and Diabetology",
+      reparto == "UOSD OBI e Medicina d'urgenza" ~ "Emergency Medicine",
+      reparto == "UOC Medicina interna" ~ "Internal Medicine",
+      reparto == "UOC Gastroenterologia" ~ "Gastroenterology",
+      reparto == "UOC Urologia" ~ "Urology",
+      reparto == "UOC Neurologia" ~ "Neurology",
+      reparto == "UOC Chirurgia" ~ "Surgery",
+      reparto == "UOS UTIC" ~ "Coronary Care Unit",
+      reparto == "UOC Ortopedia" ~ "Orthopedics",
+      reparto == "UOC Chirurgia Vascolare" ~ "Vascular Surgery",
+      reparto == "UOC Psichiatria e Psicologia Clinica" ~ "Psychiatry and Clinical Psychology",
+      reparto == "UOC Reumatologia" ~ "Rheumatology",
+      reparto == "UOC Cardiologia" ~ "Cardiology",
+      reparto == "UOSD Oncologia" ~ "Oncology",
+      reparto == "UOC Chirurgia Toracica" ~ "Thoracic Surgery",
+      reparto == "UOSD Chirurgia Maxillo facciale" ~ "Maxillofacial Surgery",
+      reparto == "UOC Ginecologia" ~ "Gynecology",
+      reparto == "UOSD Otorinolaringoiatria" ~ "Otorhinolaryngology",
+      reparto == "UOSD Oculistica" ~ "Ophthalmology",
+      TRUE ~ as.character(reparto)
+    )
+  )
 

@@ -31,6 +31,7 @@ t_inv_real <- db_regr %>%
   adorn_pct_formatting(digits = 1) %>%
   adorn_ns
 
+# Analisi univariata ####
 univariata <- tbl_uvregression(data = db_regr,
                                method = glm,
                                y = infetto,
@@ -38,7 +39,7 @@ univariata <- tbl_uvregression(data = db_regr,
                                exponentiate = T)
 
 
-univariata
+
 #Regressione multivariata
 
 

@@ -465,3 +465,8 @@ cateteri <- db %>%
   rename(noninf = "FALSE",
          inf = "TRUE")
 cateteri
+
+names(db)
+frq(db$reparto)
+
+export(db, "output/master.csv")
