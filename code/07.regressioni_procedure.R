@@ -52,13 +52,11 @@ descr_uni <- tbl_merge(
 descr_uni
 
 #Regressione multivariata
-
-
 db_multi <- db_regr %>% 
-  filter(!reparto == "UOSD Oculistica")
+  filter(!department == "UOSD Oculistica")
 
 model_multi <- glm(
-  infetto ~ proc_inv_real + sdo1_eta + education + profession_simple + sdo1_modali + sdo1_degenza + terapia + decessodico + reparto, 
+  infetto ~ proc_inv_real + sdo1_eta + education + profession_simple + sdo1_modali + sdo1_degenza + terapia + decessodico + department, 
   data = db_multi,
   family = binomial("logit")
 )
@@ -85,9 +83,12 @@ model_multi_2 <- glm(
   family = binomial("logit")
 )
 
-
+#Table multi ####
 multivariata_2 <- model_multi_2 %>% 
   tbl_regression(exponentiate = T) 
+
+multivariata_2
+
 
 # Analisi per procedura ####
 db_procedure <- db %>% 
@@ -160,6 +161,7 @@ colnames(results_df) <- c("Odds Ratio", "Lower 95% CI", "Upper 95% CI", "p-value
 results_tibble <- as_tibble(results_df, rownames = "Procedure Code")
 
 
+
 # Crea un dataframe con il numero di pazienti per procedura
 patient_counts <- db %>%
   dplyr::select(starts_with("code_")) %>%
@@ -172,6 +174,7 @@ patient_counts <- db %>%
 # Esegui il left join
 final_results <- left_join(results_tibble, patient_counts, by = "Procedure Code") %>% 
   relocate("N", .after = "Procedure Code")
+final_results
 
 # Definisci i codici delle procedure a rischio
 procedure_risk <- c(311, 3129, 3893, 8962, 9672)
@@ -187,6 +190,17 @@ t_inv_risk <- db %>%
   adorn_pct_formatting(digits = 1) %>%
   adorn_ns
 
+
+db <- db %>%
+  mutate(
+    proc_risk = case_when(
+      proc_risk == TRUE ~ "High-risk-procedure",
+      proc_risk == FALSE ~ "Low-risk-procedure"
+    ),
+    proc_risk = factor(proc_risk, levels = c("Low-risk-procedure", "High-risk-procedure"))
+  )
+
+#Multi con procedure high risk ####
 
 model_multi_3 <- glm(
   infetto ~ 
@@ -207,5 +221,17 @@ model_multi_3 <- glm(
 
 multivariata_3 <- model_multi_3 %>% 
   tbl_regression(exponentiate = T) 
+
+multivariata_3 <- multivariata_3 %>%
+  modify_table_body(
+    ~ .x %>%
+      dplyr::mutate(
+        label = dplyr::if_else(
+          label == "proc_risk", 
+          "Procedure at risk of HAI", 
+          label
+        )
+      )
+  )
 
 multivariata_3

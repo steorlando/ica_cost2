@@ -574,6 +574,6 @@ db <- db %>%
     risk_dep = factor(risk_dep, levels = c("Low-risk-department", "High-risk-department"))
   )
 
-frq(db$risk_dep)
+
 
 

@@ -22,5 +22,5 @@ db <- db %>%
              proc_inv           = "Invasive procedure not confirmed",
              decessodico        = "Mortality outcome",
              proc_inv_real      = "Invasive procedure",
-             risk_dep           = "Department at risk of HAI"
+             risk_dep           = "Department at risk of HAI",
   )
